@@ -1,14 +1,14 @@
 <?php
 
     include_once "db.php";           /* including the database */
-    session_start();       /* starting the session */
-
     
-    $var = $_GET['function_name'];
+    $get_function_name = $_GET['function_name'];
 
-    if(isset($var))
+    if(isset($get_function_name) && $get_function_name == "getReviews")
     {       
         getReviews($conn);
+    }else if(isset($get_function_name) && $get_function_name == "getCompanies"){
+        getCompanies($conn);
     }
 
     function postReview(){
@@ -74,19 +74,24 @@
          
     }
     
-    function getCompanies(){
+    function getCompanies($conn){
         $companies    = array();
         $sql          = "select id , country_id , name from company where province_id = ?";
         $province_id  = $_GET["province_id"];
         $stmt         = $conn->prepare($sql);
         $stmt->bind_param("s", $province_id);
         $stmt->execute(); 
-        $stmt->execute(); 
+         $stmt->bind_result($col1,$col2,$col3);
         while($row = $stmt->fetch()){
-            array_push($companies, $row);
+            $company             = new \stdClass();
+            $company->id         = $col1;
+            $company->country_id = $col2;
+            $company->name       = $col3;
+            $companies[]         = $company; 
+           
 
         }
-        return $companies;
+        echo json_encode($companies);
     }
 
 

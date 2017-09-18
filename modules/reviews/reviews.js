@@ -23,8 +23,8 @@ function reviewsCtrl ($scope , $http , $state) {
                                          "province_name" : "Alberta" , "province_id" : "1"};
   $scope.init = function(){
       $scope.getReviews();
-     // $scope.getProvinces();
-     //  $scope.getCompanies();
+      $scope.getProvinces();
+      $scope.getCompanies();
       
   };
   
@@ -49,25 +49,25 @@ function reviewsCtrl ($scope , $http , $state) {
     });   
      
   };
-//  
-//  $scope.viewPrice = function(review_id){
-//      var first_name = $('check_first_name').val();
-//      console.log("inside viewPrice first_name ");
-//      console.log(first_name);
-//      console.log("review_id " + review_id);
-//      if(first_name !== null){
-//          $('#view_price_'+review_id).hide();
-//          $('#show_price_'+review_id).show();
-//          
-//      }else{
-//        swal(
-//            'Oops...',
-//            'Please signin before viewing price!',
-//            'error'
-//        );
-//      }
-//  };
-//  
+  
+  $scope.viewPrice = function(review_id){
+      var first_name = $('check_first_name').val();
+      console.log("inside viewPrice first_name ");
+      console.log(first_name);
+      console.log("review_id " + review_id);
+      if(first_name !== null){
+          $('#view_price_'+review_id).hide();
+          $('#show_price_'+review_id).show();
+          
+      }else{
+        swal(
+            'Oops...',
+            'Please signin before viewing price!',
+            'error'
+        );
+      }
+  };
+  
 //  $("#post_form").submit(function(event) {
 //    var reviewBox      = $('#post-review-box');
 //    var newReview      = $('#new-review');
@@ -111,57 +111,57 @@ function reviewsCtrl ($scope , $http , $state) {
 //    });   
 //     
 //   });
-//  
-//  $scope.changeReviewsVolume = function(volume_id){
-//      $scope.reviews_volume = volume_id;
-//      console.log("volume has changed");
-//      console.log($scope.reviews_volume);
-//      
-//  };
-//  
-//  $scope.changeProvincy = function(){
-//      $scope.getProvinces();
-//      $scope.getCompanies();
-//      
-//  };
-//  
-//  
-//  $scope.getCompanies = function(){
-//      console.log("insid getCompanies function");
-//      console.log($scope.post_review_selected_province);
-//     $.ajax({
-//        type        : "GET",
-//        url         : "GetCompanies", // Location of the service
-//        data        : {"province_id" : $scope.post_review_selected_province.id}, //Data sent to server
-//        contentType : "application/json", // content type sent to server
-//        crossDomain : true,
-//        async       : false,
-//        success: function(data, success) {
-//            console.log("success getting the companies");
-//            $scope.post_review_companies = data;
-//            $scope.selected_post_review_company = data[0];
-//        } ,
-//        error : function(error){
-//            console.log("error fetching companies");
-//        }
-//    });      
-//  };
-//  
-//  $scope.getProvinces = function(){
-//     $.ajax({
-//        type        : "GET",
-//        url         : "GetProvinces", // Location of the service
-//        data        : {"country_id" : $scope.post_review_selected_country}, //Data sent to server
-//        contentType : "application/json", // content type sent to server
-//        crossDomain : true,
-//        async       : false,
-//        success: function(data, success) {
-//            console.log("success getting the provinces");
-//            $scope.provinces = data;
-//            $scope.post_review_selected_province = data[0];
-//        }
-//    });      
-//  };
+  
+  $scope.changeReviewsVolume = function(volume_id){
+      $scope.reviews_volume = volume_id;
+      console.log("volume has changed");
+      console.log($scope.reviews_volume);
+      
+  };
+  
+  $scope.changeProvincy = function(){
+      $scope.getProvinces();
+      $scope.getCompanies();
+      
+  };
+  
+  
+  $scope.getCompanies = function(){
+      console.log("insid getCompanies function");
+      console.log($scope.post_review_selected_province);
+     $.ajax({
+        type        : "GET",
+        url         : "handler/reviewsHandler.php", // Location of the service
+        data        : {"province_id" : $scope.post_review_selected_province.id , "function_name" : "getCompanies"}, //Data sent to server
+        contentType : "application/json", // content type sent to server
+        crossDomain : true,
+        async       : false,
+        success: function(data, success) {
+            console.log("success getting the companies");
+            $scope.post_review_companies        =  JSON.parse(data);
+            $scope.selected_post_review_company =  $scope.post_review_companies[0];
+        } ,
+        error : function(error){
+            console.log("error fetching companies");
+        }
+    });      
+  };
+  
+  $scope.getProvinces = function(){
+     $.ajax({
+        type        : "GET",
+        url         : "handler/signUpHandler.php", // Location of the service
+        data        : {"country_id" : $scope.post_review_selected_country , "function_name" : "getProvinces"}, //Data sent to server
+        contentType : "application/json", // content type sent to server
+        crossDomain : true,
+        async       : false,
+        success: function(data, success) {
+            console.log("success getting the provinces");
+            $scope.provinces = JSON.parse(data);
+            $scope.post_review_selected_province = $scope.provinces[0];
+        }
+    });      
+  };
   
   $scope.init();
 

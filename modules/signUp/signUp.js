@@ -29,16 +29,16 @@ function signUpCtrl ($scope , $http , $state) {
   
   $("#contact_form").submit(function(event) {
     var params = {
-        "email"      : $scope.email,
-        "first_name" : $scope.first_name,
-        "last_name"  : $scope.last_name,
-        "address"    : $scope.address,
-        "number"     : $scope.number,
-        "code"       : $scope.code,              
-        "province"   : $scope.selected_province.id,
-        "country"    : $scope.country,
-        "password"   : $scope.password,
-        "user_name"  : $scope.user_name
+        "email"         : $scope.email,
+        "first_name"    : $scope.first_name,
+        "last_name"     : $scope.last_name,
+        "address"       : $scope.address,
+        "phone"         : $scope.number,
+        "postal_zip"    : $scope.code,              
+        "province_id"   : $scope.selected_province.id,
+        "country_id"    : $scope.country,
+        "password"      : $scope.password,
+        "user_name"     : $scope.user_name
         
     };  
     console.log("params inside signup");
