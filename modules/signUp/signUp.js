@@ -34,27 +34,35 @@ function signUpCtrl ($scope , $http , $state) {
         "last_name"     : $scope.last_name,
         "address"       : $scope.address,
         "phone"         : $scope.number,
-        "postal_zip"    : $scope.code,              
-        "province_id"   : $scope.selected_province.id,
-        "country_id"    : $scope.country,
+        "postal"        : $scope.code,              
+        "province"      : $scope.selected_province.id,
+        "country"       : $scope.country,
         "password"      : $scope.password,
-        "user_name"     : $scope.user_name
+        "user_name"     : $scope.user_name,
+        "function_name" : "signUp"
         
     };  
     console.log("params inside signup");
     console.log(params);
     event.preventDefault();
     $.ajax({
-        type        : "POST",
-        url         : "SignUp", // Location of the service
-        data        : JSON.stringify(params), //Data sent to server
+        type        : "GET",
+        url         : "handler/signUpHandler.php", // Location of the service
+        data        : params, //Data sent to server
         contentType : "application/json", // content type sent to server
         crossDomain : true,
         async       : false,
         success: function(data, success) {
             console.log("nameeeeeeeeeeeeee");
             console.log(data);
-          $state.go('reviews');
+            if ($.trim(data) === "success") {
+                swal(
+                    'Success',
+                    'Signed Up Successfully',
+                    'success'
+                );
+            }
+            $state.go('reviews');
         },
         error : function (jqXHR, textStatus, errorThrown) {
             console.log("error in sign up");
@@ -67,14 +75,14 @@ function signUpCtrl ($scope , $http , $state) {
   $scope.getProvinces = function(){
      $.ajax({
         type        : "GET",
-        url         : "GetProvinces", // Location of the service
-        data        : {"country_id" : $scope.country}, //Data sent to server
+        url         : "handler/signUpHandler.php", // Location of the service
+        data        : {"country_id" : $scope.country , "function_name" : "getProvinces"}, //Data sent to server
         contentType : "application/json", // content type sent to server
         crossDomain : true,
         async       : false,
         success: function(data, success) {
-            $scope.provinces = data;
-            $scope.selected_province = data[0];
+            $scope.provinces = JSON.parse(data);
+            $scope.selected_province = $scope.provinces[0];
         }
     });      
   };

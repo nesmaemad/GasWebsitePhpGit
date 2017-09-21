@@ -8,35 +8,23 @@
     if(isset($get_function_name) && $get_function_name == "getProvinces")
     {       
         getProvinces($conn);
+    }else if(isset($get_function_name) && $get_function_name == "signUp"){
+        signUp($conn);
     }
 
   
-//    function signUp(){
-//
-//            $sql = "insert into user (";
-//            
-//            $parameterIndex = 1;
-//            for (String key : params.keySet()) {
-//                 String value = String.valueOf(params.get(key));
-//                 System.out.println("key: "+ key + " value: " + value);
-//                 sql+= sign_up_colunms_names.get(key);
-//                 parameterIndex++;
-//                 if(parameterIndex <= 10){
-//                     sql+= ",";
-//                 }
-//             }
-//            sql += ") values ( ? ,? ,? ,? ,? ,? ,? ,? ,? ,?)";
-//            System.out.println(sql);
-//            parameterIndex = 1;
-//            PreparedStatement stmt = connection.prepareStatement(sql);
-//            for (String key : params.keySet()) {
-//                 String value = String.valueOf(params.get(key));
-//                 System.out.println("key: "+ key + " value: " + value);
-//                 stmt.setString(parameterIndex, value);
-//                 parameterIndex++;
-//             }
-//
-//    }
+    function signUp($conn){
+        $sql = "insert into user (email,first_name,last_name,address,phone,postal_zip,province_id,"
+                . "country_id,password,user_name) values ( ? ,? ,? ,? ,? ,? ,? ,? ,? ,?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ssssssssss", $_GET['email'], $_GET['first_name'] , $_GET['last_name'],
+                $_GET['address'] , $_GET['phone'] , $_GET['postal'] , $_GET['province'],
+                $_GET['country'] , $_GET['password'] , $_GET['user_name']);
+        $stmt->execute(); 
+
+        echo "success";
+
+    }
     
     function getProvinces($conn){
         $country_id         = $_GET["country_id"];

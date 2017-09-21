@@ -1,23 +1,23 @@
 
   function signIn(){
     var params = {
-        "email"      : $('#email').val(),
-        "password"   : $('#Password').val()
+        "email"         : $('#email').val(),
+        "password"      : $('#Password').val(),
+        "function_name" : "signIn"
     };  
     console.log("params inside signin");
     console.log(params);
     event.preventDefault();
     $.ajax({
-        type        : "POST",
-        url         : "SignIn", // Location of the service
-        data        : JSON.stringify(params), //Data sent to server
+        type        : "GET",
+        url         : "handler/signInHandler.php", // Location of the service
+        data        : params, //Data sent to server
         contentType : "application/json", // content type sent to server
         crossDomain : true,
         async       : false,
         success: function(data, success) {
             console.log("sign in successfully");
             console.log("data " +data);
-
             if ($.trim(data) === "failed") {
                 swal(
                     'Oops...',

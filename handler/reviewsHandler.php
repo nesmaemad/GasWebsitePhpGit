@@ -1,45 +1,26 @@
 <?php
 
-    include_once "db.php";           /* including the database */
-    
-    $get_function_name = $_GET['function_name'];
+   include_once "db.php";           /* including the database */
 
-    if(isset($get_function_name) && $get_function_name == "getReviews")
-    {       
-        getReviews($conn);
-    }else if(isset($get_function_name) && $get_function_name == "getCompanies"){
-        getCompanies($conn);
-    }
+   $get_function_name  = $_GET['function_name'];
+   if(isset($get_function_name) && $get_function_name == "getReviews")
+   {       
+       getReviews($conn);
+   }else if(isset($get_function_name) && $get_function_name == "getCompanies"){
+       getCompanies($conn);
+   }else if (isset($get_function_name) && $get_function_name === "postReview"){
+       postReview($conn);
+   }
 
-    function postReview(){
-        echo "inside postReview in ReviewsHandler";
-        $sql = "insert into review (";
-        $parameterIndex = 1;
-        foreach($_POST as $k => $v) {
-            if(strpos($k, 'function_name') !== 0) {
-                 echo "$k = $v";
-                 $sql.= $k;
-                 $parameterIndex++;
-                 if($parameterIndex <= 8){
-                     $sql.= ",";
-                 }
-            }
-        }
-
-        $sql .= ") values ( ? ,? ,? ,? ,? ,? ,? ,?)";
-
-        $parameterIndex = 1;
-        $stmt = $conn->prepare($sql);
-        $a_params[] = "ssssssss";
-        foreach($_POST as $k => $v) {
-            if(strpos($k, 'function_name') !== 0) {
-                $a_params[] = &$v;
-
-            }
-        }
-        call_user_func_array(array($stmt, 'bind_param'), $a_params);
+    function postReview($conn){
+        $sql = "insert into review (country_id,province_id,volume_id,company_id,user_id,price,review,rating)"
+               . "values ( ? ,? ,? ,? ,? ,? ,? ,?)";
+        $stmt     = $conn->prepare($sql);
+        $stmt->bind_param("ssssssss", $_GET['country_id'] , $_GET['province_id'],$_GET['volume_id'],$_GET['company_id']
+                ,$_GET['user_id'],$_GET['price'],$_GET['review'],$_GET['rating']);
         $stmt->execute(); 
-        return "success";
+
+        echo "success";
 
     }
     
@@ -50,10 +31,11 @@
          $volume_id   = $_GET["volume_id"];
          
 
-         $sql = "select company.name , count(review.company_id)  , MIN(review.price) ,"
+         $sql = "select company.name , count(review.company_id)  , review.price ,"
                  . "user.user_name , review.rating , review.id from company , review , province , user , volume where "
                  . "review.company_id = company.id and review.user_id = user.id and review.province_id = province.id"
-                 . " and review.volume_id = volume.id and province.id = ? and volume.id = ?"
+                 . " and review.volume_id = volume.id and province.id = ? and volume.id = ? and "
+                 . "review.price = (select MIN(review.price) from review where review.company_id = company.id)"
                  . " group by company.name";
       
             $stmt = $conn->prepare($sql);
