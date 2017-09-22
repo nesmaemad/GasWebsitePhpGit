@@ -171,6 +171,8 @@
                             
                               ({{review.reviews_count}} Reviews)
                               {{review.user_name}} 
+                              <br/>
+                              {{review.review}}
                         </td>
 
                           <td>                             
