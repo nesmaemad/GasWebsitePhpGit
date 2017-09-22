@@ -3,13 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/GasWebsitePhpGit/modules/navbar/navbar.js</file>
-            <file>file:/C:/xampp/htdocs/GasWebsitePhpGit/handler/signInHandler.php</file>
             <file>file:/C:/xampp/htdocs/GasWebsitePhpGit/handler/signUpHandler.php</file>
             <file>file:/C:/xampp/htdocs/GasWebsitePhpGit/handler/reviewsHandler.php</file>
             <file>file:/C:/xampp/htdocs/GasWebsitePhpGit/index.php</file>
             <file>file:/C:/xampp/htdocs/GasWebsitePhpGit/modules/reviews/reviews.js</file>
+            <file>file:/C:/xampp/htdocs/GasWebsitePhpGit/js/stars.js</file>
             <file>file:/C:/xampp/htdocs/GasWebsitePhpGit/modules/reviews/reviews.php</file>
+            <file>file:/C:/xampp/htdocs/GasWebsitePhpGit/resources/canada_america.json</file>
         </group>
     </open-files>
 </project-private>

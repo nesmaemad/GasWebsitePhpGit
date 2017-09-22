@@ -22,7 +22,7 @@
                 <div class="input-group col-md-12">
                     <input type="text" class="  search-query form-control" id="search_input" placeholder="Search" />
                     <span class="input-group-btn">
-                        <button class="btn btn-danger" type="button" ng-click="updateReviews()">
+                        <button class="btn btn-danger" type="button" ng-click="updateReviewsBySearch()">
                             <span class=" glyphicon glyphicon-search"></span>
                         </button>
                     </span>
@@ -117,11 +117,12 @@
               <div class="panel-body">
                 <div class="text-center">
                   <div class="btn-group gas_liter">
-                    <button type="button" class="btn btn-danger btn-filter active" ng-click ="changeReviewsVolume('1')">Up to 500 liters</button>
-                    <button type="button" class="btn btn-danger btn-filter" ng-click ="changeReviewsVolume('2')">1,000 liters</button>
-                    <button type="button" class="btn btn-danger btn-filter" ng-click ="changeReviewsVolume('3')">2,000 liters</button>
-                    <button type="button" class="btn btn-danger btn-filter" ng-click ="changeReviewsVolume('4')">4,000 liters</button>
-                    <button type="button" class="btn btn-danger btn-filter" ng-click ="changeReviewsVolume('5')">7,000 liters+</button>
+
+                    <button type="button"  ng-click ="changeReviewsVolume('1')" ng-class="reviews_volume == '1' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">Up to 500 liters</button>
+                    <button type="button"  ng-click ="changeReviewsVolume('2')" ng-class="reviews_volume == '2' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">1,000 liters</button>
+                    <button type="button"  ng-click ="changeReviewsVolume('3')" ng-class="reviews_volume == '3' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">2,000 liters</button>
+                    <button type="button"  ng-click ="changeReviewsVolume('4')" ng-class="reviews_volume == '4' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">4,000 liters</button>
+                    <button type="button"  ng-click ="changeReviewsVolume('5')" ng-class="reviews_volume == '5' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">7,000 liters+</button>
                   </div>
                 </div>
                 <div class="table-container">

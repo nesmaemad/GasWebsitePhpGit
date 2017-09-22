@@ -128,6 +128,7 @@ function reviewsCtrl ($scope , $http , $state , $filter) {
       $scope.reviews_volume = volume_id;
       console.log("volume has changed");
       console.log($scope.reviews_volume);
+      $scope.getReviews();
       
   };
   
@@ -175,7 +176,7 @@ function reviewsCtrl ($scope , $http , $state , $filter) {
     });      
   };
   
-  $scope.updateReviews = function(){
+  $scope.updateReviewsBySearch = function(){
         console.log("updaaaaaaaaaaaaaaaaaaaaaaaaaaaaate");
         console.log($('#search_input').val());
         $scope.loadCitiesTownsJson(function(response) {

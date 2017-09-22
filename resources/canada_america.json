@@ -386,8 +386,8 @@
                     
 	],
 	"America": [
-		{"region": "Alberta", "name": "Airdrie" , "type" : "city"},
-		{"region": "Alberta", "name": "Brooks", "type" : "city"},
-		{"region": "Alberta", "name": "Diana Prince", "type" : "city"}
+		{"region": "Alberta", "name": "Airdrie" , "type" : "city" , "province_name" : "Newfoundland and Labrador" , "province_id" : "5"},
+		{"region": "Alberta", "name": "Brooks", "type" : "city" , "province_name" : "Newfoundland and Labrador" , "province_id" : "5"},
+		{"region": "Alberta", "name": "Diana Prince", "type" : "city" , "province_name" : "Newfoundland and Labrador" , "province_id" : "5"}
 	]
 }

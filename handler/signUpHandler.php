@@ -3,25 +3,64 @@
 
     include_once "db.php";           /* including the database */
     
-    $get_function_name = $_GET['function_name'];
+    
+    if(isset($_GET['email']) && !empty($_GET['email']) AND isset($_GET['hash']) && !empty($_GET['hash'])){
 
-    if(isset($get_function_name) && $get_function_name == "getProvinces")
-    {       
-        getProvinces($conn);
-    }else if(isset($get_function_name) && $get_function_name == "signUp"){
-        signUp($conn);
+    // Verify data
+        $email = $_GET['email']; // Set email variable
+        $hash = $_GET['hash']; // Set hash variable
+
+
+        $sql      = "SELECT email, hash, active FROM user WHERE email= ? AND hash= ? AND active=0";
+        $stmt     = $conn->prepare($sql);
+        $stmt->bind_param("ss", $email , $hash);
+        $stmt->execute(); 
+        
+        if($row = $stmt->fetch()){
+            $stmt->close();
+
+            $stmt_update   = $conn->prepare("UPDATE user SET active= 1 WHERE email= ? AND hash= ? AND active= 0");
+            $stmt_update->bind_param("ss", $email , $hash);
+            $stmt_update->execute(); 
+   
+           
+        }
+        header("Location: http://localhost/GasWebsitePhpGit/index.php");
+        exit;
+    }else{
+        $get_function_name = $_GET['function_name'];
+        if(isset($get_function_name) && $get_function_name == "getProvinces")
+        {       
+            getProvinces($conn);
+        }else if(isset($get_function_name) && $get_function_name == "signUp"){
+            signUp($conn);
+        }
     }
+
+
 
   
     function signUp($conn){
+        $hash = md5( rand(0,1000) );
         $sql = "insert into user (email,first_name,last_name,address,phone,postal_zip,province_id,"
-                . "country_id,password,user_name) values ( ? ,? ,? ,? ,? ,? ,? ,? ,? ,?)";
+                . "country_id,password,user_name,hash) values ( ? ,? ,? ,? ,? ,? ,? ,? ,? ,?,?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssssssssss", $_GET['email'], $_GET['first_name'] , $_GET['last_name'],
+        $stmt->bind_param("sssssssssss", $_GET['email'], $_GET['first_name'] , $_GET['last_name'],
                 $_GET['address'] , $_GET['phone'] , $_GET['postal'] , $_GET['province'],
-                $_GET['country'] , $_GET['password'] , $_GET['user_name']);
+                $_GET['country'] , $_GET['password'] , $_GET['user_name'],$hash);
         $stmt->execute(); 
+        $msg = '
 
+        Thanks for signing up!
+        Your account has been created, you can login after you have activated your account by pressing the url below.
+
+        Please click this link to activate your account:
+        http://superiorchoicemarketing.com/Gas/handler/signUpHandler.php?email='.$_GET['email'].'&hash='.$hash.'
+
+        '; // Our message above including the link
+
+        // send email
+        mail($_GET['email'],"Confirmation",$msg);
         echo "success";
 
     }
