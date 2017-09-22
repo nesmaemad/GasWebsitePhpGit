@@ -138,6 +138,29 @@ function reviewsCtrl ($scope , $http , $state , $filter) {
       
   };
   
+  $scope.getCompanyReviews = function(company_id){
+      console.log("insid getCompanyReviews function");
+      console.log(company_id);
+      console.log($scope.reviews_city.province_id);
+      console.log($scope.reviews_volume);
+     
+     $.ajax({
+        type        : "GET",
+        url         : "handler/reviewsHandler.php", // Location of the service
+        data        : {"company_id" : company_id , "province_id" : $scope.reviews_city.province_id , "volume_id" : $scope.reviews_volume ,"function_name" : "getCompanyReviews"}, //Data sent to server
+        contentType : "application/json", // content type sent to server
+        crossDomain : true,
+        async       : false,
+        success: function(data, success) {
+            console.log("success getting the companies reviews");
+            $scope.company_reviews   =  JSON.parse(data);
+            console.log($scope.company_reviews);
+        } ,
+        error : function(error){
+            console.log("error fetching companies");
+        }
+    });     
+  };
   
   $scope.getCompanies = function(){
       console.log("insid getCompanies function");

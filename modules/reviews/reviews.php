@@ -132,21 +132,32 @@
                            
                         <td>
                             <div class="dropdown">
-                                <a class="dropdown-toggle rowlink" data-toggle="dropdown" href="#">
+                                <a class="dropdown-toggle rowlink" data-toggle="dropdown" ng-click="getCompanyReviews(review.company_id)">
                                     <h3> {{review.company_name}} </h3>
                                 </a>
-                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                    <li>
-                                        <a tabindex="-1" href="#">
-                                            Review in row1
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a tabindex="-1" href="#">
-                                            Another review in row1
-                                        </a>
-                                    </li>
-                                </ul>
+                                <div class="dropdown-menu" role="menu" aria-labelledby="dLabel" style="max-height: 200px;overflow-y: scroll;overflow-x: hidden;">
+                                   
+                                        <div class="row" ng-repeat="company_review in company_reviews">
+                                            <div class="col-md-4">&nbsp&nbsp&nbsp{{company_review.user_name}}</div>
+                                            <div class="col-md-6">
+                                                 <span data-ng-repeat="i in getNumber(company_review.rating) track by $index"
+                                                        class="glyphicon glyphicon-star">
+                                                  </span>
+                                                  <span data-ng-repeat="i in getNumber(5 - company_review.rating) track by $index"
+                                                        class="glyphicon glyphicon-star-empty">
+                                                  </span>
+                                                <br/>
+
+                                               {{company_review.review}} &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   
+                                                 
+                                            </div>
+                                            <div class="col-md-2">{{company_review.price}}</div>
+                                        </div>
+                                        
+                                   
+                                  
+                                    
+                                </div>
                             </div>
                         </td>
                         <td>

@@ -61,6 +61,7 @@
 
         // send email
         mail($_GET['email'],"Confirmation",$msg);
+        $stmt-> close();
         echo "success";
 
     }
@@ -81,6 +82,7 @@
            
 
         }
+        $stmt-> close();
         echo json_encode($provinces);
 
     }

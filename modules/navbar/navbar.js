@@ -24,14 +24,21 @@
                     'Wrong Email or Password!',
                     'error'
                 );
+            }else if($.trim(data) === "confirm"){
+                swal(
+                    'Oops...',
+                    'Please confirm your email first!',
+                    'error'
+                );
             }else{
                 swal(
                     'Signed In Successfully',
                     'Welcome '+data,
                     'success'
                 );
-               location.reload();
+               
             }
+            location.reload();
             $('#nav-collapse2').slideToggle();
 
         },
