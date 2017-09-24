@@ -2,7 +2,7 @@
 <!--<div ng-include="'navbar.html'"></div>-->
 
 
-<div class="row">
+<!--<div class="row">
     <div class="col-md-12 well well-sm" style="min-height: 120px;">
 
             <div class="row">
@@ -13,10 +13,12 @@
             </div>
     </div>
 
-</div>
+</div>-->
+
+
 
 <div class="row">
-		<div class="col-md-8 col-md-offset-1">
+    <div class="col-md-7 col-md-offset-1">
       <div class="row">
            <div id="custom-search-input">
                 <div class="input-group col-md-12">
@@ -37,8 +39,8 @@
             <div class="row" style="margin-top:40px;">
                 <div class="col-md-8 col-md-push-2">
                     <div class="well well-sm" style="background: rgba(0,151,169 , 0.5)">
-                        <div class="text-right">
-                            <a class="btn btn-success btn-green" href="#reviews-anchor" id="open-review-box">Leave a Review</a>
+                        <div class="text-center">
+                            <a class="btn btn-success" href="#reviews-anchor" id="open-review-box" style="display: block;font-size: 20px;">Post your Price</a>
                         </div>
 
                         <div class="row" id="post-review-box" style="display:none;">
@@ -131,11 +133,11 @@
                         <tr data-status="pagado" class="rowlink" ng-repeat="review in reviews">
                            
                         <td>
-                            <div class="dropdown">
-                                <a class="dropdown-toggle rowlink" data-toggle="dropdown" ng-click="getCompanyReviews(review.company_id)">
+                            
+                                <a class="dropdown dropdown-toggle rowlink" data-toggle="dropdown" ng-click="getCompanyReviews(review.company_id)">
                                     <h3> {{review.company_name}} </h3>
                                 </a>
-                                <div class="dropdown-menu" role="menu" aria-labelledby="dLabel" style="max-height: 200px;overflow-y: scroll;overflow-x: hidden;">
+                                <div class="col-md-12 dropdown dropdown-menu" role="menu" aria-labelledby="dLabel" style="max-height: 200px;overflow-y: scroll;overflow-x: hidden;">
                                    
                                         <div class="row" ng-repeat="company_review in company_reviews">
                                             <div class="col-md-4">&nbsp&nbsp&nbsp{{company_review.user_name}}</div>
@@ -151,14 +153,14 @@
                                                {{company_review.review}} &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   
                                                  
                                             </div>
-                                            <div class="col-md-2">{{company_review.price}}</div>
+                                            <div class="col-md-2">$ {{company_review.price}} </div>
                                         </div>
                                         
                                    
                                   
                                     
                                 </div>
-                            </div>
+                            
                         </td>
                         <td>
                               <span data-ng-repeat="i in getNumber(review.rating) track by $index"
@@ -176,7 +178,7 @@
                         </td>
 
                           <td>                             
-                          <label  style=" font-size: 25px; color: rgb(0,151,169)">{{review.price}}</label>
+                          <label  style=" font-size: 25px; color: rgb(0,151,169)">$ {{review.price}}</label>
                         </td>
                         
                     <input type="hidden" id="check_first_name" value = "<?php echo isset($_COOKIE['first_name'])?>" >
@@ -199,17 +201,29 @@
 
 
     </div>
+    
+    <div class="col-md-3">
+        <div class="row">
+            <div class="well well-sm col-md-offset-1" style="min-height: 275px;">
+                <h2>Find Cheap Gas in Canada</h2>
+                <div class="col-md-6" ng-repeat="province in provinces">
+                    <a ng-click="getProvinceReviews(province)">{{province.name}}</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
 
     <div class="col-md-2" >
-
             <div class="row">
-                <div class="col-md-12 text-center well well-sm col-md-offset-1" style="min-height: 200px;">
+                <div class="col-md-12 text-center well well-sm col-md-offset-4" style="min-height: 200px;">
                   Here is your second AD
                 </div>
 
             </div>
+  
            <div class="row">
-                <div class="col-md-12 text-center well well-sm col-md-offset-1" style="min-height: 150px;">
+                <div class="col-md-12 text-center well well-sm col-md-offset-4" style="min-height: 150px;">
                   Here is your third AD
                 </div>
 

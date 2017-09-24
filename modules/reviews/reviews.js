@@ -47,12 +47,11 @@ function reviewsCtrl ($scope , $http , $state , $filter) {
  
   
   $scope.getNumber = function(num) {
-        console.log("inside getNumber "+num);
         var arr = [];
         for(var i = 1; i <= num; i++){
             arr.push(i);
         }
-        console.log(arr);
+        
         return arr;   
   };
   
@@ -197,6 +196,13 @@ function reviewsCtrl ($scope , $http , $state , $filter) {
             $scope.post_review_selected_province = $scope.provinces[0];
         }
     });      
+  };
+  
+  $scope.getProvinceReviews = function(province){
+        console.log("inside getProvinceReviews");
+        $scope.reviews_city = {"name" : province.name,"province_name" : province.name , "province_id" : province.id};
+        $scope.getReviews();
+        console.log($scope.reviews);
   };
   
   $scope.updateReviewsBySearch = function(){
