@@ -16,8 +16,8 @@
 </div>-->
 
 
-
-<div class="row">
+<div ng-include="'modules/HowItWorks/howItWorks.php'"></div>
+<div class="row" style="background-image: images/background.jpg">
     <div class="col-md-7 col-md-offset-1">
       <div class="row">
            <div id="custom-search-input">
@@ -133,41 +133,46 @@
                         <tr data-status="pagado" class="rowlink" ng-repeat="review in reviews">
                            
                         <td>
-                            
-                                <a class="dropdown dropdown-toggle rowlink" data-toggle="dropdown" ng-click="getCompanyReviews(review.company_id)">
+                            <div class="dropdown">
+                                <a class="dropdown-toggle rowlink" data-toggle="dropdown" ng-click="getCompanyReviews(review.company_id)">
                                     <h3> {{review.company_name}} </h3>
                                 </a>
-                                <div class="col-md-12 dropdown dropdown-menu" role="menu" aria-labelledby="dLabel" style="max-height: 200px;overflow-y: scroll;overflow-x: hidden;">
-                                   
-                                        <div class="row" ng-repeat="company_review in company_reviews">
-                                            <div class="col-md-4">&nbsp&nbsp&nbsp{{company_review.user_name}}</div>
-                                            <div class="col-md-6">
-                                                 <span data-ng-repeat="i in getNumber(company_review.rating) track by $index"
-                                                        class="glyphicon glyphicon-star">
-                                                  </span>
-                                                  <span data-ng-repeat="i in getNumber(5 - company_review.rating) track by $index"
-                                                        class="glyphicon glyphicon-star-empty">
-                                                  </span>
+                                <div class="dropdown-menu" role="menu" aria-labelledby="dLabel" style="max-height: 200px;">
+                                    	<div class="review-block" >
+					    <div class="row" ng-repeat="company_review in company_reviews">
+						<div class="col-sm-3">
+							<img src="https://en.opensuse.org/images/0/0b/Icon-user.png" style="width: 60px;height: 60px" class="img-rounded">
+							<div class="review-block-name"><a href="#">{{company_review.user_name}}</a></div>
+							<div class="review-block-date">{{company_review.time * 1000  | date:'dd-MM-yyyy HH:mm:ss Z'}}</div>
+						</div>
+						<div class="col-sm-9">
+							<div class="review-block-rate">
+								<span data-ng-repeat="i in getNumber(company_review.rating) track by $index"
+                                                                    class="glyphicon glyphicon-star" style="color: rgb(255, 200, 60); font-size: 30px;">
+                                                                </span>
+                                                                <span data-ng-repeat="i in getNumber(5 - company_review.rating) track by $index"
+                                                                    class="glyphicon glyphicon-star-empty" style=" font-size: 30px;">
+                                                                </span>
+							</div>
+							<div class="review-block-title">$ {{company_review.price}}</div>
+							<div class="review-block-description">{{company_review.review}}</div>
+						</div>
+                                                <hr/>
+                                                <hr/>
                                                 <br/>
-
-                                               {{company_review.review}} &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   
-                                                 
-                                            </div>
-                                            <div class="col-md-2">$ {{company_review.price}} </div>
+					    </div>
+					
                                         </div>
-                                        
-                                   
-                                  
-                                    
+
                                 </div>
-                            
+                            </div>
                         </td>
                         <td>
                               <span data-ng-repeat="i in getNumber(review.rating) track by $index"
-                                    class="glyphicon glyphicon-star">
+                                    class="glyphicon glyphicon-star" style="color: rgb(255, 200, 60); font-size: 30px;">
                               </span>
                               <span data-ng-repeat="i in getNumber(5 - review.rating) track by $index"
-                                    class="glyphicon glyphicon-star-empty">
+                                    class="glyphicon glyphicon-star-empty" style="font-size: 30px;">
                               </span>
                             <br/>
                             
@@ -330,9 +335,12 @@ var options = {
 };
 
 $( document ).ready(function() {      
-    console.log("init options");
+
     $("#search_input").easyAutocomplete(options);
-    console.log("after options");
+    console.log("paneeeeeeeeeeeeeeeeeeeel "+( (80 * $(".panel").width()/ 100 ) + 'px'));
+    $(".dropdown-menu").css({
+    'width':( (60 * $(".panel").width()/ 100 ) + 'px')
+  });
 });
 
 </script>

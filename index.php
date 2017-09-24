@@ -24,6 +24,7 @@ session_start();       /* starting the session */
       <link rel="stylesheet" type="text/css" href="css/searchStyle.css">
       <link rel="stylesheet" type="text/css" href="css/tableStyle.css">
       <link rel="stylesheet" type="text/css" href="css/footerStyle.css">
+      <link rel="stylesheet" type="text/css" href="css/companyReviews.css">
       <link href="https://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
       <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-dropdown/2.0.3/jquery.dropdown.min.css" rel="stylesheet">
       <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"  rel="stylesheet">
@@ -48,15 +49,12 @@ session_start();       /* starting the session */
    </head>
 
       <body ng-app="myApp">
-        <div ng-include="'modules/navbar/navbar.html'"></div>
-        <div ng-include="'modules/HowItWorks/howItWorks.php'"></div>
-        <div class="container-fluid my-container"> 
-            <img src="images/background.jpg">
-           
-            <div ui-view></div>
-            
+
+<!--        <div class="container-fluid my-container">-->
+            <div ng-include="'modules/navbar/navbar.html'"></div>
+            <div ui-view></div>           
             <div ng-include="'footer.html'"></div> 
-        </div>           
+<!--        </div>           -->
 
 
 

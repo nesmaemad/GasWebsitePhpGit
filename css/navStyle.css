@@ -23,8 +23,10 @@ Follow me on Twitter @maridlcrmn
 .btn.btn-outline { background-color: transparent; }
 
 .navbar-nav.navbar-right .btn:not(.collapsed) {
-    background-color: rgb(111, 84, 153);
-    border-color: rgb(111, 84, 153);
+/*    background-color: rgb(111, 84, 153);
+    border-color: rgb(111, 84, 153);*/
+    background-color: #c9302c;
+    border-color: #c9302c;
     color: rgb(255, 255, 255);
 }
 
