@@ -35,13 +35,13 @@ session_start();       /* starting the session */
       <!-- Additional CSS Themes file - not required-->
       <link rel="stylesheet" href="css/easy-autocomplete.themes.min.css"> 
       <style>
-          .my-container{
+/*          .my-container{
              position: relative;
              overflow: hidden;
           }
-          
+          */
           .my-container img {
-            position: absolute;
+          //  position: absolute;
             opacity: 0.4;
           }
       </style>
@@ -52,7 +52,7 @@ session_start();       /* starting the session */
 
 <!--        <div class="container-fluid my-container">-->
             <div ng-include="'modules/navbar/navbar.html'"></div>
-            <div ui-view></div>           
+            <div ui-view  style="background-image: url('images/background.jpg');"></div>           
             <div ng-include="'footer.html'"></div> 
 <!--        </div>           -->
 

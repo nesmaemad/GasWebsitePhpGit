@@ -43,7 +43,7 @@
         $sql = "insert into review (country_id,province_id,volume_id,company_id,user_id,price,review,rating,time)"
                . "values ( ? ,? ,? ,? ,? ,? ,? ,? ,?)";
         $stmt     = $conn->prepare($sql);
-        $stmt->bind_param("ssssssss", $_GET['country_id'] , $_GET['province_id'],$_GET['volume_id'],$_GET['company_id']
+        $stmt->bind_param("sssssssss", $_GET['country_id'] , $_GET['province_id'],$_GET['volume_id'],$_GET['company_id']
                 ,$_GET['user_id'],$_GET['price'],$_GET['review'],$_GET['rating'],$time_stamp);
         $stmt->execute(); 
         $stmt-> close();

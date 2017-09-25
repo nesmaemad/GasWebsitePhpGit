@@ -114,7 +114,7 @@ function reviewsCtrl ($scope , $http , $state , $filter) {
         success: function(data, success) {
             console.log("post review successfully");
             console.log(data);
-            location.reload();
+         //   location.reload();
         },
         error : function (jqXHR, textStatus, errorThrown) {
             console.log("error in sign up");

@@ -139,13 +139,13 @@
                                 </a>
                                 <div class="dropdown-menu" role="menu" aria-labelledby="dLabel" style="max-height: 200px;">
                                     	<div class="review-block" >
-					    <div class="row" ng-repeat="company_review in company_reviews">
-						<div class="col-sm-3">
-							<img src="https://en.opensuse.org/images/0/0b/Icon-user.png" style="width: 60px;height: 60px" class="img-rounded">
+                                            <div class="row" ng-repeat="company_review in company_reviews" style="margin-bottom: 20px;">
+						<div class="col-sm-4">
+							<img src="images/Icon-user.png" style="width: 60px;height: 60px" class="img-rounded">
 							<div class="review-block-name"><a href="#">{{company_review.user_name}}</a></div>
 							<div class="review-block-date">{{company_review.time * 1000  | date:'dd-MM-yyyy HH:mm:ss Z'}}</div>
 						</div>
-						<div class="col-sm-9">
+						<div class="col-sm-7 col-sm-push-1">
 							<div class="review-block-rate">
 								<span data-ng-repeat="i in getNumber(company_review.rating) track by $index"
                                                                     class="glyphicon glyphicon-star" style="color: rgb(255, 200, 60); font-size: 30px;">
@@ -157,10 +157,9 @@
 							<div class="review-block-title">$ {{company_review.price}}</div>
 							<div class="review-block-description">{{company_review.review}}</div>
 						</div>
-                                                <hr/>
-                                                <hr/>
-                                                <br/>
+                                                <hr>
 					    </div>
+                                            
 					
                                         </div>
 
@@ -333,14 +332,14 @@ var options = {
 
     theme: "square"
 };
-
+    console.log("paneeeeeeeeeeeeeeeeeeeel "+( (80 * $(".panel").width()/ 100 ) + 'px'));
+    $(".dropdown-menu").css({
+    'width':( (70 * $(".panel").width()/ 100 ) + 'px')
+  });
 $( document ).ready(function() {      
 
     $("#search_input").easyAutocomplete(options);
-    console.log("paneeeeeeeeeeeeeeeeeeeel "+( (80 * $(".panel").width()/ 100 ) + 'px'));
-    $(".dropdown-menu").css({
-    'width':( (60 * $(".panel").width()/ 100 ) + 'px')
-  });
+
 });
 
 </script>
