@@ -1,51 +1,24 @@
 
-<div class="row" style="margin-bottom: 20px">
-  <div class="col-md-12" id="myCarousel" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-      <li data-target="#myCarousel" data-slide-to="1"></li>
-      <li data-target="#myCarousel" data-slide-to="2"></li>
-    </ol>
-
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner">
-
-      <div class="item active">
-        <img src="images/register.jpg" alt="Step 1" style="width:100%;height: 250px;">
-        <div class="carousel-caption">
-          <h3>Step 1</h3>
-          <p>Signup for FREE</p>
-        </div>
-      </div>
-
-      <div class="item">
-          <img src="images/Post_Danmark.jpg" alt="Step 2" style="width:100%;height: 250px;">
-        <div class="carousel-caption">
-          <h3>Step 2</h3>
-          <p>Post your Price</p>
-        </div>
-      </div>
-    
-      <div class="item">
-          <img src="images/x_07e78abc-1.jpg" alt="Step 3" style="width:100%;height: 250px;">
-        <div class="carousel-caption">
-          <h3>Step 3</h3>
-          <p>Compare your Local Price</p>
-        </div>
-      </div>
-  
+    <div class="row text-center" style="margin-bottom: 20px; background-color: #6d5e5d ">
+    <div class="row" style="margin-bottom: 10px;">
+        <h1 style="color:whitesmoke">Find Your Local Propane Prices</h1>
     </div>
-
-    <!-- Left and right controls -->
-    <a class="left carousel-control" href="#myCarousel" data-slide="prev" onclick="$('#myCarousel').carousel('prev')">
-      <span class="glyphicon glyphicon-chevron-left"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" data-slide="next" onclick="$('#myCarousel').carousel('next')">
-      <span class="glyphicon glyphicon-chevron-right"></span>
-      <span class="sr-only">Next</span>
-    </a>
-  </div>
+    <div class="row">
+        <div class="col-lg-4 col-sm-12">
+            <img src="images/register.png" style="max-width: 130px;max-height: 130px">
+            <h2 style="color:whitesmoke">Step 1</h2>
+            <h3 style="color:whitesmoke">Sign Up for Free</h3>
+        </div>
+        <div class="col-lg-4 col-sm-12">
+            <img src="images/post_review.png" style="max-width: 130px;max-height: 130px">
+            <h2 style="color:whitesmoke">Step 2</h2>
+            <h3 style="color:whitesmoke">Post your Price</h3>
+        </div>
+       <div class="col-lg-4 col-sm-12">
+            <img src="images/compare_prices.png" style="max-width: 130px;max-height: 130px">
+            <h2 style="color:whitesmoke">Step 3</h2>
+            <h3 style="color:whitesmoke">Compare your Local Price</h3>
+        </div>
+    </div>
 
 </div>

@@ -6,11 +6,14 @@ angular.module('myApp', [
     'ui.router',
     'ngRoute',
     'myApp.signUp',
-    'myApp.reviews'
+    'myApp.reviews',
+    'myApp.landing',
+    'myApp.contactUs'
 
 ]).
 config(['$stateProvider' , '$urlRouterProvider',function($stateProvider , $urlRouterProvider ) {
-    $urlRouterProvider.otherwise('/mainPage');
+       
+    $urlRouterProvider.otherwise('/landing');
 }]);
 
 

@@ -25,7 +25,9 @@ session_start();       /* starting the session */
       <link rel="stylesheet" type="text/css" href="css/tableStyle.css">
       <link rel="stylesheet" type="text/css" href="css/footerStyle.css">
       <link rel="stylesheet" type="text/css" href="css/companyReviews.css">
+      <link rel="stylesheet" type="text/css" href="css/jquery.floating-social-share.css">
       <link href="https://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
+<!--      <link  href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">-->
       <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-dropdown/2.0.3/jquery.dropdown.min.css" rel="stylesheet">
       <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"  rel="stylesheet">
       <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet">
@@ -48,11 +50,11 @@ session_start();       /* starting the session */
 
    </head>
 
-      <body ng-app="myApp">
+   <body ng-app="myApp" style="background-color: #6d5e5d">
 
 <!--        <div class="container-fluid my-container">-->
             <div ng-include="'modules/navbar/navbar.html'"></div>
-            <div ui-view  style="background-image: url('images/background.jpg');"></div>           
+            <div ui-view></div>           
             <div ng-include="'footer.html'"></div> 
 <!--        </div>           -->
 
@@ -81,12 +83,19 @@ session_start();       /* starting the session */
 <script src = "js/jquery.easy-autocomplete.min.js"></script> 
 <script src = "js/search_autocomplete.js"></script> 
 <script src = "js/signup_form_validation.js"></script>
+<script src = "js/jquery.floating-social-share.js"></script>
 
 <script src = "app.js"></script> 
 <script src = "modules/signUp/signUp.js"></script> 
 <script src = "modules/reviews/reviews.js"></script> 
 <script src = "modules/navbar/navbar.js"></script>
-
+<script src = "modules/landing/landing.js"></script>
+<script src = "modules/contactUs/contactUs.js"></script>
+<script>
+$(function(){
+$("body").floatingSocialShare();
+});
+</script>
 
 
 </body>

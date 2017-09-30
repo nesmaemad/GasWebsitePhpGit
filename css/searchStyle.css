@@ -17,9 +17,10 @@
         -webkit-border-radius: 3px;
         -moz-border-radius: 3px;
         border-radius: 3px;
+        height: 40px;
     }
  
-    #custom-search-input button {
+    #custom-search-input .search-review {
         border: 0;
         background: none;
         /** belows styles are working good */

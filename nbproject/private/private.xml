@@ -12,12 +12,10 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/GasWebsitePhpGit/modules/navbar/navbar.js</file>
-            <file>file:/C:/xampp/htdocs/GasWebsitePhpGit/modules/signUp/signUp.html</file>
-            <file>file:/C:/xampp/htdocs/GasWebsitePhpGit/handler/reviewsHandler.php</file>
-            <file>file:/C:/xampp/htdocs/GasWebsitePhpGit/modules/HowItWorks/howItWorks.php</file>
-            <file>file:/C:/xampp/htdocs/GasWebsitePhpGit/index.php</file>
-            <file>file:/C:/xampp/htdocs/GasWebsitePhpGit/modules/reviews/reviews.js</file>
+            <file>file:/C:/xampp/htdocs/GasWebsitePhpGit/modules/contactUs/contactUs.js</file>
+            <file>file:/C:/xampp/htdocs/GasWebsitePhpGit/modules/landing/landing.js</file>
+            <file>file:/C:/xampp/htdocs/GasWebsitePhpGit/modules/contactUs/contactUs.php</file>
+            <file>file:/C:/xampp/htdocs/GasWebsitePhpGit/handler/contactUsHandler.php</file>
             <file>file:/C:/xampp/htdocs/GasWebsitePhpGit/modules/reviews/reviews.php</file>
         </group>
     </open-files>

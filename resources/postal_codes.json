@@ -1,0 +1,24 @@
+{
+    "postal_codes" : [
+        {"postal_letter" :"A" , "name": "Newfoundland and Labrador" , "province_name" : "Newfoundland and Labrador" , "province_id" : "5"},
+        {"postal_letter" :"B" , "name": "Nova Scotia" , "province_name" : "Nova Scotia" , "province_id" : "6"},
+        {"postal_letter" :"C" , "name": "Prince Edward Island" , "province_name" : "Prince Edward Island" , "province_id" : "8"},
+        {"postal_letter" :"E" , "name": "New Brunswick" , "province_name" : "New Brunswick" , "province_id" : "4"},
+        {"postal_letter" :"G" , "name": "Quebec" , "province_name" : "Quebec" , "province_id" : "9"},
+        {"postal_letter" :"H" , "name": "Quebec" , "province_name" : "Quebec" , "province_id" : "9"},
+        {"postal_letter" :"J" , "name": "Quebec" , "province_name" : "Quebec" , "province_id" : "9"},
+        {"postal_letter" :"K" , "name": "Ontario" , "province_name" : "Ontario" , "province_id" : "7"},
+        {"postal_letter" :"L" , "name": "Ontario" , "province_name" : "Ontario" , "province_id" : "7"},
+        {"postal_letter" :"M" , "name": "Ontario" , "province_name" : "Ontario" , "province_id" : "7"},
+        {"postal_letter" :"N" , "name": "Ontario" , "province_name" : "Ontario" , "province_id" : "7"},
+        {"postal_letter" :"P" , "name": "Ontario" , "province_name" : "Ontario" , "province_id" : "7"},
+        {"postal_letter" :"R" , "name": "Manitoba" , "province_name" : "Manitoba" , "province_id" : "3"},
+        {"postal_letter" :"S" , "name": "Saskatchewan" , "province_name" : "Saskatchewan" , "province_id" : "10"},
+        {"postal_letter" :"T" , "name": "Alberta" , "province_name" : "Alberta" , "province_id" : "1"},
+        {"postal_letter" :"V" , "name": "British Columbia" , "province_name" : "British Columbia" , "province_id" : "2"},
+        {"postal_letter" :"X" , "name": "Northwest Territories" , "province_name" : "Northwest Territories" , "province_id" : "11"}
+                
+    ]
+    
+    
+}

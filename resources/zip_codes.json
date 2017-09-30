@@ -1,0 +1,7 @@
+{
+    "zip_codes":
+    [
+        {"zip_prefix" :"X" , "name": "Northwest Territories" , "province_name" : "Northwest Territories" , "province_id" : "11"}
+
+    ]
+}

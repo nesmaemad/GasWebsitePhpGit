@@ -17,14 +17,14 @@
 
 
 <div ng-include="'modules/HowItWorks/howItWorks.php'"></div>
-<div class="row" style="background-image: images/background.jpg">
+<div class="row" style="background-color: #FFF8DC;margin-top: 70px;">
     <div class="col-md-7 col-md-offset-1">
       <div class="row">
            <div id="custom-search-input">
                 <div class="input-group col-md-12">
                     <input type="text" class="  search-query form-control" id="search_input" placeholder="Search" />
                     <span class="input-group-btn">
-                        <button class="btn btn-danger" type="button" ng-click="updateReviewsBySearch()">
+                        <button class="btn btn-danger search-review" type="button" ng-click="updateReviewsBySearch()">
                             <span class=" glyphicon glyphicon-search"></span>
                         </button>
                     </span>
@@ -40,7 +40,7 @@
                 <div class="col-md-8 col-md-push-2">
                     <div class="well well-sm" style="background: rgba(0,151,169 , 0.5)">
                         <div class="text-center">
-                            <a class="btn btn-success" href="#reviews-anchor" id="open-review-box" style="display: block;font-size: 20px;">Post your Price</a>
+                            <a class="btn btn-success" id="open-review-box" style="display: block;font-size: 20px;">Post Your Price</a>
                         </div>
 
                         <div class="row" id="post-review-box" style="display:none;">
@@ -98,7 +98,7 @@
                                     <label class="col-md-4 control-label" >Review</label>
                                     <textarea class="form-control animated" cols="50" id="new-review" name="comment" required="true" ng-model="post_review_comment"
                                               placeholder="Enter your review here..." rows="5" style="overflow: scroll; word-wrap: break-word;  height: 100px; margin-top:20px;"></textarea>
-
+                                    <span class="help-block"><p id="characterLeft" class="help-block ">You have reached the limit</p></span>
                                     <div class="text-left">
                                         <label class="col-md-4 control-label">Rating</label>
                                         <div class="stars starrr" data-rating="0"></div>
@@ -106,7 +106,7 @@
                                      <div class="text-right">
                                         <a class="btn btn-danger btn-sm" href="#" id="close-review-box" style="display:none; margin-right: 10px;">
                                         <span class="glyphicon glyphicon-remove"></span>Cancel</a>
-                                        <button class="btn btn-success btn-lg" type="submit">Save</button>
+                                        <button class="btn btn-success btn-lg" id="btnSubmit" type="submit">Save</button>
                                     </div>
                                 </form>
                             </div>
@@ -128,70 +128,74 @@
                   </div>
                 </div>
                 <div class="table-container">
-                  <table class="table table-filter table-responsive">
-                    <tbody>
-                        <tr data-status="pagado" class="rowlink" ng-repeat="review in reviews">
+                  <div class="table table-filter table-responsive">
+                    <div class="reviews-body">
+                      <div data-status="pagado" class="row rowlink reviews-row" ng-repeat="review in reviews">
                            
-                        <td>
-                            <div class="dropdown">
-                                <a class="dropdown-toggle rowlink" data-toggle="dropdown" ng-click="getCompanyReviews(review.company_id)">
+                         <div class="col-lg-6 reviews-cell">
+                        
+                                <a class="rowlink" data-toggle="dropdown" ng-click="getCompanyReviews(review.company_id)">
                                     <h3> {{review.company_name}} </h3>
                                 </a>
-                                <div class="dropdown-menu" role="menu" aria-labelledby="dLabel" style="max-height: 200px;">
-                                    	<div class="review-block" >
-                                            <div class="row" ng-repeat="company_review in company_reviews" style="margin-bottom: 20px;">
-						<div class="col-sm-4">
-							<img src="images/Icon-user.png" style="width: 60px;height: 60px" class="img-rounded">
-							<div class="review-block-name"><a href="#">{{company_review.user_name}}</a></div>
-							<div class="review-block-date">{{company_review.time * 1000  | date:'dd-MM-yyyy HH:mm:ss Z'}}</div>
-						</div>
-						<div class="col-sm-7 col-sm-push-1">
-							<div class="review-block-rate">
-								<span data-ng-repeat="i in getNumber(company_review.rating) track by $index"
-                                                                    class="glyphicon glyphicon-star" style="color: rgb(255, 200, 60); font-size: 30px;">
-                                                                </span>
-                                                                <span data-ng-repeat="i in getNumber(5 - company_review.rating) track by $index"
-                                                                    class="glyphicon glyphicon-star-empty" style=" font-size: 30px;">
-                                                                </span>
-							</div>
-							<div class="review-block-title">$ {{company_review.price}}</div>
-							<div class="review-block-description">{{company_review.review}}</div>
-						</div>
-                                                <hr>
-					    </div>
-                                            
-					
-                                        </div>
+                          
+                        </div>
 
-                                </div>
-                            </div>
-                        </td>
-                        <td>
+                        <div class="col-lg-4 reviews-cell">
                               <span data-ng-repeat="i in getNumber(review.rating) track by $index"
-                                    class="glyphicon glyphicon-star" style="color: rgb(255, 200, 60); font-size: 30px;">
+                                    class="glyphicon glyphicon-star" style="color: rgb(255, 200, 60); font-size: 20px;">
                               </span>
                               <span data-ng-repeat="i in getNumber(5 - review.rating) track by $index"
-                                    class="glyphicon glyphicon-star-empty" style="font-size: 30px;">
+                                    class="glyphicon glyphicon-star-empty" style="font-size: 20px;">
                               </span>
                             <br/>
                             
-                              ({{review.reviews_count}} Reviews)
-                              {{review.user_name}} 
+                            <span>({{review.reviews_count}} Reviews)
+                              <span style="color:#0097a9;">{{review.user_name}} </span>
+                              </span>
                               <br/>
                               {{review.review}}
-                        </td>
+                        </div>
 
-                          <td>                             
+                        <div class="col-lg-2 reviews-cell">                            
                           <label  style=" font-size: 25px; color: rgb(0,151,169)">$ {{review.price}}</label>
-                        </td>
+                        </div>
+                          
+                        <div  role="menu" id="comapny_review_menu_{{review.company_id}}" class="hidden-company-reviews" aria-labelledby="dLabel" style="max-height: 200px;">
+                            <div class="col-lg-12 review-block" >
+                                <div class="row" ng-repeat="company_review in company_reviews" style="margin-bottom: 20px;">
+                                    <div class="col-sm-4" >
+                                            <img src="images/Icon-user.png" style="width: 60px;height: 60px" class="img-rounded">
+                                            <div class="review-block-name"><a href="#">{{company_review.user_name}}</a></div>
+                                            <div class="review-block-date">{{company_review.time * 1000  | date:'dd-MM-yyyy HH:mm:ss Z'}}</div>
+                                    </div>
+                                    <div class="col-sm-7 col-sm-push-1">
+                                            <div class="review-block-rate">
+                                                    <span data-ng-repeat="i in getNumber(company_review.rating) track by $index"
+                                                        class="glyphicon glyphicon-star" style="color: rgb(255, 200, 60); font-size: 20px;">
+                                                    </span>
+                                                    <span data-ng-repeat="i in getNumber(5 - company_review.rating) track by $index"
+                                                        class="glyphicon glyphicon-star-empty" style=" font-size: 20px;">
+                                                    </span>
+                                            </div>
+                                            <div class="review-block-title">$ {{company_review.price}}</div>
+                                            <div class="review-block-description">{{company_review.review}}</div>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>  
                         
-                    <input type="hidden" id="check_first_name" value = "<?php echo isset($_COOKIE['first_name'])?>" >
-                      </tr>
+                         <input type="hidden" id="check_first_name" value = "<?php echo isset($_COOKIE['first_name'])?>" >
+                       
+                      </div>
 
                   
       
-                    </tbody>
-                  </table>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -333,8 +337,8 @@ var options = {
     theme: "square"
 };
     console.log("paneeeeeeeeeeeeeeeeeeeel "+( (80 * $(".panel").width()/ 100 ) + 'px'));
-    $(".dropdown-menu").css({
-    'width':( (70 * $(".panel").width()/ 100 ) + 'px')
+    $(".hidden-company-reviews").css({
+    'width':( (95 * $(".panel").width()/ 100 ) + 'px')
   });
 $( document ).ready(function() {      
 
@@ -342,4 +346,23 @@ $( document ).ready(function() {
 
 });
 
+</script>
+
+<script>
+    $('#characterLeft').text('140 characters left');
+    $('#new-review').keydown(function () {
+        var max = 140;
+        var len = $(this).val().length;
+        if (len >= max) {
+            $('#characterLeft').text('You have reached the limit');
+            $('#characterLeft').addClass('red');
+            $('#btnSubmit').addClass('disabled');            
+        } 
+        else {
+            var ch = max - len;
+            $('#characterLeft').text(ch + ' characters left');
+            $('#btnSubmit').removeClass('disabled');
+            $('#characterLeft').removeClass('red');            
+        }
+    }); 
 </script>

@@ -14,14 +14,24 @@ reviews.config(['$stateProvider', function($stateProvider) {
 
 
 reviews.controller('reviewsCtrl',reviewsCtrl);
-reviewsCtrl.$inject = ['$scope' , '$http' , '$state' , '$filter'];
+reviewsCtrl.$inject = ['$rootScope' , '$scope' , '$http' , '$state' , '$filter'];
 
-function reviewsCtrl ($scope , $http , $state , $filter) {
+function reviewsCtrl ($rootScope , $scope , $http , $state , $filter) {
   $scope.post_review_selected_volume  = "1";  
   $scope.post_review_selected_country = "1";
-  $scope.reviews_volume               = "1";
+  if($rootScope.has_reviews_volume){
+     $scope.reviews_volume            = $rootScope.landing_reviews_volume; 
+  }else{
+     $scope.reviews_volume            = "1"; 
+  }
+  
   $scope.rating2                      = "2";
-  $scope.reviews_city                 = {"name" : "Airdrie","province_name" : "Alberta" , "province_id" : "1"};
+  if($rootScope.has_reviews_city){
+      console.log("root scope has landing reviews city");
+      $scope.reviews_city = $rootScope.landing_reviews_city;
+  }else{
+      $scope.reviews_city             = {"name" : "Airdrie","province_name" : "Alberta" , "province_id" : "1"};
+  }
 
 
   $scope.init = function(){
@@ -137,12 +147,13 @@ function reviewsCtrl ($scope , $http , $state , $filter) {
       
   };
   
+  
   $scope.getCompanyReviews = function(company_id){
       console.log("insid getCompanyReviews function");
       console.log(company_id);
       console.log($scope.reviews_city.province_id);
       console.log($scope.reviews_volume);
-     
+     //optimization check the class before calling the backend, only call in case of the existance of class hidden
      $.ajax({
         type        : "GET",
         url         : "handler/reviewsHandler.php", // Location of the service
@@ -154,6 +165,7 @@ function reviewsCtrl ($scope , $http , $state , $filter) {
             console.log("success getting the companies reviews");
             $scope.company_reviews   =  JSON.parse(data);
             console.log($scope.company_reviews);
+            $("#comapny_review_menu_"+company_id).toggleClass('hidden-company-reviews');
         } ,
         error : function(error){
             console.log("error fetching companies");
