@@ -160,7 +160,7 @@
                           <label  style=" font-size: 25px; color: rgb(0,151,169)">$ {{review.price}}</label>
                         </div>
                           
-                        <div  role="menu" id="comapny_review_menu_{{review.company_id}}" class="hidden-company-reviews" aria-labelledby="dLabel" style="max-height: 200px;">
+                        <div  role="menu" id="comapny_review_menu_{{review.company_id}}" class="reviews-cell hidden-company-reviews" aria-labelledby="dLabel" style="max-height: 200px;">
                             <div class="col-lg-12 review-block" >
                                 <div class="row" ng-repeat="company_review in company_reviews" style="margin-bottom: 20px;">
                                     <div class="col-sm-4" >
