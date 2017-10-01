@@ -39,6 +39,32 @@
     </div>
 
 </div>
+<div class="row" style="background:white;height: 330px;">
+    <div class="col-md-7">
+        <div class="row">
+            <div class="col-md-offset-1" style="height: 275px;box-shadow: 10px 10px 5px #888888;background:whitesmoke">
+                <h2 class="text-center" style="color: #0097a9">Find Cheap Gas in America</h2>
+                <div class="col-md-2" ng-repeat="state in states">
+                    <a ng-click="getStateReviews(state)">{{state.name}}</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="row">
+            <div class="col-md-offset-1" style="height: 275px;box-shadow: 10px 10px 5px #888888;background:whitesmoke">
+                <h2 class="text-center" style="color: #0097a9">Find Cheap Gas in Canada</h2>
+                <div class="col-md-6" ng-repeat="province in provinces">
+                    <a ng-click="getProvinceReviews(province)">{{province.name}}</a>
+                </div>
+       
+            </div>
+
+        </div>
+    </div>
+</div>
 
 <script>
     console.log("inside search_autocomplete.js");

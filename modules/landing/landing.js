@@ -18,6 +18,22 @@ landingCtrl.$inject = ['$rootScope' , '$scope' , '$http' , '$state' , '$filter']
 function landingCtrl ($rootScope ,$scope , $http , $state , $filter) {
   $scope.landing_selected_volume = "1";
   
+  $scope.getProvinces = function(){
+     $.ajax({
+        type        : "GET",
+        url         : "handler/signUpHandler.php", // Location of the service
+        data        : {"country_id" : "1" , "function_name" : "getProvinces"}, //Data sent to server
+        contentType : "application/json", // content type sent to server
+        crossDomain : true,
+        async       : false,
+        success: function(data, success) {
+            console.log("success getting the provinces");
+            $scope.provinces = JSON.parse(data);
+            $scope.post_review_selected_province = $scope.provinces[0];
+        }
+    });      
+  };
+  
   $scope.loadCitiesTownsJson = function(callback) {   
 
     var xobj = new XMLHttpRequest();
@@ -110,5 +126,7 @@ function landingCtrl ($rootScope ,$scope , $http , $state , $filter) {
            });
       }
   };
+  
+  $scope.getProvinces();
 };
 
