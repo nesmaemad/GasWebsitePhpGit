@@ -147,30 +147,33 @@ function reviewsCtrl ($rootScope , $scope , $http , $state , $filter) {
       
   };
   
-  
+  var prev_company_id = "";
   $scope.getCompanyReviews = function(company_id){
       console.log("insid getCompanyReviews function");
-      console.log(company_id);
-      console.log($scope.reviews_city.province_id);
-      console.log($scope.reviews_volume);
      //optimization check the class before calling the backend, only call in case of the existance of class hidden
-     $.ajax({
-        type        : "GET",
-        url         : "handler/reviewsHandler.php", // Location of the service
-        data        : {"company_id" : company_id , "province_id" : $scope.reviews_city.province_id , "volume_id" : $scope.reviews_volume ,"function_name" : "getCompanyReviews"}, //Data sent to server
-        contentType : "application/json", // content type sent to server
-        crossDomain : true,
-        async       : false,
-        success: function(data, success) {
-            console.log("success getting the companies reviews");
-            $scope.company_reviews   =  JSON.parse(data);
-            console.log($scope.company_reviews);
-            $("#comapny_review_menu_"+company_id).toggleClass('hidden-company-reviews');
-        } ,
-        error : function(error){
-            console.log("error fetching companies");
-        }
-    });     
+        $("#comapny_review_menu_"+prev_company_id).addClass('hidden-company-reviews');
+        console.log(prev_company_id);
+        console.log(company_id);
+        if(prev_company_id != company_id){
+            $.ajax({
+                type        : "GET",
+                url         : "handler/reviewsHandler.php", // Location of the service
+                data        : {"company_id" : company_id , "province_id" : $scope.reviews_city.province_id , "volume_id" : $scope.reviews_volume ,"function_name" : "getCompanyReviews"}, //Data sent to server
+                contentType : "application/json", // content type sent to server
+                crossDomain : true,
+                async       : false,
+                success: function(data, success) {
+                    console.log("success getting the companies reviews");
+                    $scope.company_reviews   =  JSON.parse(data);
+                    console.log($scope.company_reviews);
+                    $("#comapny_review_menu_"+company_id).toggleClass('hidden-company-reviews');
+                    prev_company_id = company_id;
+                } ,
+                error : function(error){
+                    console.log("error fetching companies");
+                }
+            }); 
+        }    
   };
   
   $scope.getCompanies = function(){

@@ -5,7 +5,7 @@
             <url>modules/reviews/reviews.php</url>
             <bookmark id="1">
                 <name/>
-                <line>139</line>
+                <line>138</line>
                 <key/>
             </bookmark>
         </file>
@@ -16,6 +16,8 @@
             <file>file:/C:/xampp/htdocs/GasWebsitePhpGit/modules/landing/landing.js</file>
             <file>file:/C:/xampp/htdocs/GasWebsitePhpGit/modules/contactUs/contactUs.php</file>
             <file>file:/C:/xampp/htdocs/GasWebsitePhpGit/handler/contactUsHandler.php</file>
+            <file>file:/C:/xampp/htdocs/GasWebsitePhpGit/css/tableStyle.css</file>
+            <file>file:/C:/xampp/htdocs/GasWebsitePhpGit/modules/reviews/reviews.js</file>
             <file>file:/C:/xampp/htdocs/GasWebsitePhpGit/modules/reviews/reviews.php</file>
         </group>
     </open-files>
