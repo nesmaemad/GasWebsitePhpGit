@@ -53,7 +53,7 @@ session_start();       /* starting the session */
    <body ng-app="myApp" style="background-color: #6d5e5d">
 
 <!--        <div class="container-fluid my-container">-->
-            <div ng-include="'modules/navbar/navbar.html'"></div>
+            <div ng-include="'modules/navbar/navbar.html'" ng-app="myApp.navbar" ng-controller="navbarCtrl"></div>
             <div ui-view></div>           
             <div ng-include="'footer.html'"></div> 
 <!--        </div>           -->
@@ -66,8 +66,7 @@ session_start();       /* starting the session */
 <script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src = "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-
-
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-cookies.js"></script>
 
 
 <!--[if lt IE 9] -->
@@ -91,6 +90,7 @@ session_start();       /* starting the session */
 <script src = "modules/navbar/navbar.js"></script>
 <script src = "modules/landing/landing.js"></script>
 <script src = "modules/contactUs/contactUs.js"></script>
+<script src = "modules/commercial/commercial.js"></script>
 <script>
 $(function(){
 $("body").floatingSocialShare();

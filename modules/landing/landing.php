@@ -17,11 +17,11 @@
                     <div class="col-md-3">
                         <select class="form-control" ng-model="landing_selected_volume"
                                 style="position: absolute!important;height: 40px;">
-                            <option value="1">Up to 500 liters</option>
-                            <option value="2">1,000 liters</option>
-                            <option value="3">2,000 liters</option>
-                            <option value="4">4,000 liters</option>
-                            <option value="5">7,000 liters+</option>
+                                    <option value="1">Up to 999 Liters</option>
+                                    <option value="2">1,000 - 1,999 Liters</option>
+                                    <option value="3">2,000 - 4,999 Liters</option>
+                                    <option value="4">5,000 - 9,999 Liters</option>
+                                    <option value="5">10,000+ Liters</option>
 
                         </select> 
                     </div>
@@ -39,25 +39,25 @@
     </div>
 
 </div>
-<div class="row" style="background:white;height: 330px;">
-    <div class="col-md-7">
+<div class="row" style="background:white;height: 380px;">
+    <div class="col-md-8">
         <div class="row">
-            <div class="col-md-offset-1" style="height: 275px;box-shadow: 10px 10px 5px #888888;background:whitesmoke">
+            <div class="col-md-offset-1" style="height: 340px;box-shadow: 10px 10px 5px #888888;background:whitesmoke">
                 <h2 class="text-center" style="color: #0097a9">Find Cheap Gas in America</h2>
                 <div class="col-md-2" ng-repeat="state in states">
-                    <a ng-click="getStateReviews(state)">{{state.name}}</a>
+                    <a style="cursor: pointer;" ng-click="getProvinceReviews(state)">{{state.name}}</a>
                 </div>
             </div>
 
         </div>
     </div>
     
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="row">
-            <div class="col-md-offset-1" style="height: 275px;box-shadow: 10px 10px 5px #888888;background:whitesmoke">
+            <div class="col-md-offset-1" style="height: 340px;box-shadow: 10px 10px 5px #888888;background:whitesmoke">
                 <h2 class="text-center" style="color: #0097a9">Find Cheap Gas in Canada</h2>
                 <div class="col-md-6" ng-repeat="province in provinces">
-                    <a ng-click="getProvinceReviews(province)">{{province.name}}</a>
+                    <a style="cursor: pointer;" ng-click="getProvinceReviews(province)">{{province.name}}</a>
                 </div>
        
             </div>

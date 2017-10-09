@@ -21,7 +21,15 @@
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#">Home</a></li>
             <li><a ui-sref="reviews">Residential</a></li>
-            <li><a href="#">Commercial</a></li> 
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown">Commercial</a>
+                <ul class="dropdown-menu" style="left:0;width:230px;background-color: #222222;">                  
+                  <li><a ng-click="redirectCommrcial('2')" style="color: #FFF8DC;">Agriculture</a></li>                  
+                  <li><a ng-click="redirectCommrcial('4')" style="color: #FFF8DC;">Building and Development</a></li>
+                  <li><a ng-click="redirectCommrcial('3')" style="color: #FFF8DC;">Forklifts</a></li>
+                  <li><a ng-click="redirectCommrcial('1')" style="color: #FFF8DC;">Heating and Cooking</a></li>
+                </ul>
+            </li> 
             <li><a href="#">BBQ</a></li>
             <li><a href="#">Advertise With Us</a></li>
             <li><a ui-sref="contactUs">Contact</a></li>

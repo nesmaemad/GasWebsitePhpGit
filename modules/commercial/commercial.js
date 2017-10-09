@@ -1,22 +1,22 @@
 'use strict';
 
-var reviews = angular.module('myApp.reviews', ['ui.router' , 'ngCookies']);
+var commercial = angular.module('myApp.commercial', ['ui.router' , 'ngCookies']);
 
-reviews.config(['$stateProvider', function($stateProvider) {
+commercial.config(['$stateProvider', function($stateProvider) {
 
-    $stateProvider.state('reviews', {
-        url          : '/mainPage',    
-        templateUrl  : 'modules/reviews/reviews.php',
-        controller   : 'reviewsCtrl'
+    $stateProvider.state('commercial', {
+        url          : '/commercial',    
+        templateUrl  : 'modules/commercial/commercial.php',
+        controller   : 'commercialCtrl'
   });
 
 }]);
 
 
-reviews.controller('reviewsCtrl',reviewsCtrl);
-reviewsCtrl.$inject = ['$rootScope' , '$scope' , '$http' , '$state' , '$filter' , '$cookies'];
+commercial.controller('commercialCtrl',commercialCtrl);
+commercialCtrl.$inject = ['$rootScope' , '$scope' , '$http' , '$state' , '$filter' , '$cookies'];
 
-function reviewsCtrl ($rootScope , $scope , $http , $state , $filter , $cookies) {
+function commercialCtrl ($rootScope , $scope , $http , $state , $filter , $cookies) {
   $scope.country_id                   = "1";  
   $scope.post_review_selected_volume  = "1";  
   $scope.post_review_selected_country = "1";
@@ -68,13 +68,19 @@ function reviewsCtrl ($rootScope , $scope , $http , $state , $filter , $cookies)
   };
   
   $scope.getReviews = function(){
-     var province_id = $scope.reviews_city.province_id;
-     var volume_id   = $scope.reviews_volume;
-    
+     var province_id            = $scope.reviews_city.province_id;
+     var volume_id              = $scope.reviews_volume;
+     var commercial_category_id = $cookies.get("commercial_category_id");
+     var params                 = { "province_id"            : province_id , 
+                                    "volume_id"              : volume_id ,
+                                    "commercial_category_id" : commercial_category_id,
+                                    "function_name"          : "getCommercialReviews"};
+     console.log("inside getReviews");
+     console.log(params);
      $.ajax({
         type        : "GET",
         url         : "handler/reviewsHandler.php", // Location of the service
-        data        : {"province_id" : province_id , "volume_id" : volume_id , "function_name" : "getReviews"}, //Data sent to server
+        data        : params, //Data sent to server
         contentType : "application/json", // content type sent to server
         crossDomain : true,
         async       : false,
@@ -93,23 +99,25 @@ function reviewsCtrl ($rootScope , $scope , $http , $state , $filter , $cookies)
 
   
   $("#post_form").submit(function(event) {
-    var reviewBox      = $('#post-review-box');
-    var newReview      = $('#new-review');
-    var openReviewBtn  = $('#open-review-box');
-    var closeReviewBtn = $('#close-review-box');
-    var ratingsField   = $('#ratings-hidden');
-    var user_id        = $('#user_id');
+    var reviewBox              = $('#post-review-box');
+    var newReview              = $('#new-review');
+    var openReviewBtn          = $('#open-review-box');
+    var closeReviewBtn         = $('#close-review-box');
+    var ratingsField           = $('#ratings-hidden');
+    var user_id                = $('#user_id');
+    var commercial_category_id = $cookies.get("commercial_category_id");
     
     var params = {
-        "country_id"      : $scope.post_review_selected_country,
-        "province_id"     : $scope.post_review_selected_province.id,
-        "volume_id"       : $scope.post_review_selected_volume,
-        "company_id"      : $scope.selected_post_review_company.id,
-        "user_id"         : user_id.val(),
-        "price"           : $scope.post_review_price,              
-        "review"          : $scope.post_review_comment,
-        "rating"          : ratingsField.val(),
-        "function_name"   : "postReview"
+        "country_id"             : $scope.post_review_selected_country,
+        "province_id"            : $scope.post_review_selected_province.id,
+        "volume_id"              : $scope.post_review_selected_volume,
+        "company_id"             : $scope.selected_post_review_company.id,
+        "user_id"                : user_id.val(),
+        "price"                  : $scope.post_review_price,              
+        "review"                 : $scope.post_review_comment,
+        "rating"                 : ratingsField.val(),
+        "commercial_category_id" : commercial_category_id,
+        "function_name"          : "postCommercialReview"
         
     }; 
     
@@ -150,6 +158,8 @@ function reviewsCtrl ($rootScope , $scope , $http , $state , $filter , $cookies)
       
   };
   
+  
+
   var prev_company_id = "";
   $scope.getCompanyReviews = function(company_id){
       console.log("insid getCompanyReviews function");
@@ -157,11 +167,14 @@ function reviewsCtrl ($rootScope , $scope , $http , $state , $filter , $cookies)
         $("#comapny_review_menu_"+prev_company_id).addClass('hidden-company-reviews');
         console.log(prev_company_id);
         console.log(company_id);
+        var commercial_category_id = $cookies.get("commercial_category_id");
         if(prev_company_id != company_id){
             $.ajax({
                 type        : "GET",
                 url         : "handler/reviewsHandler.php", // Location of the service
-                data        : {"company_id" : company_id , "province_id" : $scope.reviews_city.province_id , "volume_id" : $scope.reviews_volume ,"function_name" : "getCompanyReviews"}, //Data sent to server
+                data        : {"company_id" : company_id , "province_id" : $scope.reviews_city.province_id 
+                                , "volume_id" : $scope.reviews_volume , "commercial_category_id" : commercial_category_id,
+                                "function_name" : "getCompanyCommercialReviews"}, //Data sent to server
                 contentType : "application/json", // content type sent to server
                 crossDomain : true,
                 async       : false,

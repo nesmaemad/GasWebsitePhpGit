@@ -1,5 +1,30 @@
 
-  function signIn(){
+'use strict';
+
+var navbar = angular.module('myApp.navbar', ['ui.router' , 'ngCookies']);
+
+navbar.config(['$stateProvider', function($stateProvider) {
+
+    $stateProvider.state('navbar', {
+        templateUrl  : 'modules/navbar/navbar.html',
+        controller   : 'navbarCtrl'
+  });
+
+}]);
+
+
+navbar.controller('navbarCtrl',navbarCtrl);
+navbarCtrl.$inject = ['$rootScope' , '$scope' , '$http' , '$state' , '$filter' , '$cookies'];
+
+function navbarCtrl ($rootScope , $scope , $http , $state , $filter , $cookies) {
+    $scope.redirectCommrcial = function(commercial_category_id){
+        console.log("inside redirectCommrcial in navbar");
+        $cookies.put("commercial_category_id" , commercial_category_id);
+        $state.go("commercial");
+    };
+};
+
+function signIn(){
     var params = {
         "email"         : $('#email').val(),
         "password"      : $('#Password').val(),

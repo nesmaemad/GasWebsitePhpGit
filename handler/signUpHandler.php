@@ -75,10 +75,11 @@
         $stmt->execute(); 
         $stmt->bind_result($col1,$col2);
         while($row = $stmt->fetch()){
-            $province            = new \stdClass();
-            $province->id        = $col1;
-            $province->name      = $col2;
-            $provinces[]         = $province; 
+            $province             = new \stdClass();
+            $province->id         = $col1;
+            $province->name       = $col2;
+            $province->country_id = $country_id;
+            $provinces[]          = $province; 
            
 
         }

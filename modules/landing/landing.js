@@ -29,9 +29,31 @@ function landingCtrl ($rootScope ,$scope , $http , $state , $filter) {
         success: function(data, success) {
             console.log("success getting the provinces");
             $scope.provinces = JSON.parse(data);
-            $scope.post_review_selected_province = $scope.provinces[0];
         }
     });      
+  };
+  
+    $scope.getStates = function(){
+     $.ajax({
+        type        : "GET",
+        url         : "handler/signUpHandler.php", // Location of the service
+        data        : {"country_id" : "2" , "function_name" : "getProvinces"}, //Data sent to server
+        contentType : "application/json", // content type sent to server
+        crossDomain : true,
+        async       : false,
+        success: function(data, success) {
+            console.log("success getting the provinces");
+            $scope.states = JSON.parse(data);
+        }
+    });      
+  };
+  
+  $scope.getProvinceReviews = function(provice){
+    $rootScope.has_reviews_city = true;
+    $rootScope.has_country_id   = true;
+    $rootScope.country_id       = provice.country_id;
+    $rootScope.landing_reviews_city = {"name" : provice.name,"province_name" : provice.name , "province_id" : provice.id};
+    $state.go("reviews");
   };
   
   $scope.loadCitiesTownsJson = function(callback) {   
@@ -63,6 +85,8 @@ function landingCtrl ($rootScope ,$scope , $http , $state , $filter) {
   };
   
   $scope.updateReviewsByLandingSearch = function(){
+      //TODO check for country_id and seand it in the rootScope has_country_id = true and country_id
+      
       console.log($scope.zip_city);
       //check if its length is 3 and has numeric value then its canada
       if($scope.zip_city.length === 3 && $scope.zip_city.match(/\d+/g) != null){
@@ -128,5 +152,6 @@ function landingCtrl ($rootScope ,$scope , $http , $state , $filter) {
   };
   
   $scope.getProvinces();
+  $scope.getStates();
 };
 
