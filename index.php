@@ -91,6 +91,7 @@ session_start();       /* starting the session */
 <script src = "modules/landing/landing.js"></script>
 <script src = "modules/contactUs/contactUs.js"></script>
 <script src = "modules/commercial/commercial.js"></script>
+<script src = "modules/bbq/bbq.js"></script>
 <script>
 $(function(){
 $("body").floatingSocialShare();

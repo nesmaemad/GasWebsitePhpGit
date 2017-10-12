@@ -1,22 +1,22 @@
 'use strict';
 
-var commercial = angular.module('myApp.commercial', ['ui.router' , 'ngCookies']);
+var bbq = angular.module('myApp.bbq', ['ui.router' , 'ngCookies']);
 
-commercial.config(['$stateProvider', function($stateProvider) {
+bbq.config(['$stateProvider', function($stateProvider) {
 
-    $stateProvider.state('commercial', {
-        url          : '/commercial',    
-        templateUrl  : 'modules/commercial/commercial.php',
-        controller   : 'commercialCtrl'
+    $stateProvider.state('bbq', {
+        url          : '/BBQ',    
+        templateUrl  : 'modules/bbq/bbq.php',
+        controller   : 'bbqCtrl'
   });
 
 }]);
 
 
-commercial.controller('commercialCtrl',commercialCtrl);
-commercialCtrl.$inject = ['$rootScope' , '$scope' , '$http' , '$state' , '$filter' , '$cookies'];
+bbq.controller('bbqCtrl',bbqCtrl);
+bbqCtrl.$inject = ['$rootScope' , '$scope' , '$http' , '$state' , '$filter' , '$cookies'];
 
-function commercialCtrl ($rootScope , $scope , $http , $state , $filter , $cookies) {
+function bbqCtrl ($rootScope , $scope , $http , $state , $filter , $cookies) {
   $scope.country_id                   = "1";  
   $scope.post_review_selected_volume  = "1";  
   $scope.post_review_selected_country = "1";
@@ -68,19 +68,13 @@ function commercialCtrl ($rootScope , $scope , $http , $state , $filter , $cooki
   };
   
   $scope.getReviews = function(){
-     var province_id            = $scope.reviews_city.province_id;
-     var volume_id              = $scope.reviews_volume;
-     var commercial_category_id = $cookies.get("commercial_category_id");
-     var params                 = { "province_id"            : province_id , 
-                                    "volume_id"              : volume_id ,
-                                    "commercial_category_id" : commercial_category_id,
-                                    "function_name"          : "getReviews"};
-     console.log("inside getReviews");
-     console.log(params);
+     var province_id = $scope.reviews_city.province_id;
+     var tank_id     = $scope.reviews_volume;
+    
      $.ajax({
         type        : "GET",
-        url         : "handler/commercialReviewsHandler.php", // Location of the service
-        data        : params, //Data sent to server
+        url         : "handler/bbqReviewsHandler.php", // Location of the service
+        data        : {"province_id" : province_id , "tank_id" : tank_id , "function_name" : "getReviews"}, //Data sent to server
         contentType : "application/json", // content type sent to server
         crossDomain : true,
         async       : false,
@@ -99,25 +93,23 @@ function commercialCtrl ($rootScope , $scope , $http , $state , $filter , $cooki
 
   
   $("#post_form").submit(function(event) {
-    var reviewBox              = $('#post-review-box');
-    var newReview              = $('#new-review');
-    var openReviewBtn          = $('#open-review-box');
-    var closeReviewBtn         = $('#close-review-box');
-    var ratingsField           = $('#ratings-hidden');
-    var user_id                = $('#user_id');
-    var commercial_category_id = $cookies.get("commercial_category_id");
+    var reviewBox      = $('#post-review-box');
+    var newReview      = $('#new-review');
+    var openReviewBtn  = $('#open-review-box');
+    var closeReviewBtn = $('#close-review-box');
+    var ratingsField   = $('#ratings-hidden');
+    var user_id        = $('#user_id');
     
     var params = {
-        "country_id"             : $scope.post_review_selected_country,
-        "province_id"            : $scope.post_review_selected_province.id,
-        "volume_id"              : $scope.post_review_selected_volume,
-        "company_id"             : $scope.selected_post_review_company.id,
-        "user_id"                : user_id.val(),
-        "price"                  : $scope.post_review_price,              
-        "review"                 : $scope.post_review_comment,
-        "rating"                 : ratingsField.val(),
-        "commercial_category_id" : commercial_category_id,
-        "function_name"          : "postReview"
+        "country_id"      : $scope.post_review_selected_country,
+        "province_id"     : $scope.post_review_selected_province.id,
+        "tank_id"         : $scope.post_review_selected_volume,
+        "company_id"      : $scope.selected_post_review_company.id,
+        "user_id"         : user_id.val(),
+        "price"           : $scope.post_review_price,              
+        "review"          : $scope.post_review_comment,
+        "rating"          : ratingsField.val(),
+        "function_name"   : "postReview"
         
     }; 
     
@@ -127,7 +119,7 @@ function commercialCtrl ($rootScope , $scope , $http , $state , $filter , $cooki
     
     $.ajax({
         type        : "GET",
-        url         : "handler/commercialReviewsHandler.php", // Location of the service
+        url         : "handler/bbqReviewsHandler.php", // Location of the service
         data        : params, //Data sent to server
         contentType : "application/json", // content type sent to server
         crossDomain : true,
@@ -144,8 +136,8 @@ function commercialCtrl ($rootScope , $scope , $http , $state , $filter , $cooki
      
    });
   
-  $scope.changeReviewsVolume = function(volume_id){
-      $scope.reviews_volume = volume_id;
+  $scope.changeReviewsVolume = function(tank_id){
+      $scope.reviews_volume = tank_id;
       console.log("volume has changed");
       console.log($scope.reviews_volume);
       $scope.getReviews();
@@ -158,8 +150,6 @@ function commercialCtrl ($rootScope , $scope , $http , $state , $filter , $cooki
       
   };
   
-  
-
   var prev_company_id = "";
   $scope.getCompanyReviews = function(company_id){
       console.log("insid getCompanyReviews function");
@@ -167,14 +157,11 @@ function commercialCtrl ($rootScope , $scope , $http , $state , $filter , $cooki
         $("#comapny_review_menu_"+prev_company_id).addClass('hidden-company-reviews');
         console.log(prev_company_id);
         console.log(company_id);
-        var commercial_category_id = $cookies.get("commercial_category_id");
         if(prev_company_id != company_id){
             $.ajax({
                 type        : "GET",
-                url         : "handler/commercialReviewsHandler.php", // Location of the service
-                data        : {"company_id" : company_id , "province_id" : $scope.reviews_city.province_id 
-                                , "volume_id" : $scope.reviews_volume , "commercial_category_id" : commercial_category_id,
-                                "function_name" : "getCompanyReviews"}, //Data sent to server
+                url         : "handler/bbqReviewsHandler.php", // Location of the service
+                data        : {"company_id" : company_id , "province_id" : $scope.reviews_city.province_id , "tank_id" : $scope.reviews_volume ,"function_name" : "getCompanyReviews"}, //Data sent to server
                 contentType : "application/json", // content type sent to server
                 crossDomain : true,
                 async       : false,
@@ -200,7 +187,7 @@ function commercialCtrl ($rootScope , $scope , $http , $state , $filter , $cooki
       console.log($scope.post_review_selected_province);
      $.ajax({
         type        : "GET",
-        url         : "handler/commercialReviewsHandler.php", // Location of the service
+        url         : "handler/bbqReviewsHandler.php", // Location of the service
         data        : {"province_id" : $scope.post_review_selected_province.id , "function_name" : "getCompanies"}, //Data sent to server
         contentType : "application/json", // content type sent to server
         crossDomain : true,
