@@ -3,8 +3,7 @@
     include_once "db.php";           /* including the database */
 
     $get_function_name  = $_GET['function_name'];
-    if(isset($get_function_name) && $get_function_name == "getReviews")
-    {       
+    if(isset($get_function_name) && $get_function_name == "getReviews"){       
         getReviews($conn);
     }else if(isset($get_function_name) && $get_function_name == "getCompanies"){
         getCompanies($conn);
@@ -61,36 +60,41 @@
          $volume_id   = $_GET["volume_id"];
          
 
-         $sql = "select company.name , count(review.company_id),"
-                 . "user.user_name , review.rating , review.id , company.id , review.review from company , review , province , user , volume where "
-                 . "review.company_id = company.id and review.user_id = user.id and review.province_id = province.id"
+         $sql = "select company.name , count(review.company_id), MIN(price), company.id "
+                 . " from company , review , province , volume where "
+                 . "review.company_id = company.id  and review.province_id = province.id"
                  . " and review.volume_id = volume.id and province.id = ? and volume.id = ?"
                  . " group by company.name";
          
-        $price_sql = "select MIN(price) from review where company_id = ? and "
-            . "province_id = ? and volume_id = ?";
+        $price_sql = "select user.user_name , review.rating , review.id , review.review "
+                . "from review , user  where company_id = ? and review.user_id = user.id and "
+            . "review.province_id = ? and volume_id = ? and review.price = ?";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("ss", $province_id, $volume_id);
             $stmt->execute(); 
             $stmt->store_result(); 
-            $stmt->bind_result($col1,$col2,$col4 ,$col5 , $col6 , $col7 , $col8 );
+            $stmt->bind_result($col1,$col2,$col3, $col7   );
             while($stmt->fetch()){
                 $review                = new \stdClass();
                 $review->company_name  =  $col1;
                 $review->reviews_count =  $col2;
              //   $review->price         =  $col3;
-                $review->user_name     =  $col4;
-                $review->rating        =  $col5;
-                $review->id            =  $col6;
+             //  $review->user_name     =  $col4;
+             //   $review->rating        =  $col5;
+             //   $review->id            =  $col6;
                 $review->company_id    =  $col7;
-                $review->review        =  $col8;
+               // $review->review        =  $col8;
                 if($price_stmt = $conn->prepare($price_sql)){
-                    $price_stmt->bind_param("sss", $col7 ,$province_id, $volume_id );
+                    $price_stmt->bind_param("ssss", $col7 ,$province_id, $volume_id , $col3 );
                     $price_stmt->execute();
                     $price_stmt->store_result();
-                    $price_stmt->bind_result($price_col1);
+                    $price_stmt->bind_result( $col4 ,$col5 , $col6 , $col8 );
                     while($price_stmt->fetch()){
-                        $review->price = $price_col1;
+                        $review->price         =  $col3;
+                        $review->user_name     =  $col4;
+                        $review->rating        =  $col5;
+                        $review->id            =  $col6;
+                        $review->review        =  $col8;
                     }
 
                     $price_stmt->close();

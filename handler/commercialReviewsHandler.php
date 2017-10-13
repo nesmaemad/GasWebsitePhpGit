@@ -61,37 +61,41 @@
          $volume_id              = $_GET["volume_id"];
          $commercial_category_id = $_GET["commercial_category_id"];
 
-         $sql = "select company.name , count(commercial_review.company_id),"
-                 . "user.user_name , commercial_review.rating , commercial_review.id , company.id , "
-                 . "commercial_review.review from company , commercial_review , province , user , volume where "
-                 . "commercial_review.company_id = company.id and commercial_review.user_id = user.id and commercial_review.province_id = province.id"
-                 . " and commercial_review.volume_id = commercial_review.id and province.id = ? and commercial_review.id = ? and commercial_category_id = ?"
+         $sql = "select company.name , count(commercial_review.company_id), MIN(commercial_review.price), company.id"
+                 . " from company , commercial_review , province  , volume where "
+                 . "commercial_review.company_id = company.id and commercial_review.province_id = province.id"
+                 . " and commercial_review.volume_id = volume.id and province.id = ? and volume.id = ? and commercial_category_id = ?"
                  . " group by company.name";
          
-        $price_sql = "select MIN(price) from commercial_review where company_id = ? and "
-            . "province_id = ? and volume_id = ? and commercial_category_id = ?";
+        $price_sql = "select user.user_name , commercial_review.rating , commercial_review.id , commercial_review.review "
+                . " from commercial_review , user where company_id = ? and commercial_review.user_id = user.id and "
+            . "commercial_review.province_id = ? and volume_id = ? and commercial_category_id = ? and commercial_review.price = ?";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("sss", $province_id, $volume_id , $commercial_category_id);
             $stmt->execute(); 
             $stmt->store_result(); 
-            $stmt->bind_result($col1,$col2,$col4 ,$col5 , $col6 , $col7 , $col8 );
+            $stmt->bind_result($col1,$col2,$col3, $col7 );
             while($stmt->fetch()){
                 $review                = new \stdClass();
                 $review->company_name  =  $col1;
                 $review->reviews_count =  $col2;
              //   $review->price         =  $col3;
-                $review->user_name     =  $col4;
-                $review->rating        =  $col5;
-                $review->id            =  $col6;
+             //  $review->user_name     =  $col4;
+             //   $review->rating        =  $col5;
+             //   $review->id            =  $col6;
                 $review->company_id    =  $col7;
-                $review->review        =  $col8;
+               // $review->review        =  $col8;
                 if($price_stmt = $conn->prepare($price_sql)){
-                    $price_stmt->bind_param("ssss", $col7 ,$province_id, $volume_id , $commercial_category_id);
+                    $price_stmt->bind_param("sssss", $col7 ,$province_id, $volume_id , $commercial_category_id , $col3);
                     $price_stmt->execute();
                     $price_stmt->store_result();
-                    $price_stmt->bind_result($price_col1);
+                    $price_stmt->bind_result($col4 ,$col5 , $col6 , $col8);
                     while($price_stmt->fetch()){
-                        $review->price = $price_col1;
+                        $review->price         =  $col3;
+                        $review->user_name     =  $col4;
+                        $review->rating        =  $col5;
+                        $review->id            =  $col6;
+                        $review->review        =  $col8;
                     }
 
                     $price_stmt->close();

@@ -5,17 +5,17 @@
     </div>
     <div class="row">
         <div class="col-lg-4 col-sm-12">
-            <img src="images/register.png" style="max-width: 130px;max-height: 130px">
+            <img src="images/register.png" style="max-width: 100px;max-height: 100px">
             <h3 style="color:whitesmoke">Step 1</h3>
             <h4 style="color:whitesmoke">Sign Up for Free</h4>
         </div>
         <div class="col-lg-4 col-sm-12">
-            <img src="images/post_review.png" style="max-width: 130px;max-height: 130px">
+            <img src="images/post_review.png" style="max-width: 100px;max-height: 100px">
             <h3 style="color:whitesmoke">Step 2</h3>
             <h4 style="color:whitesmoke">Post your Price</h4>
         </div>
        <div class="col-lg-4 col-sm-12">
-            <img src="images/compare_prices.png" style="max-width: 130px;max-height: 130px">
+            <img src="images/compare_prices.png" style="max-width: 100px;max-height: 100px">
             <h3 style="color:whitesmoke">Step 3</h3>
             <h4 style="color:whitesmoke">Compare your Local Price</h4>
         </div>
