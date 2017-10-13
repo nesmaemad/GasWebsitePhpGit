@@ -17,6 +17,9 @@ commercial.controller('commercialCtrl',commercialCtrl);
 commercialCtrl.$inject = ['$rootScope' , '$scope' , '$http' , '$state' , '$filter' , '$cookies'];
 
 function commercialCtrl ($rootScope , $scope , $http , $state , $filter , $cookies) {
+  $scope.commercial_category_id       = $cookies.get("commercial_category_id");
+  console.log("commerciaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaal");
+  console.log($scope.commercial_category_id );
   $scope.country_id                   = "1";  
   $scope.post_review_selected_volume  = "1";  
   $scope.post_review_selected_country = "1";
@@ -70,7 +73,7 @@ function commercialCtrl ($rootScope , $scope , $http , $state , $filter , $cooki
   $scope.getReviews = function(){
      var province_id            = $scope.reviews_city.province_id;
      var volume_id              = $scope.reviews_volume;
-     var commercial_category_id = $cookies.get("commercial_category_id");
+     var commercial_category_id = $scope.commercial_category_id;
      var params                 = { "province_id"            : province_id , 
                                     "volume_id"              : volume_id ,
                                     "commercial_category_id" : commercial_category_id,
@@ -105,7 +108,7 @@ function commercialCtrl ($rootScope , $scope , $http , $state , $filter , $cooki
     var closeReviewBtn         = $('#close-review-box');
     var ratingsField           = $('#ratings-hidden');
     var user_id                = $('#user_id');
-    var commercial_category_id = $cookies.get("commercial_category_id");
+    var commercial_category_id = $scope.commercial_category_id;
     
     var params = {
         "country_id"             : $scope.post_review_selected_country,
@@ -167,7 +170,7 @@ function commercialCtrl ($rootScope , $scope , $http , $state , $filter , $cooki
         $("#comapny_review_menu_"+prev_company_id).addClass('hidden-company-reviews');
         console.log(prev_company_id);
         console.log(company_id);
-        var commercial_category_id = $cookies.get("commercial_category_id");
+        var commercial_category_id = $scope.commercial_category_id;
         if(prev_company_id != company_id){
             $.ajax({
                 type        : "GET",

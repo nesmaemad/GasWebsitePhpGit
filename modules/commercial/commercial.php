@@ -71,11 +71,34 @@
                                     <span class="input-group-addon" style="margin-bottom : 20px;">
                                         
                                         <select class="form-control selectpicker" ng-model="post_review_selected_volume" required>
-                                            <option value="1">Up to 999 Liters</option>
-                                            <option value="2">1,000 - 1,999 Liters</option>
-                                            <option value="3">2,000 - 4,999 Liters</option>
-                                            <option value="4">5,000 - 9,999 Liters</option>
-                                            <option value="5">10,000+ Liters</option>
+                                            <option value="1" ng-if="commercial_category_id == '1' || commercial_category_id == '4'">
+                                                Up to 999 Liters
+                                            </option>
+                                            <option value="2" ng-if="commercial_category_id == '1' || commercial_category_id == '4'">
+                                                1,000 - 1,999 Liters
+                                            </option>
+                                            <option value="3" ng-if="commercial_category_id == '1' || commercial_category_id == '4'">
+                                                2,000 - 4,999 Liters
+                                            </option>
+                                            <option value="4" ng-if="commercial_category_id == '1' || commercial_category_id == '4'">
+                                                5,000 - 9,999 Liters
+                                            </option>
+                                            <option value="5" ng-if="commercial_category_id == '1' || commercial_category_id == '4'">
+                                                10,000+ Liters
+                                            </option>
+                                            <option value="6" ng-if="commercial_category_id == '2'">up to 5,000 liters</option>
+                                            <option value="7" ng-if="commercial_category_id == '2'">5001 - 10,000 liters</option>
+                                            <option value="8" ng-if="commercial_category_id == '2'">10,001 - 30,000 liters</option>
+                                            <option value="9" ng-if="commercial_category_id == '2'">30,001 - 60,000 liters</option>
+                                            <option value="10" ng-if="commercial_category_id == '2'">60,001 - 99,999 liters</option>
+                                            <option value="11" ng-if="commercial_category_id == '2'">100,000+ liters</option>
+                                            <option value="12" ng-if="commercial_category_id == '3'">1 - 4 tanks/month</option>
+                                            <option value="13" ng-if="commercial_category_id == '3'">5 - 10 tanks/month</option>
+                                            <option value="14" ng-if="commercial_category_id == '3'">10 - 20 tanks/month</option>
+                                            <option value="15" ng-if="commercial_category_id == '3'">20 - 40 tanks/month</option>
+                                            <option value="16" ng-if="commercial_category_id == '3'">40 - 70 tanks/month</option>
+                                            <option value="17" ng-if="commercial_category_id == '3'">71+ tanks/month</option>
+                                            
                                          
                                         </select>   
                                     </span>
@@ -121,11 +144,33 @@
                   <div class="btn-group gas_liter">
               
                                                                                                                             
-                    <button type="button"  ng-click ="changeReviewsVolume('1')" ng-class="reviews_volume == '1' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">Up to 999 Liters</button>
-                    <button type="button"  ng-click ="changeReviewsVolume('2')" ng-class="reviews_volume == '2' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">1,000 - 1,999 Liters</button>
-                    <button type="button"  ng-click ="changeReviewsVolume('3')" ng-class="reviews_volume == '3' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">2,000 - 4,999 Liters</button>
-                    <button type="button"  ng-click ="changeReviewsVolume('4')" ng-class="reviews_volume == '4' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">5,000 - 9,999 Liters</button>
-                    <button type="button"  ng-click ="changeReviewsVolume('5')" ng-class="reviews_volume == '5' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">10,000+ Liters</button>
+                    <button type="button"  ng-if="commercial_category_id == '1' || commercial_category_id == '4'" ng-click ="changeReviewsVolume('1')" ng-class="reviews_volume == '1' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">Up to 999 Liters</button>
+                    <button type="button"  ng-if="commercial_category_id == '1' || commercial_category_id == '4'" ng-click ="changeReviewsVolume('2')" ng-class="reviews_volume == '2' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">1,000 - 1,999 Liters</button>
+                    <button type="button"  ng-if="commercial_category_id == '1' || commercial_category_id == '4'" ng-click ="changeReviewsVolume('3')" ng-class="reviews_volume == '3' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">2,000 - 4,999 Liters</button>
+                    <button type="button"  ng-if="commercial_category_id == '1' || commercial_category_id == '4'" ng-click ="changeReviewsVolume('4')" ng-class="reviews_volume == '4' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">5,000 - 9,999 Liters</button>
+                    <button type="button"  ng-if="commercial_category_id == '1' || commercial_category_id == '4'" ng-click ="changeReviewsVolume('5')" ng-class="reviews_volume == '5' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">10,000+ Liters</button>
+                    <button type="button"  ng-if="commercial_category_id == '2'" ng-click ="changeReviewsVolume('6')" ng-class="reviews_volume == '6' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">up to 5,000 liters</button>
+                    <button type="button"  ng-if="commercial_category_id == '2'" ng-click ="changeReviewsVolume('7')" ng-class="reviews_volume == '7' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">5001 - 10,000 liters</button>
+                    <button type="button"  ng-if="commercial_category_id == '2'" ng-click ="changeReviewsVolume('8')" ng-class="reviews_volume == '8' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">10,001 - 30,000 liters</button>
+                    <button type="button"  ng-if="commercial_category_id == '2'" ng-click ="changeReviewsVolume('9')" ng-class="reviews_volume == '9' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">30,001 - 60,000 liters</button>
+                    <button type="button"  ng-if="commercial_category_id == '2'" ng-click ="changeReviewsVolume('10')" ng-class="reviews_volume == '10' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">60,001 - 99,999 liters</button>
+                    <button type="button"  ng-if="commercial_category_id == '2'" ng-click ="changeReviewsVolume('11')" ng-class="reviews_volume == '11' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">100,000+ liters</button>
+                    <button type="button"  ng-if="commercial_category_id == '3'" ng-click ="changeReviewsVolume('12')" ng-class="reviews_volume == '12' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">1 - 4 tanks/month</button>
+                    <button type="button"  ng-if="commercial_category_id == '3'" ng-click ="changeReviewsVolume('13')" ng-class="reviews_volume == '13' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">5 - 10 tanks/month</button>
+                    <button type="button"  ng-if="commercial_category_id == '3'" ng-click ="changeReviewsVolume('14')" ng-class="reviews_volume == '14' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">10 - 20 tanks/month</button>
+                    <button type="button"  ng-if="commercial_category_id == '3'" ng-click ="changeReviewsVolume('15')" ng-class="reviews_volume == '15' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">20 - 40 tanks/month</button>
+                    <button type="button"  ng-if="commercial_category_id == '3'" ng-click ="changeReviewsVolume('16')" ng-class="reviews_volume == '16' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">40 - 70 tanks/month</button>
+                    <button type="button"  ng-if="commercial_category_id == '3'" ng-click ="changeReviewsVolume('17')" ng-class="reviews_volume == '17' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">71+ tanks/month</button>
+
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                                                                                                    
+
                   </div>
                 </div>
                 <div class="table-container">
