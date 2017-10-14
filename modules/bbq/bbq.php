@@ -77,6 +77,9 @@
                                                 ng-options="company.name for company in post_review_companies" ng-model="selected_post_review_company" required="true">
                                         </select> 
                                     </span>
+                                    <label class="col-md-12 control-label" style="margin-top: 10px">Or Enter your company name if it is not listed</label>
+                                    <input type="text" class="form-control animated" id="custome_company" name="custome_company" ng-model="custome_company" >
+
                                     
                                     <label class="col-md-4 control-label" ng-if="post_review_selected_country == '2'">Price per Gallon</label>
                                     <label class="col-md-4 control-label" ng-if="post_review_selected_country == '1'">Price per Litre</label>

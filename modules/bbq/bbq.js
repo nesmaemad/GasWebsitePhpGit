@@ -93,23 +93,33 @@ function bbqCtrl ($rootScope , $scope , $http , $state , $filter , $cookies) {
 
   
   $("#post_form").submit(function(event) {
-    var reviewBox      = $('#post-review-box');
-    var newReview      = $('#new-review');
-    var openReviewBtn  = $('#open-review-box');
-    var closeReviewBtn = $('#close-review-box');
-    var ratingsField   = $('#ratings-hidden');
-    var user_id        = $('#user_id');
+    var reviewBox             = $('#post-review-box');
+    var newReview             = $('#new-review');
+    var openReviewBtn         = $('#open-review-box');
+    var closeReviewBtn        = $('#close-review-box');
+    var ratingsField          = $('#ratings-hidden');
+    var user_id               = $('#user_id');
+    var check_custome_company = "0";
+    var company               = "";
+    if(typeof  $scope.custome_company == 'undefined'){
+        company = $scope.selected_post_review_company.id;
+    }else{
+        company               = $scope.custome_company;
+        check_custome_company = "1";
+    }
+
     
     var params = {
-        "country_id"      : $scope.post_review_selected_country,
-        "province_id"     : $scope.post_review_selected_province.id,
-        "tank_id"         : $scope.post_review_selected_volume,
-        "company_id"      : $scope.selected_post_review_company.id,
-        "user_id"         : user_id.val(),
-        "price"           : $scope.post_review_price,              
-        "review"          : $scope.post_review_comment,
-        "rating"          : ratingsField.val(),
-        "function_name"   : "postReview"
+        "country_id"            : $scope.post_review_selected_country,
+        "province_id"           : $scope.post_review_selected_province.id,
+        "tank_id"               : $scope.post_review_selected_volume,
+        "check_custome_company" : check_custome_company,
+        "company"               : company,
+        "user_id"               : user_id.val(),
+        "price"                 : $scope.post_review_price,              
+        "review"                : $scope.post_review_comment,
+        "rating"                : ratingsField.val(),
+        "function_name"         : "postReview"
         
     }; 
     
@@ -127,7 +137,7 @@ function bbqCtrl ($rootScope , $scope , $http , $state , $filter , $cookies) {
         success: function(data, success) {
             console.log("post review successfully");
             console.log(data);
-            location.reload();
+           // location.reload();
         },
         error : function (jqXHR, textStatus, errorThrown) {
             console.log("error in sign up");

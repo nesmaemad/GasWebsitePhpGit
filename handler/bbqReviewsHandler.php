@@ -43,14 +43,42 @@
 
     
     function postReview($conn){
+        $custome_company_check = $_GET['check_custome_company'];
+        $company               = $_GET['company'];
+        $country_id            = $_GET['country_id'];
+        $province_id           = $_GET['province_id'];
+        if($custome_company_check == "1"){
+            //check if the company exists in the database if it is then continue else add ot to the database
+            //then get its id and continue
+            $check_company_sql  = "select id from company where name = ? and country_id = ? and province_id = ?";
+            $check_company_stmt = $conn->prepare($check_company_sql);
+            $check_company_stmt->bind_param("sss",$company , $country_id , $province_id );
+            $check_company_stmt->execute();
+            $check_company_stmt->store_result(); 
+            if(!$check_company_stmt->fetch()){                
+                $add_company_sql  = "insert into company (country_id , province_id , name) values (? , ? , ?)";
+                $add_company_stmt = $conn->prepare($add_company_sql);
+                $add_company_stmt->bind_param("sss",  $country_id , $province_id , $company);
+                $add_company_stmt->execute();
+                $add_company_stmt->store_result();
+                $company = $conn->insert_id;
+                echo "hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee no company exist ".$company; 
+               // $add_company_stmt-> close();
+            }
+            
+            
+            $check_company_stmt-> close();
+        }
+        
         $date       = new DateTime();
         $time_stamp = $date->getTimestamp();
         $sql = "insert into bbq_review (country_id,province_id,tank_id,company_id,user_id,price,review,rating,time)"
                . "values ( ? ,? ,? ,? ,? ,? ,? ,? ,?)";
         $stmt     = $conn->prepare($sql);
-        $stmt->bind_param("sssssssss", $_GET['country_id'] , $_GET['province_id'],$_GET['tank_id'],$_GET['company_id']
+        $stmt->bind_param("sssssssss", $country_id , $province_id,$_GET['tank_id'],$company
                 ,$_GET['user_id'],$_GET['price'],$_GET['review'],$_GET['rating'],$time_stamp );
-        $stmt->execute(); 
+        $stmt->execute();
+        $stmt->store_result(); 
         $stmt-> close();
         echo "success";
 
