@@ -13,7 +13,11 @@ angular.module('myApp', [
     'myApp.navbar',
     'myApp.commercial',
     'myApp.bbq',
-    'myApp.terms'
+    'myApp.terms',
+    'myApp.policy',
+    'myApp.careers',
+    'myApp.aboutUs',
+    'myApp.advertiseWithUs'
 
 ]).
 config(['$stateProvider' , '$urlRouterProvider',function($stateProvider , $urlRouterProvider ) {

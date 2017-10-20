@@ -93,6 +93,10 @@ session_start();       /* starting the session */
 <script src = "modules/commercial/commercial.js"></script>
 <script src = "modules/bbq/bbq.js"></script>
 <script src = "modules/terms/terms.js"></script>
+<script src = "modules/policy/policy.js"></script>
+<script src = "modules/careers/careers.js"></script>
+<script src = "modules/aboutUs/aboutUs.js"></script>
+<script src = "modules/advertiseWithUs/advertiseWithUs.js"></script>
 <script src = "app.js"></script> 
 <script>
 $(function(){
