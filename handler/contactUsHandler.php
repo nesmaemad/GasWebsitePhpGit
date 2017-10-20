@@ -19,7 +19,7 @@
         '.$_GET['message'].'
         He/She has provided these contact information to reach him/her:
         Email : '.$_GET['email'].'
-        Phone Number : '.$_GET['number'].''
+        Phone Number : '.$_GET['phone'].''
         . '';
         // send email
         mail("nesma.emad45@gmail.com",$_GET['subject'],$msg);

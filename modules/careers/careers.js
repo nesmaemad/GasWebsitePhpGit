@@ -17,6 +17,6 @@ careers.config(['$stateProvider', function($stateProvider) {
 careers.controller('careersCtrl',careersCtrl);
 careersCtrl.$inject = ['$scope' , '$http' , '$state'];
 
-function termsCtrl ($scope , $http , $state) {
+function careersCtrl ($scope , $http , $state) {
     
 };
