@@ -83,7 +83,7 @@ session_start();       /* starting the session */
 <script src = "js/search_autocomplete.js"></script> 
 <script src = "js/signup_form_validation.js"></script>
 <script src = "js/jquery.floating-social-share.js"></script>
-
+<script src=  "footer.js"></script>
 
 <script src = "modules/signUp/signUp.js"></script> 
 <script src = "modules/reviews/reviews.js"></script> 

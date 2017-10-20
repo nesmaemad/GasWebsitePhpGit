@@ -3,8 +3,7 @@
     include_once "db.php";           /* including the database */
 
     $get_function_name  = $_GET['function_name'];
-    if(isset($get_function_name) && $get_function_name == "getReviews")
-    {       
+    if(isset($get_function_name) && $get_function_name == "getReviews"){       
         getReviews($conn);
     }else if(isset($get_function_name) && $get_function_name == "getCompanies"){
         getCompanies($conn);
@@ -14,8 +13,6 @@
         getCompanyReviews($conn);
     }
     
-
-
     
     function getCompanyReviews($conn){
         $reviews     = array();
@@ -50,13 +47,13 @@
         if($custome_company_check == "1"){
             //check if the company exists in the database if it is then continue else add ot to the database
             //then get its id and continue
-            $check_company_sql  = "select id from company where name = ? and country_id = ? and province_id = ?";
+            $check_company_sql  = "select id from bbq_company where name = ? and country_id = ? and province_id = ?";
             $check_company_stmt = $conn->prepare($check_company_sql);
             $check_company_stmt->bind_param("sss",$company , $country_id , $province_id );
             $check_company_stmt->execute();
             $check_company_stmt->store_result(); 
             if(!$check_company_stmt->fetch()){                
-                $add_company_sql  = "insert into company (country_id , province_id , name) values (? , ? , ?)";
+                $add_company_sql  = "insert into bbq_company (country_id , province_id , name) values (? , ? , ?)";
                 $add_company_stmt = $conn->prepare($add_company_sql);
                 $add_company_stmt->bind_param("sss",  $country_id , $province_id , $company);
                 $add_company_stmt->execute();
@@ -80,6 +77,26 @@
         $stmt->execute();
         $stmt->store_result(); 
         $stmt-> close();
+        
+        
+        $users_sql = "select email , first_name from user where province_id = ?";
+        $users_stmt     = $conn->prepare($users_sql);
+        $users_stmt->bind_param("s", $_GET['province_id'] );
+        $users_stmt->execute(); 
+        $users_stmt->store_result(); 
+        $users_stmt->bind_result($col1,$col2 );
+        while($users_stmt->fetch()){
+            $msg = '
+
+            Hello '.$col2.'
+            A new Review has been added on propane companies in you region in the BBQ section
+
+            Please check out the latest reviews.
+            Thanks. '; // Our message above including the link
+
+            // send email
+            mail($col1,"New Gas Review",$msg);
+        }
         echo "success";
 
     }
@@ -91,11 +108,11 @@
          $tank_id   = $_GET["tank_id"];
          
 
-         $sql = "select company.name , count(bbq_review.company_id), MIN(price), company.id"
-                 . " from company , bbq_review , province  , bbq_tank where "
-                 . "bbq_review.company_id = company.id  and bbq_review.province_id = province.id"
+         $sql = "select bbq_company.name , count(bbq_review.company_id), MIN(price), bbq_company.id"
+                 . " from bbq_company , bbq_review , province  , bbq_tank where "
+                 . "bbq_review.company_id = bbq_company.id  and bbq_review.province_id = province.id"
                  . " and bbq_review.tank_id = bbq_tank.id and province.id = ? and bbq_tank.id = ?"
-                 . " group by company.name";
+                 . " group by bbq_company.name";
          
         $price_sql = "select user.user_name , bbq_review.rating , bbq_review.id , bbq_review.review"
                 . " from bbq_review , user where bbq_review.user_id = user.id and company_id = ? and "
@@ -142,7 +159,7 @@
     
     function getCompanies($conn){
         $companies    = array();
-        $sql          = "select id , country_id , name from company where province_id = ?";
+        $sql          = "select id , country_id , name from bbq_company where province_id = ? group by name";
         $province_id  = $_GET["province_id"];
         $stmt         = $conn->prepare($sql);
         $stmt->bind_param("s", $province_id);

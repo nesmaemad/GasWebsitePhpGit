@@ -20,8 +20,13 @@ function navbarCtrl ($rootScope , $scope , $http , $state , $filter , $cookies) 
     $scope.redirectCommrcial = function(commercial_category_id){
         console.log("inside redirectCommrcial in navbar");
         $cookies.put("commercial_category_id" , commercial_category_id);
-        location.reload();
-        $state.go("commercial");
+
+        if($state.current.name == 'commercial'){
+            location.reload();
+        }else{
+            $state.go("commercial");
+        }
+        
     };
 };
 

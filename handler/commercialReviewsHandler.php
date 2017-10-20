@@ -50,6 +50,25 @@
                 ,$_GET['user_id'],$_GET['price'],$_GET['review'],$_GET['rating'],$time_stamp , $_GET["commercial_category_id"] );
         $stmt->execute(); 
         $stmt-> close();
+        
+                $users_sql = "select email , first_name from user where province_id = ?";
+        $users_stmt     = $conn->prepare($users_sql);
+        $users_stmt->bind_param("s", $_GET['province_id'] );
+        $users_stmt->execute(); 
+        $users_stmt->store_result(); 
+        $users_stmt->bind_result($col1,$col2 );
+        while($users_stmt->fetch()){
+            $msg = '
+
+            Hello '.$col2.'
+            A new Review has been added on propane companies in you region in the Commercial section
+
+            Please check out the latest reviews.
+            Thanks. '; // Our message above including the link
+
+            // send email
+            mail($col1,"New Gas Review",$msg);
+        }
         echo "success";
 
     }
@@ -112,7 +131,7 @@
     
     function getCompanies($conn){
         $companies    = array();
-        $sql          = "select id , country_id , name from company where province_id = ?";
+        $sql          = "select id , country_id , name from company where province_id = ? group by name";
         $province_id  = $_GET["province_id"];
         $stmt         = $conn->prepare($sql);
         $stmt->bind_param("s", $province_id);

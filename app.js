@@ -17,7 +17,8 @@ angular.module('myApp', [
     'myApp.policy',
     'myApp.careers',
     'myApp.aboutUs',
-    'myApp.advertiseWithUs'
+    'myApp.advertiseWithUs',
+    'myApp.footer'
 
 ]).
 config(['$stateProvider' , '$urlRouterProvider',function($stateProvider , $urlRouterProvider ) {
