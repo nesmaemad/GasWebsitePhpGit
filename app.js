@@ -12,7 +12,8 @@ angular.module('myApp', [
     'myApp.contactUs',
     'myApp.navbar',
     'myApp.commercial',
-    'myApp.bbq'
+    'myApp.bbq',
+    'myApp.terms'
 
 ]).
 config(['$stateProvider' , '$urlRouterProvider',function($stateProvider , $urlRouterProvider ) {

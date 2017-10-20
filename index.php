@@ -84,7 +84,7 @@ session_start();       /* starting the session */
 <script src = "js/signup_form_validation.js"></script>
 <script src = "js/jquery.floating-social-share.js"></script>
 
-<script src = "app.js"></script> 
+
 <script src = "modules/signUp/signUp.js"></script> 
 <script src = "modules/reviews/reviews.js"></script> 
 <script src = "modules/navbar/navbar.js"></script>
@@ -92,6 +92,8 @@ session_start();       /* starting the session */
 <script src = "modules/contactUs/contactUs.js"></script>
 <script src = "modules/commercial/commercial.js"></script>
 <script src = "modules/bbq/bbq.js"></script>
+<script src = "modules/terms/terms.js"></script>
+<script src = "app.js"></script> 
 <script>
 $(function(){
 $("body").floatingSocialShare();
