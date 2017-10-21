@@ -42,7 +42,7 @@
 <div class="row" style="background:white;height: 380px;">
     <div class="col-md-8">
         <div class="row">
-            <div class="col-md-offset-1" style="height: 340px;box-shadow: 10px 10px 5px #888888;background:whitesmoke">
+            <div class="col-md-offset-1" style="height: 340px;box-shadow: 10px 10px 5px #888888;background:#dedcdc">
                 <h2 class="text-center" style="color: #0097a9">Find Cheap Gas in America</h2>
                 <div class="col-md-2" ng-repeat="state in states">
                     <a style="cursor: pointer;" ng-click="getProvinceReviews(state)">{{state.name}}</a>
@@ -54,7 +54,7 @@
     
     <div class="col-md-3">
         <div class="row">
-            <div class="col-md-offset-1" style="height: 340px;box-shadow: 10px 10px 5px #888888;background:whitesmoke">
+            <div class="col-md-offset-1" style="height: 340px;box-shadow: 10px 10px 5px #888888;background:#dedcdc">
                 <h2 class="text-center" style="color: #0097a9">Find Cheap Gas in Canada</h2>
                 <div class="col-md-6" ng-repeat="province in provinces">
                     <a style="cursor: pointer;" ng-click="getProvinceReviews(province)">{{province.name}}</a>

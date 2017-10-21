@@ -234,7 +234,7 @@
     </div>
     <div class="col-md-3">
         <div class="row" style="margin-bottom: 20px;">
-            <div class="col-md-offset-1" style="height: 300px;overflow-y: scroll;box-shadow: 10px 10px 5px #888888;background:whitesmoke" >
+            <div class="col-md-offset-1" style="height: 300px;overflow-y: scroll;box-shadow: 10px 10px 5px #888888;background:#dedcdc" >
                 <h2 ng-if="country_id == '1'" class="text-center" style="color: #0097a9">Find Cheap Gas in Canada</h2>
                 <h2 ng-if="country_id == '2'" class="text-center" style="color: #0097a9">Find Cheap Gas in America</h2>
                 <div class="col-md-6" ng-repeat="province in quickSearchProvinces">
