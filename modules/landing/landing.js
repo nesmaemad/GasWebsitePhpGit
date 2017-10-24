@@ -16,8 +16,14 @@ landing.controller('landingCtrl',landingCtrl);
 landingCtrl.$inject = ['$rootScope' , '$scope' , '$http' , '$state' , '$filter'];
 
 function landingCtrl ($rootScope ,$scope , $http , $state , $filter) {
-  $scope.landing_selected_volume = "1";
+  $scope.landing_selected_volume   = "1";
+  $scope.landing_selected_category = "reviews";
   
+  $scope.redirectCommrcial = function(commercial_category_id , commercial_category_name){
+        console.log("inside redirectCommrcial in landing");
+        $cookies.put("commercial_category_id" , commercial_category_id);
+        $cookies.put("commercial_category_name" , commercial_category_name);        
+  };
   $scope.getProvinces = function(){
      $.ajax({
         type        : "GET",
@@ -144,7 +150,22 @@ function landingCtrl ($rootScope ,$scope , $http , $state , $filter) {
                 $rootScope.has_reviews_volume     = true; 
                 $rootScope.landing_reviews_volume = $scope.landing_selected_volume; 
                 $rootScope.landing_reviews_city = {"name" : single_object.name,"province_name" : single_object.province_name , "province_id" : single_object.province_id};
-                $state.go("reviews");
+                if($scope.landing_selected_category == "commercial1"){
+                    $scope.redirectCommrcial('2' , 'Agriculture');
+                    $state.go("commercial");
+                }else if($scope.landing_selected_category == "commercial2"){
+                    $scope.redirectCommrcial('4' , 'Building and Development');
+                    $state.go("commercial");                    
+                }else if($scope.landing_selected_category == "commercial3"){
+                    $scope.redirectCommrcial('3' , 'Forklifts');
+                    $state.go("commercial");                    
+                }else if($scope.landing_selected_category == "commercial4"){
+                    $scope.redirectCommrcial('1' , 'Heating and Cooking');
+                    $state.go("commercial");                    
+                }else{
+                    $state.go($scope.landing_selected_category);
+                }
+                
             }
 
            });

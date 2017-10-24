@@ -6,17 +6,63 @@
     <div class="col-lg-8 col-lg-push-2" style="margin-top: 20px;">
         
             <div class="input-group col-md-12">
-                    <div class="col-md-7">
+                    <div class="col-md-6">
               
                         <input type="text" class="form-control search-query" id="search_input" 
                                placeholder="Search propane prices by city or zip" 
-                               style="position: absolute!important;height: 40px;width: 103%!important"
+                               style="position: absolute!important;height: 40px;width: 103.5%!important"
                                ng-model="zip_city"/>
                      
                     </div>
-                    <div class="col-md-3">
-                        <select class="form-control" ng-model="landing_selected_volume"
+                    <div class="col-md-2">
+                        <select class="form-control" ng-model="landing_selected_category"
                                 style="position: absolute!important;height: 40px;">
+                                    <option value="reviews">Residential</option>
+                                    <option value="commercial1" >Agriculture(Commercial)</option>
+                                    <option value="commercial2" >Building and Development(Commercial)</option>
+                                    <option value="commercial3" >Forklifts(Commercial)</option>
+                                    <option value="commercial4" >Heating and Cooking(Commercial)</option>
+                                    <option value="bbq">BBQ</option>
+              
+                        </select> 
+                    </div>
+                    <div class="col-md-2">
+                        <select class="form-control" ng-model="landing_selected_volume"
+                                style="position: absolute!important;height: 40px;"
+                                ng-if="landing_selected_category == 'reviews' || landing_selected_category == 'commercial2'
+                                ||landing_selected_category == 'commercial4'">
+                                    <option value="1">Up to 999 Liters</option>
+                                    <option value="2">1,000 - 1,999 Liters</option>
+                                    <option value="3">2,000 - 4,999 Liters</option>
+                                    <option value="4">5,000 - 9,999 Liters</option>
+                                    <option value="5">10,000+ Liters</option>
+
+                        </select> 
+                        <select class="form-control" ng-model="landing_selected_volume"
+                                style="position: absolute!important;height: 40px;"
+                                ng-if="landing_selected_category == 'commercial1'">
+                                    <option value="6" >up to 5,000 liters</option>
+                                    <option value="7" >5001 - 10,000 liters</option>
+                                    <option value="8">10,001 - 30,000 liters</option>
+                                    <option value="9" >30,001 - 60,000 liters</option>
+                                    <option value="10" >60,001 - 99,999 liters</option>
+                                    <option value="11" >100,000+ liters</option>
+
+                        </select> 
+                        <select class="form-control" ng-model="landing_selected_volume"
+                                style="position: absolute!important;height: 40px;"
+                                ng-if="landing_selected_category == 'commercial3'">
+                                    <option value="12" >1 - 4 tanks/month</option>
+                                    <option value="13" >5 - 10 tanks/month</option>
+                                    <option value="14">10 - 20 tanks/month</option>
+                                    <option value="15">20 - 40 tanks/month</option>
+                                    <option value="16">40 - 70 tanks/month</option>
+                                    <option value="17">71+ tanks/month</option>
+
+                        </select> 
+                         <select class="form-control" ng-model="landing_selected_volume"
+                                style="position: absolute!important;height: 40px;"
+                                ng-if="landing_selected_category == 'bbq'">
                                     <option value="1">Up to 999 Liters</option>
                                     <option value="2">1,000 - 1,999 Liters</option>
                                     <option value="3">2,000 - 4,999 Liters</option>
@@ -25,6 +71,7 @@
 
                         </select> 
                     </div>
+
                     <div class="col-md-2">
                         <span class="input-group-btn">
                             <button class="btn btn-danger" type="button" ng-click="updateReviewsByLandingSearch()"
