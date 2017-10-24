@@ -24,23 +24,35 @@
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" >Commercial</a>
                 <ul class="dropdown-menu" style="left:0;width:230px;background-color: #222222;">                  
-                  <li><a ng-click="redirectCommrcial('2')" style="color: #FFF8DC;">Agriculture</a></li>                  
-                  <li><a ng-click="redirectCommrcial('4')" style="color: #FFF8DC;">Building and Development</a></li>
-                  <li><a ng-click="redirectCommrcial('3')" style="color: #FFF8DC;">Forklifts</a></li>
-                  <li><a ng-click="redirectCommrcial('1')" style="color: #FFF8DC;">Heating and Cooking</a></li>
+                  <li><a ng-click="redirectCommrcial('2' , 'Agriculture')" style="color: #FFF8DC;">Agriculture</a></li>                  
+                  <li><a ng-click="redirectCommrcial('4' , 'Building and Development')" style="color: #FFF8DC;">Building and Development</a></li>
+                  <li><a ng-click="redirectCommrcial('3' , 'Forklifts')" style="color: #FFF8DC;">Forklifts</a></li>
+                  <li><a ng-click="redirectCommrcial('1' , 'Heating and Cooking')" style="color: #FFF8DC;">Heating and Cooking</a></li>
                 </ul>
             </li> 
             <li><a ui-sref="bbq">BBQ</a></li>
             <li><a ui-sref="advertiseWithUs">Advertise With Us</a></li>
             <li><a ui-sref="contactUs">Contact</a></li>
-            <li>
-              <a class="btn btn-default btn-outline btn-circle collapsed"  data-toggle="collapse" href="#nav-collapse2" aria-expanded="false" aria-controls="nav-collapse2">Sign in</a>
+            <li ng-if="is_signed_in != 'true'">
+<!--              <a class="btn btn-default btn-outline btn-circle collapsed"  data-toggle="collapse" href="#nav-collapse2" aria-expanded="false" aria-controls="nav-collapse2">Sign in</a>-->
+              <a class="btn btn-default btn-outline btn-circle"  ui-sref="signIn">Sign in</a>
+
             </li>
-            <li>
+            <li ng-if="is_signed_in != 'true'">
               <a class="btn btn-default btn-outline btn-circle collapsed" ui-sref="signUp" >Sign Up</a>
             </li>
+            
+            <li ng-if="is_signed_in == 'true'">
+<!--              <a class="btn btn-default btn-outline btn-circle collapsed"  data-toggle="collapse" href="#nav-collapse2" aria-expanded="false" aria-controls="nav-collapse2">Sign in</a>-->
+              <p class="btn btn-default btn-outline btn-circle" >{{user_name}}</p>
+
+            </li>
+            <li ng-if="is_signed_in == 'true'">
+              <a class="btn btn-default btn-outline btn-circle collapsed" ng-click="signOut()" >Sign Out</a>
+            </li>
+            
           </ul>
-          <div class="collapse nav navbar-nav nav-collapse slide-down" id="nav-collapse2">
+<!--          <div class="collapse nav navbar-nav nav-collapse slide-down" id="nav-collapse2">
               <form class="navbar-form navbar-right form-inline" id="signin_form" role="form" onsubmit="signIn()">
               <div class="form-group">
                 <label class="sr-only" for="Email">Email</label>
@@ -52,7 +64,7 @@
               </div>
               <button type="submit" class="btn btn-success">Sign in</button>
             </form>
-          </div>
+          </div>-->
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container -->
     </nav><!-- /.navbar -->

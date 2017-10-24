@@ -6,7 +6,7 @@ var navbar = angular.module('myApp.navbar', ['ui.router' , 'ngCookies']);
 navbar.config(['$stateProvider', function($stateProvider) {
 
     $stateProvider.state('navbar', {
-        templateUrl  : 'modules/navbar/navbar.html',
+        templateUrl  : 'modules/navbar/navbar.php',
         controller   : 'navbarCtrl'
   });
 
@@ -17,9 +17,12 @@ navbar.controller('navbarCtrl',navbarCtrl);
 navbarCtrl.$inject = ['$rootScope' , '$scope' , '$http' , '$state' , '$filter' , '$cookies'];
 
 function navbarCtrl ($rootScope , $scope , $http , $state , $filter , $cookies) {
-    $scope.redirectCommrcial = function(commercial_category_id){
+    $scope.is_signed_in = $cookies.get("is_signed_in");
+    $scope.user_name    = $cookies.get("user_name");
+    $scope.redirectCommrcial = function(commercial_category_id , commercial_category_name){
         console.log("inside redirectCommrcial in navbar");
         $cookies.put("commercial_category_id" , commercial_category_id);
+        $cookies.put("commercial_category_name" , commercial_category_name);
 
         if($state.current.name == 'commercial'){
             location.reload();
@@ -27,6 +30,15 @@ function navbarCtrl ($rootScope , $scope , $http , $state , $filter , $cookies) 
             $state.go("commercial");
         }
         
+    };
+    
+    $scope.signOut = function(){
+        var cookies = $cookies.getAll();
+        angular.forEach(cookies, function (v, k) {
+            $cookies.remove(k);
+        });
+        location.reload();
+        $state.go("landing");
     };
 };
 
@@ -70,7 +82,7 @@ function signIn(){
                
             }
             location.reload();
-            $('#nav-collapse2').slideToggle();
+          //  $('#nav-collapse2').slideToggle();
 
         },
         error : function (jqXHR, textStatus, errorThrown) {

@@ -53,7 +53,7 @@ session_start();       /* starting the session */
    <body ng-app="myApp" style="background-color: #6d5e5d">
 
 <!--        <div class="container-fluid my-container">-->
-            <div ng-include="'modules/navbar/navbar.html'" ng-app="myApp.navbar" ng-controller="navbarCtrl"></div>
+            <div ng-include="'modules/navbar/navbar.php'" ng-app="myApp.navbar" ng-controller="navbarCtrl"></div>
             <div ui-view></div>           
             <div ng-include="'footer.html'"></div> 
 <!--        </div>           -->
@@ -97,6 +97,7 @@ session_start();       /* starting the session */
 <script src = "modules/careers/careers.js"></script>
 <script src = "modules/aboutUs/aboutUs.js"></script>
 <script src = "modules/advertiseWithUs/advertiseWithUs.js"></script>
+<script src = "modules/signIn/signIn.js"></script>
 <script src = "app.js"></script> 
 <script>
 $(function(){

@@ -22,7 +22,7 @@
       <div class="row">
            <div id="custom-search-input">
                 <div class="input-group col-md-12">
-                    <input type="text" class="  search-query form-control" id="search_input" placeholder="Search gas prices by city or zip" />
+                    <input type="text" class="  search-query form-control" id="search_input" placeholder="Search propane prices by city or zip" />
                     <span class="input-group-btn">
                         <button class="btn btn-danger search-review" type="button" ng-click="updateReviewsBySearch()">
                             <span class=" glyphicon glyphicon-search"></span>
@@ -132,12 +132,12 @@
                   <div class="table table-filter table-responsive" style="overflow-x: visible!important;">
                     <div class="reviews-body">
                       <div data-status="pagado" class="row rowlink reviews-row" ng-repeat="review in reviews">
-                           
+                        <a class="rowlink" data-toggle="dropdown" ng-click="getCompanyReviews(review.company_id)">   
                          <div class="col-lg-6 reviews-cell">
                         
-                                <a class="rowlink" data-toggle="dropdown" ng-click="getCompanyReviews(review.company_id)">
+                                
                                     <h3> {{review.company_name}} </h3>
-                                </a>
+                                
                           
                         </div>
 
@@ -150,17 +150,17 @@
                               </span>
                             <br/>
                             
-                            <span>({{review.reviews_count}} Reviews)
+                            <span><span style="color: black">({{review.reviews_count}} Reviews)</span>
                               <span style="color:#0097a9;">{{review.user_name}} </span>
                               </span>
                               <br/>
-                              {{review.review}}
+                              <span style="color: black"> {{review.review}}</span>
                         </div>
 
                         <div class="col-lg-2 reviews-cell">                            
                           <label  style=" font-size: 25px; color: rgb(0,151,169)">$ {{review.price}}</label>
                         </div>
-                          
+                       </a>   
                         <div  role="menu" id="comapny_review_menu_{{review.company_id}}" class="reviews-cell hidden-company-reviews" aria-labelledby="dLabel" style="max-height: 200px;">
                             <div class="col-lg-12 review-block" >
                                 <div class="row" ng-repeat="company_review in company_reviews" style="margin-bottom: 20px;">
@@ -234,18 +234,18 @@
 
             </div>
     </div>
-    <div class="col-md-3">
+<!--    <div class="col-md-3">
         <div class="row" style="margin-bottom: 20px;">
             <div class="col-md-offset-1" style="height: 300px;overflow-y: scroll;box-shadow: 10px 10px 5px #888888;background:#dedcdc" >
-                <h2 ng-if="country_id == '1'" class="text-center" style="color: #0097a9">Find Cheap Gas in Canada</h2>
-                <h2 ng-if="country_id == '2'" class="text-center" style="color: #0097a9">Find Cheap Gas in America</h2>
+                <h2 ng-if="country_id == '1'" class="text-center" style="color: #0097a9">Find Cheap Propane in Canada</h2>
+                <h2 ng-if="country_id == '2'" class="text-center" style="color: #0097a9">Find Cheap Propane in America</h2>
                 <div class="col-md-6" ng-repeat="province in quickSearchProvinces">
                     <a style="cursor: pointer;" ng-click="getProvinceReviews(province)">{{province.name}}</a>
                 </div>
             </div>
 
         </div>
-    </div>
+    </div>-->
 
 </div>
 

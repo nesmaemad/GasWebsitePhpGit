@@ -71,3 +71,13 @@ Follow me on Twitter @maridlcrmn
 .dropdown-menu>li>a:hover {
     color: #c52c2c!important;
 }
+
+.nav>li>a {
+    cursor: pointer;
+    cursor: hand;
+}
+
+.dropdown-menu>li>a {
+    cursor: pointer;
+    cursor: hand;
+}

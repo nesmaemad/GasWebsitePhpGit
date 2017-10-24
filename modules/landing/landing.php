@@ -2,14 +2,14 @@
 
 <div ng-include="'modules/HowItWorks/howItWorks.php'"></div>
 <div class="row text-center" id="landing_body" style="background-color: #FFF8DC; height: 250px ">
-    <h1 style="color: #0097a9">Find The Best Gas Price</h1>
+    <h1 style="color: #0097a9">Find The Best Propane Price</h1>
     <div class="col-lg-8 col-lg-push-2" style="margin-top: 20px;">
         
             <div class="input-group col-md-12">
                     <div class="col-md-7">
               
                         <input type="text" class="form-control search-query" id="search_input" 
-                               placeholder="Search gas prices by city or zip" 
+                               placeholder="Search propane prices by city or zip" 
                                style="position: absolute!important;height: 40px;width: 103%!important"
                                ng-model="zip_city"/>
                      
@@ -39,11 +39,22 @@
     </div>
 
 </div>
-<div class="row" style="background:white;height: 380px;">
+
+<div class="row" style="background:white;height: 250px;">
+    <div class="col-md-4 text-center well well-sm col-sm-12 col-md-push-1" style="min-height: 200px;margin-top: 20px;">
+      Here is your first AD
+    </div>
+    
+    <div class="col-md-4 text-center well well-sm col-md-push-2 col-sm-12" style="min-height: 200px;margin-top: 20px;">
+      Here is your second AD
+    </div>
+
+</div>
+<!--<div class="row" style="background:white;height: 380px;">
     <div class="col-md-8">
         <div class="row">
             <div class="col-md-offset-1" style="height: 340px;box-shadow: 10px 10px 5px #888888;background:#dedcdc">
-                <h2 class="text-center" style="color: #0097a9">Find Cheap Gas in America</h2>
+                <h2 class="text-center" style="color: #0097a9">Find Cheap Propane in America</h2>
                 <div class="col-md-2" ng-repeat="state in states">
                     <a style="cursor: pointer;" ng-click="getProvinceReviews(state)">{{state.name}}</a>
                 </div>
@@ -55,7 +66,7 @@
     <div class="col-md-3">
         <div class="row">
             <div class="col-md-offset-1" style="height: 340px;box-shadow: 10px 10px 5px #888888;background:#dedcdc">
-                <h2 class="text-center" style="color: #0097a9">Find Cheap Gas in Canada</h2>
+                <h2 class="text-center" style="color: #0097a9">Find Cheap Propane in Canada</h2>
                 <div class="col-md-6" ng-repeat="province in provinces">
                     <a style="cursor: pointer;" ng-click="getProvinceReviews(province)">{{province.name}}</a>
                 </div>
@@ -64,7 +75,7 @@
 
         </div>
     </div>
-</div>
+</div>-->
 
 <script>
     console.log("inside search_autocomplete.js");

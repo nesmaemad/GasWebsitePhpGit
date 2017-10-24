@@ -18,8 +18,10 @@ commercialCtrl.$inject = ['$rootScope' , '$scope' , '$http' , '$state' , '$filte
 
 function commercialCtrl ($rootScope , $scope , $http , $state , $filter , $cookies) {
   $scope.commercial_category_id       = $cookies.get("commercial_category_id");
+  $scope.commercial_category_name     = $cookies.get("commercial_category_name");
   console.log("commerciaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaal");
   console.log($scope.commercial_category_id );
+  console.log($scope.commercial_category_name );
   $scope.country_id                   = "1";  
   $scope.post_review_selected_volume  = "1";  
   $scope.post_review_selected_country = "1";

@@ -32,7 +32,7 @@
                     setcookie("country_id"  , $col6, 0, '/');
                     setcookie("email"       , $email, 0, '/');
 
-                    echo $col2;
+                    echo $col4;
                 }
             }else{
                 echo "failed";

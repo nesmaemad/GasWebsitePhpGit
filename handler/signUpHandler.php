@@ -42,27 +42,37 @@
   
     function signUp($conn){
         $hash = md5( rand(0,1000) );
-        $sql = "insert into user (email,first_name,last_name,address,phone,postal_zip,province_id,"
-                . "country_id,password,user_name,hash) values ( ? ,? ,? ,? ,? ,? ,? ,? ,? ,?,?)";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sssssssssss", $_GET['email'], $_GET['first_name'] , $_GET['last_name'],
-                $_GET['address'] , $_GET['phone'] , $_GET['postal'] , $_GET['province'],
-                $_GET['country'] , $_GET['password'] , $_GET['user_name'],$hash);
-        $stmt->execute(); 
-        $msg = '
+        $check_sql = "select id from user where email = ?";
+        $check_stmt = $conn->prepare($check_sql);
+        $check_stmt->bind_param("s", $_GET['email']);
+        $check_stmt->execute(); 
+        if($check_stmt->fetch()){
+            echo "exist";
+        }else{
+            $sql = "insert into user (email,first_name,last_name,address,phone,postal_zip,province_id,"
+             . "country_id,password,user_name,hash) values ( ? ,? ,? ,? ,? ,? ,? ,? ,? ,?,?)";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("sssssssssss", $_GET['email'], $_GET['first_name'] , $_GET['last_name'],
+                    $_GET['address'] , $_GET['phone'] , $_GET['postal'] , $_GET['province'],
+                    $_GET['country'] , $_GET['password'] , $_GET['user_name'],$hash);
+            $stmt->execute(); 
+            $msg = '
 
-        Thanks for signing up!
-        Your account has been created, you can login after you have activated your account by pressing the url below.
+            Thanks for signing up!
+            Your account has been created, you can login after you have activated your account by pressing the url below.
 
-        Please click this link to activate your account:
-        http://superiorchoicemarketing.com/Gas/handler/signUpHandler.php?email='.$_GET['email'].'&hash='.$hash.'
+            Please click this link to activate your account:
+            http://superiorchoicemarketing.com/Gas/handler/signUpHandler.php?email='.$_GET['email'].'&hash='.$hash.'
 
-        '; // Our message above including the link
+            '; // Our message above including the link
 
-        // send email
-        mail($_GET['email'],"Confirmation",$msg);
-        $stmt-> close();
-        echo "success";
+            // send email
+            mail($_GET['email'],"Confirmation",$msg);
+            $stmt-> close();
+            echo "success"; 
+        }
+        
+
 
     }
     

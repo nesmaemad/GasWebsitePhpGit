@@ -58,11 +58,18 @@ function signUpCtrl ($scope , $http , $state) {
             if ($.trim(data) === "success") {
                 swal(
                     'Success',
-                    'Signed Up Successfully',
+                    'Please check your email for confirmation',
                     'success'
                 );
+            //  $state.go('reviews');
+            }else if ($.trim(data) === "exist"){
+                swal(
+                   'Oops...',
+                   'User exists before!',
+                   'error'
+               );              
             }
-            $state.go('reviews');
+            
         },
         error : function (jqXHR, textStatus, errorThrown) {
             console.log("error in sign up");
