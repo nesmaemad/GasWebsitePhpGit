@@ -63,8 +63,20 @@
     <div class="col-md-4 selectContainer">
     <div class="input-group">
     <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-    <select name="department" class="form-control selectpicker"
+    <select name="department" class="form-control selectpicker" ng-change="changeCity()"
             ng-options="province.name for province in provinces" ng-model="selected_province" required="true">
+    </select>   
+  </div>
+</div>
+</div>
+
+<div  class="form-group"> 
+  <label class="col-md-4 control-label" >City / Town*</label>
+    <div class="col-md-4 selectContainer">
+    <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+    <select name="department" class="form-control selectpicker"
+            ng-options="city.name for city in cities" ng-model="selected_city" required="true">
     </select>   
   </div>
 </div>
@@ -91,8 +103,8 @@
   <div class="col-md-4 inputGroupContainer">
   <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-  <input  name="code" ng-if = "country == '1'" placeholder="Postal Code" class="form-control"  type="text" ng-model="code" required="true">
-    <input  name="code" ng-if = "country == '2'" placeholder="Zip Code" class="form-control"  type="text" ng-model="code" required="true">
+  <input  name="code" ng-show = "country == '1'" placeholder="Postal Code" class="form-control"  type="text" ng-model="code" required="true">
+    <input  name="code" ng-show = "country == '2'" placeholder="Zip Code" class="form-control"  type="text" ng-model="code" required="true">
 
     </div>
   </div>

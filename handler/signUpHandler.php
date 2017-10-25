@@ -34,6 +34,8 @@
             getProvinces($conn);
         }else if(isset($get_function_name) && $get_function_name == "signUp"){
             signUp($conn);
+        }else if(isset($get_function_name) && $get_function_name == "getCities"){
+            getCities($conn);
         }
     }
 
@@ -50,11 +52,11 @@
             echo "exist";
         }else{
             $sql = "insert into user (email,first_name,last_name,address,phone,postal_zip,province_id,"
-             . "country_id,password,user_name,hash) values ( ? ,? ,? ,? ,? ,? ,? ,? ,? ,?,?)";
+             . "country_id,password,user_name,hash,city_id) values ( ? ,? ,? ,? ,? ,? ,? ,? ,? ,?,? , ?)";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("sssssssssss", $_GET['email'], $_GET['first_name'] , $_GET['last_name'],
+            $stmt->bind_param("ssssssssssss", $_GET['email'], $_GET['first_name'] , $_GET['last_name'],
                     $_GET['address'] , $_GET['phone'] , $_GET['postal'] , $_GET['province'],
-                    $_GET['country'] , $_GET['password'] , $_GET['user_name'],$hash);
+                    $_GET['country'] , $_GET['password'] , $_GET['user_name'],$hash , $_GET['city_id']);
             $stmt->execute(); 
             $msg = '
 
@@ -67,7 +69,7 @@
             '; // Our message above including the link
 
             // send email
-            mail($_GET['email'],"Confirmation",$msg);
+          //  mail($_GET['email'],"Confirmation",$msg);
             $stmt-> close();
             echo "success"; 
         }
@@ -95,6 +97,30 @@
         }
         $stmt-> close();
         echo json_encode($provinces);
+
+    }
+    
+    function getCities($conn){
+        $province_id        = $_GET["province_id"];
+        $cities             = array();
+        $sql                = "select id , name , type , country_id from "
+                . "city where province_id = ?";
+        $stmt               = $conn->prepare($sql);
+        $stmt->bind_param("s", $province_id);
+        $stmt->execute(); 
+        $stmt->bind_result($col1,$col2,$col3,$col4);
+        while($row = $stmt->fetch()){
+            $city              = new \stdClass();
+            $city->id          = $col1;
+            $city->name        = $col2;
+            $city->type        = $col3;
+            $city->country_id  = $col4;
+            $city->province_id = $province_id;
+            $cities[]          = $city; 
+          
+        }
+        $stmt-> close();
+        echo json_encode($cities);
 
     }
     

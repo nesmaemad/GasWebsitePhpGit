@@ -121,10 +121,15 @@ function landingCtrl ($rootScope ,$scope , $http , $state , $filter , $cookies) 
             }else{
                 console.log('single object is hereeee ');
                 console.log(single_object);
-                $rootScope.has_reviews_city       = true; 
-                $rootScope.has_reviews_volume     = true; 
-                $rootScope.landing_reviews_volume = $scope.landing_selected_volume; 
-                $rootScope.landing_reviews_city   = {"name" : single_object.name,"province_name" : single_object.province_name , "province_id" : single_object.province_id};
+                $cookies.put("has_reviews_city" , "true");
+                $cookies.put("has_reviews_volume" , "true");
+                $cookies.put("landing_reviews_volume" , $scope.landing_selected_volume);
+                $cookies.putObject("landing_reviews_city" , {"name" : single_object.name,"province_name" : single_object.province_name , "province_id" : single_object.province_id});
+                
+//                $rootScope.has_reviews_city       = true; 
+//                $rootScope.has_reviews_volume     = true; 
+//                $rootScope.landing_reviews_volume = $scope.landing_selected_volume; 
+//                $rootScope.landing_reviews_city   = {"name" : single_object.name,"province_name" : single_object.province_name , "province_id" : single_object.province_id};
                 $state.go("reviews");
             }
 
@@ -154,12 +159,19 @@ function landingCtrl ($rootScope ,$scope , $http , $state , $filter , $cookies) 
             }else{
                 console.log('single object is hereeee ');
                 console.log(single_object);
-                $rootScope.has_reviews_city       = true; 
-                $rootScope.has_reviews_volume     = true; 
-                $rootScope.landing_reviews_volume = $scope.landing_selected_volume; 
-                console.log("volumeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
-                console.log( $rootScope.landing_reviews_volume);
-                $rootScope.landing_reviews_city = {"name" : single_object.name,"province_name" : single_object.province_name , "province_id" : single_object.province_id};
+                  var  landing_reviews_city_param = {"name" : single_object.name,
+                    "province_name" : single_object.province_name , "province_id" : single_object.province_id ,
+                    "country_id" : single_object.country_id , "id" : single_object.id};
+//                $rootScope.has_reviews_city       = true; 
+//                $rootScope.has_reviews_volume     = true; 
+//                $rootScope.landing_reviews_volume = $scope.landing_selected_volume; 
+//                $rootScope.landing_reviews_city = landing_reviews_city_param;
+
+                $cookies.put("has_reviews_city" , "true");
+                $cookies.put("has_reviews_volume" , "true");
+                $cookies.put("landing_reviews_volume" , $scope.landing_selected_volume);
+                $cookies.putObject("landing_reviews_city" , landing_reviews_city_param);
+
                 if($scope.landing_selected_category == "commercial1"){
                     $scope.redirectCommrcial('2' , 'Agriculture');
                     $state.go("commercial");

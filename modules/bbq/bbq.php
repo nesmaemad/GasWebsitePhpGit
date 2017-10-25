@@ -47,8 +47,16 @@
                                     <label class="col-md-4 control-label" ng-if = "post_review_selected_country == '2'">State</label>                 
                                     <span class="input-group-addon" style="margin-bottom : 20px;">
                                         
-                                        <select name="department" class="form-control selectpicker"
+                                        <select name="department" class="form-control selectpicker" ng-change="changeCity()"
                                                 ng-options="province.name for province in provinces" ng-model="post_review_selected_province" required="true">
+                                        </select>   
+                                    </span>
+                                    
+                                    <label class="col-md-4 control-label">City / Town</label>
+                                    <span class="input-group-addon" style="margin-bottom : 20px;">
+                                        
+                                        <select name="department" class="form-control selectpicker"
+                                                ng-options="city.name for city in cities" ng-model="post_review_selected_city" required="true">
                                         </select>   
                                     </span>
                                     
@@ -84,7 +92,7 @@
                                     
                                     <label class="col-md-4 control-label" ng-if="post_review_selected_country == '2'">Price per Gallon</label>
                                     <label class="col-md-4 control-label" ng-if="post_review_selected_country == '1'">Price per Litre</label>
-                                    <input type="number" class="form-control animated" id="price" name="price" ng-model="post_review_price" required="true">
+                                    <input type="number" step="any" class="form-control animated" id="price" name="price" ng-model="post_review_price" required="true">
                                   
                                     <input id="ratings-hidden" name="rating" type="hidden" ng-model="post_review_rating"> 
                                     <input id="user_id" type="hidden" ng-model="post_review_user_id" 

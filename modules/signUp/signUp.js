@@ -21,6 +21,11 @@ function signUpCtrl ($scope , $http , $state) {
   $scope.country = "1";
   $scope.init = function(){
       $scope.getProvinces();
+      $scope.getCities();
+  };
+  
+  $scope.changeCity = function(){
+      $scope.getCities();
   };
   
   $scope.changeProvincy = function(){
@@ -39,6 +44,7 @@ function signUpCtrl ($scope , $http , $state) {
         "country"       : $scope.country,
         "password"      : $scope.password,
         "user_name"     : $scope.user_name,
+        "city_id"       : $scope.selected_city.id,
         "function_name" : "signUp"
         
     };  
@@ -90,6 +96,21 @@ function signUpCtrl ($scope , $http , $state) {
         success: function(data, success) {
             $scope.provinces = JSON.parse(data);
             $scope.selected_province = $scope.provinces[0];
+        }
+    });      
+  };
+  
+  $scope.getCities = function(){
+     $.ajax({
+        type        : "GET",
+        url         : "handler/signUpHandler.php", // Location of the service
+        data        : {"province_id" : $scope.selected_province.id , "function_name" : "getCities"}, //Data sent to server
+        contentType : "application/json", // content type sent to server
+        crossDomain : true,
+        async       : false,
+        success: function(data, success) {
+            $scope.cities = JSON.parse(data);
+            $scope.selected_city = $scope.cities[0];
         }
     });      
   };

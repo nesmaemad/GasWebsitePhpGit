@@ -20,18 +20,28 @@ function reviewsCtrl ($rootScope , $scope , $http , $state , $filter , $cookies)
   $scope.country_id                   = "1";  
   $scope.post_review_selected_volume  = "1";  
   $scope.post_review_selected_country = "1";
-  if($rootScope.has_reviews_volume){
-     $scope.reviews_volume            = $rootScope.landing_reviews_volume; 
+  if($cookies.get("has_reviews_volume") == "true"){
+     $scope.reviews_volume            = $cookies.get("landing_reviews_volume"); 
   }else{
      $scope.reviews_volume            = "1"; 
   }
   
   $scope.rating2                      = "2";
-  if($rootScope.has_reviews_city){
+  if($cookies.get("has_reviews_city") == "true"){
       console.log("root scope has landing reviews city");
-      $scope.reviews_city = $rootScope.landing_reviews_city;
+      $scope.reviews_city = $cookies.getObject("landing_reviews_city");
+      console.log($scope.reviews_city );
   }else{
-      $scope.reviews_city             = {"name" : "Airdrie","province_name" : "Alberta" , "province_id" : "1"};
+     //TODO change it to take this object from cookies
+      $scope.reviews_city   =   {
+                                    "province_id": "1",
+                                    "name": "Airdrie",
+                                    "id": "1",
+                                    "region": "Canada-Alberta",
+                                    "type": "city",
+                                    "country_id": "1",
+                                    "province_name": "Alberta"
+                                  };
   }
 
 
@@ -39,8 +49,29 @@ function reviewsCtrl ($rootScope , $scope , $http , $state , $filter , $cookies)
       $scope.getReviews();
       $scope.getProvinces();
       $scope.getCompanies();
+      $scope.getCities();
       $scope.getQuickSearchProvinces();
        
+  };
+  
+ $scope.changeCity = function(){
+      $scope.getCities();
+  };
+  
+ $scope.getCities = function(){
+     $.ajax({
+        type        : "GET",
+        url         : "handler/signUpHandler.php", // Location of the service
+        data        : {"province_id" : $scope.post_review_selected_province.id , "function_name" : "getCities"}, //Data sent to server
+        contentType : "application/json", // content type sent to server
+        crossDomain : true,
+        async       : false,
+        success: function(data, success) {
+            console.log("success getting the provinces");
+            $scope.cities = JSON.parse(data);
+            $scope.post_review_selected_city = $scope.cities[0];
+        }
+    });      
   };
   
   $scope.loadCitiesTownsJson = function(callback) {   
@@ -70,11 +101,15 @@ function reviewsCtrl ($rootScope , $scope , $http , $state , $filter , $cookies)
   $scope.getReviews = function(){
      var province_id = $scope.reviews_city.province_id;
      var volume_id   = $scope.reviews_volume;
+     var city_id     = $scope.reviews_city.id;
     
      $.ajax({
         type        : "GET",
         url         : "handler/reviewsHandler.php", // Location of the service
-        data        : {"province_id" : province_id , "volume_id" : volume_id , "function_name" : "getReviews"}, //Data sent to server
+        data        : { "province_id"   : province_id ,
+                        "volume_id"     : volume_id ,
+                        "city_id"       : city_id,
+                        "function_name" : "getReviews"}, //Data sent to server
         contentType : "application/json", // content type sent to server
         crossDomain : true,
         async       : false,
@@ -105,6 +140,7 @@ function reviewsCtrl ($rootScope , $scope , $http , $state , $filter , $cookies)
         "province_id"     : $scope.post_review_selected_province.id,
         "volume_id"       : $scope.post_review_selected_volume,
         "company_id"      : $scope.selected_post_review_company.id,
+        "city_id"         : $scope.post_review_selected_city.id,
         "user_id"         : user_id.val(),
         "price"           : $scope.post_review_price,              
         "review"          : $scope.post_review_comment,
@@ -161,7 +197,11 @@ function reviewsCtrl ($rootScope , $scope , $http , $state , $filter , $cookies)
             $.ajax({
                 type        : "GET",
                 url         : "handler/reviewsHandler.php", // Location of the service
-                data        : {"company_id" : company_id , "province_id" : $scope.reviews_city.province_id , "volume_id" : $scope.reviews_volume ,"function_name" : "getCompanyReviews"}, //Data sent to server
+                data        : { "company_id"    : company_id , 
+                                "province_id"   : $scope.reviews_city.province_id , 
+                                "city_id"       : $scope.reviews_city.id ,  
+                                "volume_id"     : $scope.reviews_volume ,
+                                "function_name" : "getCompanyReviews"}, //Data sent to server
                 contentType : "application/json", // content type sent to server
                 crossDomain : true,
                 async       : false,
@@ -272,6 +312,8 @@ function reviewsCtrl ($rootScope , $scope , $http , $state , $filter , $cookies)
             console.log('single object is hereeee ');
             console.log(single_object);
             $scope.reviews_city = {"name" : single_object.name,"province_name" : single_object.province_name , "province_id" : single_object.province_id};
+            $cookies.put("has_reviews_city" , "true");
+            $cookies.putObject("landing_reviews_city" , $scope.reviews_city);
             $scope.getReviews();
             console.log($scope.reviews);
             $scope.$apply();
