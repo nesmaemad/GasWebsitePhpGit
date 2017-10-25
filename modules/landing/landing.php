@@ -16,7 +16,7 @@
                     </div>
                     <div class="col-md-2">
                         <select class="form-control" ng-model="landing_selected_category"
-                                style="position: absolute!important;height: 40px;">
+                                style="position: absolute!important;height: 40px;" ng-change="changeVolume()">
                                     <option value="reviews">Residential</option>
                                     <option value="commercial1" >Agriculture(Commercial)</option>
                                     <option value="commercial2" >Building and Development(Commercial)</option>
@@ -26,11 +26,11 @@
               
                         </select> 
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2" ng-if="landing_selected_category == 'reviews' || landing_selected_category == 'commercial2'
+                                ||landing_selected_category == 'commercial4'"
+                                id="landing_selected_volume">
                         <select class="form-control" ng-model="landing_selected_volume"
-                                style="position: absolute!important;height: 40px;"
-                                ng-if="landing_selected_category == 'reviews' || landing_selected_category == 'commercial2'
-                                ||landing_selected_category == 'commercial4'">
+                                style="position: absolute!important;height: 40px;" >
                                     <option value="1">Up to 999 Liters</option>
                                     <option value="2">1,000 - 1,999 Liters</option>
                                     <option value="3">2,000 - 4,999 Liters</option>
@@ -38,9 +38,12 @@
                                     <option value="5">10,000+ Liters</option>
 
                         </select> 
+                    </div>
+                    <div class="col-md-2" ng-if="landing_selected_category == 'commercial1'">
+
                         <select class="form-control" ng-model="landing_selected_volume"
                                 style="position: absolute!important;height: 40px;"
-                                ng-if="landing_selected_category == 'commercial1'">
+                                 id="landing_selected_volume">
                                     <option value="6" >up to 5,000 liters</option>
                                     <option value="7" >5001 - 10,000 liters</option>
                                     <option value="8">10,001 - 30,000 liters</option>
@@ -49,9 +52,12 @@
                                     <option value="11" >100,000+ liters</option>
 
                         </select> 
+                    </div>
+                    <div class="col-md-2" ng-if="landing_selected_category == 'commercial3'">
                         <select class="form-control" ng-model="landing_selected_volume"
                                 style="position: absolute!important;height: 40px;"
-                                ng-if="landing_selected_category == 'commercial3'">
+                                 id="landing_selected_volume">
+                                
                                     <option value="12" >1 - 4 tanks/month</option>
                                     <option value="13" >5 - 10 tanks/month</option>
                                     <option value="14">10 - 20 tanks/month</option>
@@ -60,14 +66,21 @@
                                     <option value="17">71+ tanks/month</option>
 
                         </select> 
+                    </div>
+                    <div class="col-md-2" ng-if="landing_selected_category == 'bbq'">
                          <select class="form-control" ng-model="landing_selected_volume"
                                 style="position: absolute!important;height: 40px;"
-                                ng-if="landing_selected_category == 'bbq'">
-                                    <option value="1">Up to 999 Liters</option>
-                                    <option value="2">1,000 - 1,999 Liters</option>
-                                    <option value="3">2,000 - 4,999 Liters</option>
-                                    <option value="4">5,000 - 9,999 Liters</option>
-                                    <option value="5">10,000+ Liters</option>
+                                id="landing_selected_volume">
+                                    <option value="1">5 Lb</option>
+                                    <option value="2">10 Lb</option>
+                                    <option value="3">11 Lb</option>
+                                    <option value="4">20 Lb</option>
+                                    <option value="5">30 Lb</option>
+                                    <option value="6">33 Lb</option>
+                                    <option value="7">40 Lb</option>
+                                    <option value="8">50 Lb</option>
+                                    <option value="9">60 Lb</option>
+                                    <option value="10">100 Lb</option>
 
                         </select> 
                     </div>

@@ -21,7 +21,9 @@ function bbqCtrl ($rootScope , $scope , $http , $state , $filter , $cookies) {
   $scope.post_review_selected_volume  = "1";  
   $scope.post_review_selected_country = "1";
   if($rootScope.has_reviews_volume){
+      console.log("rootscope has review volume");
      $scope.reviews_volume            = $rootScope.landing_reviews_volume; 
+     console.log($scope.reviews_volume);
   }else{
      $scope.reviews_volume            = "1"; 
   }

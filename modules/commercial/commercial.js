@@ -28,7 +28,14 @@ function commercialCtrl ($rootScope , $scope , $http , $state , $filter , $cooki
   if($rootScope.has_reviews_volume){
      $scope.reviews_volume            = $rootScope.landing_reviews_volume; 
   }else{
-     $scope.reviews_volume            = "1"; 
+      if($scope.commercial_category_id  == "1" || $scope.commercial_category_id  == "4"){
+          $scope.reviews_volume = "1"; 
+      }else if($scope.commercial_category_id  == "2"){
+          $scope.reviews_volume = "6";
+      }else if($scope.commercial_category_id  == "3"){
+          $scope.reviews_volume = "12";
+      }
+     
   }
   
   $scope.rating2                      = "2";
