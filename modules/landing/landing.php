@@ -1,4 +1,4 @@
-
+            <div ng-include="'modules/landingNavbar/landingNavbar.php'" ng-app="myApp.landingNavbar" ng-controller="landingNavbarCtrl"></div>
 
 <div ng-include="'modules/HowItWorks/howItWorks.php'"></div>
 <div class="row text-center" id="landing_body" style="background-color: #FFF8DC; height: 250px ">

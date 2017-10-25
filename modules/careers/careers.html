@@ -1,4 +1,6 @@
-    <div class="container-fluid" style="background-color: #FFF8DC;">
+            <div ng-include="'modules/navbar/navbar.php'" ng-app="myApp.navbar" ng-controller="navbarCtrl"></div>
+
+<div class="container-fluid" style="background-color: #FFF8DC;">
 
     <form class="form-horizontal" id="contact_form">
 <fieldset>

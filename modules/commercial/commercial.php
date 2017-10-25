@@ -15,6 +15,7 @@
 
 </div>-->
 
+            <div ng-include="'modules/navbar/navbar.php'" ng-app="myApp.navbar" ng-controller="navbarCtrl"></div>
 
 <div ng-include="'modules/HowItWorks/howItWorks.php'"></div>
 <div class="row" style="background-color: #FFF8DC;margin-top: 70px;">
