@@ -26,9 +26,8 @@
               
                         </select> 
                     </div>
-                    <div class="col-md-2" ng-if="landing_selected_category == 'reviews' || landing_selected_category == 'commercial2'
-                                ||landing_selected_category == 'commercial4'"
-                                id="landing_selected_volume">
+                    <div class="col-md-2" ng-show="landing_selected_category == 'reviews' || landing_selected_category == 'commercial2'
+                                ||landing_selected_category == 'commercial4'">
                         <select class="form-control" ng-model="landing_selected_volume"
                                 style="position: absolute!important;height: 40px;" >
                                     <option value="1">Up to 999 Liters</option>
@@ -39,7 +38,7 @@
 
                         </select> 
                     </div>
-                    <div class="col-md-2" ng-if="landing_selected_category == 'commercial1'">
+                    <div class="col-md-2" ng-show="landing_selected_category == 'commercial1'">
 
                         <select class="form-control" ng-model="landing_selected_volume"
                                 style="position: absolute!important;height: 40px;"
@@ -53,7 +52,7 @@
 
                         </select> 
                     </div>
-                    <div class="col-md-2" ng-if="landing_selected_category == 'commercial3'">
+                    <div class="col-md-2" ng-show="landing_selected_category == 'commercial3'">
                         <select class="form-control" ng-model="landing_selected_volume"
                                 style="position: absolute!important;height: 40px;"
                                  id="landing_selected_volume">
@@ -67,7 +66,7 @@
 
                         </select> 
                     </div>
-                    <div class="col-md-2" ng-if="landing_selected_category == 'bbq'">
+                    <div class="col-md-2" ng-show="landing_selected_category == 'bbq'">
                          <select class="form-control" ng-model="landing_selected_volume"
                                 style="position: absolute!important;height: 40px;"
                                 id="landing_selected_volume">

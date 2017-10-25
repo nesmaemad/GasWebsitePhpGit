@@ -156,25 +156,25 @@ function landingCtrl ($rootScope ,$scope , $http , $state , $filter , $cookies) 
                 console.log(single_object);
                 $rootScope.has_reviews_city       = true; 
                 $rootScope.has_reviews_volume     = true; 
-                $rootScope.landing_reviews_volume = $("#landing_selected_volume").val(); 
+                $rootScope.landing_reviews_volume = $scope.landing_selected_volume; 
                 console.log("volumeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
                 console.log( $rootScope.landing_reviews_volume);
                 $rootScope.landing_reviews_city = {"name" : single_object.name,"province_name" : single_object.province_name , "province_id" : single_object.province_id};
-//                if($scope.landing_selected_category == "commercial1"){
-//                    $scope.redirectCommrcial('2' , 'Agriculture');
-//                    $state.go("commercial");
-//                }else if($scope.landing_selected_category == "commercial2"){
-//                    $scope.redirectCommrcial('4' , 'Building and Development');
-//                    $state.go("commercial");                    
-//                }else if($scope.landing_selected_category == "commercial3"){
-//                    $scope.redirectCommrcial('3' , 'Forklifts');
-//                    $state.go("commercial");                    
-//                }else if($scope.landing_selected_category == "commercial4"){
-//                    $scope.redirectCommrcial('1' , 'Heating and Cooking');
-//                    $state.go("commercial");                    
-//                }else{
-//                    $state.go($scope.landing_selected_category);
-//                }
+                if($scope.landing_selected_category == "commercial1"){
+                    $scope.redirectCommrcial('2' , 'Agriculture');
+                    $state.go("commercial");
+                }else if($scope.landing_selected_category == "commercial2"){
+                    $scope.redirectCommrcial('4' , 'Building and Development');
+                    $state.go("commercial");                    
+                }else if($scope.landing_selected_category == "commercial3"){
+                    $scope.redirectCommrcial('3' , 'Forklifts');
+                    $state.go("commercial");                    
+                }else if($scope.landing_selected_category == "commercial4"){
+                    $scope.redirectCommrcial('1' , 'Heating and Cooking');
+                    $state.go("commercial");                    
+                }else{
+                    $state.go($scope.landing_selected_category);
+                }
                 
             }
 
