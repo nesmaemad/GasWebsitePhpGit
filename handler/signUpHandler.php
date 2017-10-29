@@ -22,10 +22,12 @@
             $stmt_update   = $conn->prepare("UPDATE user SET active= 1 WHERE email= ? AND hash= ? AND active= 0");
             $stmt_update->bind_param("ss", $email , $hash);
             $stmt_update->execute(); 
-   
+            
            
         }
-        header("Location: http://superiorchoicemarketing.com/Gas/index.php#!/landing");
+        setcookie("email" , $email, 0, '/');
+         header("Location: http://localhost/GasWebsitePhpGit/index.php#!/confirmationPage");
+        //header("Location: http://superiorchoicemarketing.com/Gas/index.php#!/confirmationPage");
         exit;
     }else{
         $get_function_name = $_GET['function_name'];

@@ -23,9 +23,6 @@
             $stmt->bind_result($col1,$col2,$col3,$col4,$col5,$col6 , $col7 , $col8);
             $sigin_result             = new \stdClass();
             if($row = $stmt->fetch()){
-                if($col7 == "0"){
-                    echo "confirm";
-                }else{
                     setcookie("id", $col1   , 0, '/');
                     setcookie("first_name"  , $col2, 0, '/');
                     setcookie("last_name"   , $col3, 0, '/');
@@ -38,8 +35,7 @@
                     $user->user_name     =  $col4;
                     $user->city_id       =  $col8;      
                     echo json_encode($user);
-                  //  echo $col4;
-                }
+
             }else{
                 echo "failed";
             }

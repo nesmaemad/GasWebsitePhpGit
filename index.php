@@ -99,6 +99,7 @@ session_start();       /* starting the session */
 <script src = "modules/advertiseWithUs/advertiseWithUs.js"></script>
 <script src = "modules/signIn/signIn.js"></script>
 <script src = "modules/landingNavbar/landingNavbar.js"></script>
+<script src = "modules/confirmationPage/confirmationPage.js"></script>
 <script src = "app.js"></script> 
 <script>
 $(function(){

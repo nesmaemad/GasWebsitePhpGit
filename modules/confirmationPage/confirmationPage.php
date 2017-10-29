@@ -10,12 +10,20 @@
 
 <!-- Text input-->
 
-<div class="form-group">
+<div class="form-group text-center">
   <div class="col-md-11">
-      <p>You have successfully confirmed your email</p>
+      <input id="email" type="hidden" value = "<?php echo $_COOKIE['email'];?>"> 
+      <h3>You have successfully confirmed your email <i class="fa fa-thumbs-up" aria-hidden="true"></i></h3>
      </div>
 </div>
 
+<div class="form-group">
+  <label class="col-md-4 control-label"></label>
+  <div class="col-md-4"><br>
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<button 
+        type="submit" class="btn btn-warning" ng-click="auto_signin()">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspCONTINUE <span class="glyphicon glyphicon-send"></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
+  </div>
+</div>
 
 
 
