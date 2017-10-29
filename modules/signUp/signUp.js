@@ -1,6 +1,6 @@
 'use strict';
 
-var signUp = angular.module('myApp.signUp', ['ui.router']);
+var signUp = angular.module('myApp.signUp', ['ui.router' , 'ngCookies']);
 
 signUp.config(['$stateProvider', function($stateProvider) {
 
@@ -15,9 +15,9 @@ signUp.config(['$stateProvider', function($stateProvider) {
 
 
 signUp.controller('signUpCtrl',signUpCtrl);
-signUpCtrl.$inject = ['$scope' , '$http' , '$state'];
+signUpCtrl.$inject = ['$scope' , '$http' , '$state' , '$cookies'];
 
-function signUpCtrl ($scope , $http , $state) {
+function signUpCtrl ($scope , $http , $state , $cookies) {
   $scope.country = "1";
   $scope.init = function(){
       $scope.getProvinces();
@@ -67,7 +67,21 @@ function signUpCtrl ($scope , $http , $state) {
                     'Please check your email for confirmation',
                     'success'
                 );
-            //  $state.go('reviews');
+        
+                $scope.reviews_city = {"name" : $scope.selected_city.name,
+                    "province_name" : $scope.selected_province.name , 
+                    "province_id" : $scope.selected_province.id,
+                    "id" : $scope.selected_city.id,
+                    "country_id" : $scope.country};
+                $cookies.put("has_reviews_city" , "true");
+                $cookies.putObject("landing_reviews_city" , $scope.reviews_city);
+                var last_state = $cookies.get("last_state");
+                if(last_state){
+                    $state.go(last_state);
+                }else{
+                    $state.go("landing");
+                }
+                               
             }else if ($.trim(data) === "exist"){
                 swal(
                    'Oops...',

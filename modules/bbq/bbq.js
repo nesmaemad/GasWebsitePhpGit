@@ -17,9 +17,8 @@ bbq.controller('bbqCtrl',bbqCtrl);
 bbqCtrl.$inject = ['$rootScope' , '$scope' , '$http' , '$state' , '$filter' , '$cookies'];
 
 function bbqCtrl ($rootScope , $scope , $http , $state , $filter , $cookies) {
-  $scope.country_id                   = "1";  
-  $scope.post_review_selected_volume  = "1";  
-  $scope.post_review_selected_country = "1";
+
+  $cookies.put("last_state" , "bbq");
   if($cookies.get("has_reviews_volume") == "true"){
       console.log("rootscope has review volume");
      $scope.reviews_volume            = $cookies.get("landing_reviews_volume"); 
@@ -32,6 +31,7 @@ function bbqCtrl ($rootScope , $scope , $http , $state , $filter , $cookies) {
   if($cookies.get("has_reviews_city") == "true"){
       console.log("root scope has landing reviews city");
       $scope.reviews_city = $cookies.getObject("landing_reviews_city");
+      console.log($scope.reviews_city);
   }else{
       //TODO change it to take this object from cookies
       $scope.reviews_city   =   {
@@ -45,6 +45,9 @@ function bbqCtrl ($rootScope , $scope , $http , $state , $filter , $cookies) {
                                   };
   }
 
+  $scope.country_id                   = $scope.reviews_city.country_id;  
+  $scope.post_review_selected_volume  = "1";  
+  $scope.post_review_selected_country = $scope.reviews_city.country_id; ;
 
   $scope.init = function(){
       $scope.getReviews();
@@ -248,7 +251,15 @@ function bbqCtrl ($rootScope , $scope , $http , $state , $filter , $cookies) {
         success: function(data, success) {
             console.log("success getting the provinces");
             $scope.cities = JSON.parse(data);
-            $scope.post_review_selected_city = $scope.cities[0];
+            var city = $filter('filter')( $scope.cities, function (d) {
+                return d.id == $scope.reviews_city.id;
+            })[0];
+            if(city === undefined){
+                $scope.post_review_selected_city = $scope.cities[0];
+            }else{
+                $scope.post_review_selected_city = city;
+            }   
+            //$scope.post_review_selected_city = $scope.cities[0];
         }
     });      
   };
@@ -264,7 +275,11 @@ function bbqCtrl ($rootScope , $scope , $http , $state , $filter , $cookies) {
         success: function(data, success) {
             console.log("success getting the provinces");
             $scope.provinces = JSON.parse(data);
-            $scope.post_review_selected_province = $scope.provinces[0];
+            var province = $filter('filter')( $scope.provinces, function (d) {
+                return d.id == $scope.reviews_city.province_id;
+            })[0];
+            $scope.post_review_selected_province = province;
+           // $scope.post_review_selected_province = $scope.provinces[0];
         }
     });      
   };
@@ -326,6 +341,10 @@ function bbqCtrl ($rootScope , $scope , $http , $state , $filter , $cookies) {
                 "province_id" : single_object.province_id,
                 "id" : single_object.id,
                 "country_id" : single_object.country_id};
+            
+            $scope.getProvinces();
+            $scope.getCities();
+            
             $cookies.put("has_reviews_city" , "true");
             $cookies.putObject("landing_reviews_city" , $scope.reviews_city);
             $scope.getReviews();

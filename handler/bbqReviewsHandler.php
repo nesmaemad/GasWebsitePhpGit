@@ -97,7 +97,7 @@
             Thanks. '; // Our message above including the link
 
             // send email
-          //  mail($col1,"New Gas Review",$msg);
+            mail($col1,"New Gas Review",$msg);
         }
         echo "success";
 

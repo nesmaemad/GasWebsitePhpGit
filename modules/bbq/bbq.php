@@ -221,20 +221,20 @@
     <div class="col-md-2" style="margin-top: 30px;">
             <div class="row">
                 <div class="col-md-12 text-center well well-sm col-md-offset-4" style="min-height: 200px;">
-                  Here is your First AD
+                  Post Your Ad Here
                 </div>
 
             </div>
             <div class="row">
                 <div class="col-md-12 text-center well well-sm col-md-offset-4" style="min-height: 200px;">
-                  Here is your second AD
+                   Post Your Ad Here
                 </div>
 
             </div>
   
            <div class="row">
                 <div class="col-md-12 text-center well well-sm col-md-offset-4" style="min-height: 200px;">
-                  Here is your third AD
+                   Post Your Ad Here
                 </div>
 
             </div>

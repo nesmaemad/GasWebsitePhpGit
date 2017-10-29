@@ -62,7 +62,7 @@
                                     <label class="col-md-4 control-label" ng-if = "post_review_selected_country == '2'">State</label>                 
                                     <span class="input-group-addon" style="margin-bottom : 20px;">
                                         
-                                        <select name="department" class="form-control selectpicker" ng-change="changeCity"
+                                        <select name="department" class="form-control selectpicker" ng-change="changeCity()"
                                                 ng-options="province.name for province in provinces" ng-model="post_review_selected_province" required="true">
                                         </select>   
                                     </span>
@@ -158,18 +158,18 @@
                     <button type="button"  ng-if="commercial_category_id == '1' || commercial_category_id == '4'" ng-click ="changeReviewsVolume('3')" ng-class="reviews_volume == '3' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">2,000 - 4,999 Liters</button>
                     <button type="button"  ng-if="commercial_category_id == '1' || commercial_category_id == '4'" ng-click ="changeReviewsVolume('4')" ng-class="reviews_volume == '4' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">5,000 - 9,999 Liters</button>
                     <button type="button"  ng-if="commercial_category_id == '1' || commercial_category_id == '4'" ng-click ="changeReviewsVolume('5')" ng-class="reviews_volume == '5' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">10,000+ Liters</button>
-                    <button type="button"  ng-if="commercial_category_id == '2'" ng-click ="changeReviewsVolume('6')" ng-class="reviews_volume == '6' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">up to 5,000 liters</button>
-                    <button type="button"  ng-if="commercial_category_id == '2'" ng-click ="changeReviewsVolume('7')" ng-class="reviews_volume == '7' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">5001 - 10,000 liters</button>
-                    <button type="button"  ng-if="commercial_category_id == '2'" ng-click ="changeReviewsVolume('8')" ng-class="reviews_volume == '8' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">10,001 - 30,000 liters</button>
-                    <button type="button"  ng-if="commercial_category_id == '2'" ng-click ="changeReviewsVolume('9')" ng-class="reviews_volume == '9' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">30,001 - 60,000 liters</button>
-                    <button type="button"  ng-if="commercial_category_id == '2'" ng-click ="changeReviewsVolume('10')" ng-class="reviews_volume == '10' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">60,001 - 99,999 liters</button>
-                    <button type="button"  ng-if="commercial_category_id == '2'" ng-click ="changeReviewsVolume('11')" ng-class="reviews_volume == '11' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">100,000+ liters</button>
-                    <button type="button"  ng-if="commercial_category_id == '3'" ng-click ="changeReviewsVolume('12')" ng-class="reviews_volume == '12' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">1 - 4 tanks/month</button>
-                    <button type="button"  ng-if="commercial_category_id == '3'" ng-click ="changeReviewsVolume('13')" ng-class="reviews_volume == '13' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">5 - 10 tanks/month</button>
-                    <button type="button"  ng-if="commercial_category_id == '3'" ng-click ="changeReviewsVolume('14')" ng-class="reviews_volume == '14' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">10 - 20 tanks/month</button>
-                    <button type="button"  ng-if="commercial_category_id == '3'" ng-click ="changeReviewsVolume('15')" ng-class="reviews_volume == '15' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">20 - 40 tanks/month</button>
-                    <button type="button"  ng-if="commercial_category_id == '3'" ng-click ="changeReviewsVolume('16')" ng-class="reviews_volume == '16' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">40 - 70 tanks/month</button>
-                    <button type="button"  ng-if="commercial_category_id == '3'" ng-click ="changeReviewsVolume('17')" ng-class="reviews_volume == '17' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">71+ tanks/month</button>
+                    <button type="button"  ng-if="commercial_category_id == '2'" ng-click ="changeReviewsVolume('6')" ng-class="reviews_volume == '6' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'" ><span >up to 5,000  <br>liters</span></button>
+                    <button type="button"  ng-if="commercial_category_id == '2'" ng-click ="changeReviewsVolume('7')" ng-class="reviews_volume == '7' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'"><span>5001-10,000 <br>liters</span></button>
+                    <button type="button"  ng-if="commercial_category_id == '2'" ng-click ="changeReviewsVolume('8')" ng-class="reviews_volume == '8' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'" ><span>10,001-30,000<br> liters</span></button>
+                    <button type="button"  ng-if="commercial_category_id == '2'" ng-click ="changeReviewsVolume('9')" ng-class="reviews_volume == '9' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'" <span>30,001-60,000 <br>liters</span></button>
+                    <button type="button"  ng-if="commercial_category_id == '2'" ng-click ="changeReviewsVolume('10')" ng-class="reviews_volume == '10' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'" ><span>60,001-99,999 <br>liters</span></button>
+                    <button type="button"  ng-if="commercial_category_id == '2'" ng-click ="changeReviewsVolume('11')" ng-class="reviews_volume == '11' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'" ><span>100,000+  <br>liters</span></button>
+                    <button type="button"  ng-if="commercial_category_id == '3'" ng-click ="changeReviewsVolume('12')" ng-class="reviews_volume == '12' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">1 - 4  <br>tanks/month</button>
+                    <button type="button"  ng-if="commercial_category_id == '3'" ng-click ="changeReviewsVolume('13')" ng-class="reviews_volume == '13' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">5 - 10  <br>tanks/month</button>
+                    <button type="button"  ng-if="commercial_category_id == '3'" ng-click ="changeReviewsVolume('14')" ng-class="reviews_volume == '14' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">10 - 20  <br>tanks/month</button>
+                    <button type="button"  ng-if="commercial_category_id == '3'" ng-click ="changeReviewsVolume('15')" ng-class="reviews_volume == '15' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">20 - 40  <br>tanks/month</button>
+                    <button type="button"  ng-if="commercial_category_id == '3'" ng-click ="changeReviewsVolume('16')" ng-class="reviews_volume == '16' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">40 - 70  <br>tanks/month</button>
+                    <button type="button"  ng-if="commercial_category_id == '3'" ng-click ="changeReviewsVolume('17')" ng-class="reviews_volume == '17' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">71+ <br> tanks/month</button>
 
                     
                     
@@ -269,20 +269,20 @@
     <div class="col-md-2" style="margin-top: 30px;">
             <div class="row">
                 <div class="col-md-12 text-center well well-sm col-md-offset-4" style="min-height: 200px;">
-                  Here is your First AD
+                   Post Your Ad Here
                 </div>
 
             </div>
             <div class="row">
                 <div class="col-md-12 text-center well well-sm col-md-offset-4" style="min-height: 200px;">
-                  Here is your second AD
+                   Post Your Ad Here
                 </div>
 
             </div>
   
            <div class="row">
                 <div class="col-md-12 text-center well well-sm col-md-offset-4" style="min-height: 200px;">
-                  Here is your third AD
+                   Post Your Ad Here
                 </div>
 
             </div>

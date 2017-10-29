@@ -62,7 +62,7 @@
                                     <label class="col-md-4 control-label" ng-if = "post_review_selected_country == '2'">State</label>                 
                                     <span class="input-group-addon" style="margin-bottom : 20px;">
                                         
-                                        <select name="department" class="form-control selectpicker" ng-change="changeCity"
+                                        <select name="department" class="form-control selectpicker" ng-change="changeCity()"
                                                 ng-options="province.name for province in provinces" ng-model="post_review_selected_province" required="true">
                                         </select>   
                                     </span>
@@ -225,20 +225,20 @@
     <div class="col-md-2" style="margin-top: 30px;">
             <div class="row">
                 <div class="col-md-12 text-center well well-sm col-md-offset-4" style="min-height: 200px;">
-                  Here is your First AD
+                   Post Your Ad Here
                 </div>
 
             </div>
             <div class="row">
                 <div class="col-md-12 text-center well well-sm col-md-offset-4" style="min-height: 200px;">
-                  Here is your second AD
+                   Post Your Ad Here
                 </div>
 
             </div>
   
            <div class="row">
                 <div class="col-md-12 text-center well well-sm col-md-offset-4" style="min-height: 200px;">
-                  Here is your third AD
+                   Post Your Ad Here
                 </div>
 
             </div>

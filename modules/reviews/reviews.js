@@ -17,9 +17,8 @@ reviews.controller('reviewsCtrl',reviewsCtrl);
 reviewsCtrl.$inject = ['$rootScope' , '$scope' , '$http' , '$state' , '$filter' , '$cookies'];
 
 function reviewsCtrl ($rootScope , $scope , $http , $state , $filter , $cookies) {
-  $scope.country_id                   = "1";  
-  $scope.post_review_selected_volume  = "1";  
-  $scope.post_review_selected_country = "1";
+
+  $cookies.put("last_state" , "reviews");
   if($cookies.get("has_reviews_volume") == "true"){
      $scope.reviews_volume            = $cookies.get("landing_reviews_volume"); 
   }else{
@@ -44,6 +43,9 @@ function reviewsCtrl ($rootScope , $scope , $http , $state , $filter , $cookies)
                                   };
   }
 
+  $scope.country_id                   = $scope.reviews_city.country_id;  
+  $scope.post_review_selected_volume  = "1";  
+  $scope.post_review_selected_country = $scope.reviews_city.country_id;
 
   $scope.init = function(){
       $scope.getReviews();
@@ -59,6 +61,8 @@ function reviewsCtrl ($rootScope , $scope , $http , $state , $filter , $cookies)
   };
   
  $scope.getCities = function(){
+     console.log("inside getCities");
+     console.log( $scope.post_review_selected_province.id );
      $.ajax({
         type        : "GET",
         url         : "handler/signUpHandler.php", // Location of the service
@@ -67,9 +71,17 @@ function reviewsCtrl ($rootScope , $scope , $http , $state , $filter , $cookies)
         crossDomain : true,
         async       : false,
         success: function(data, success) {
-            console.log("success getting the provinces");
+            console.log("success getting the cities");
             $scope.cities = JSON.parse(data);
-            $scope.post_review_selected_city = $scope.cities[0];
+            var city = $filter('filter')( $scope.cities, function (d) {
+                return d.id == $scope.reviews_city.id;
+            })[0];
+            if(city === undefined){
+                $scope.post_review_selected_city = $scope.cities[0];
+            }else{
+                $scope.post_review_selected_city = city;
+            }          
+           
         }
     });      
   };
@@ -125,6 +137,14 @@ function reviewsCtrl ($rootScope , $scope , $http , $state , $filter , $cookies)
     });   
      
   };
+  
+  $('#search_input').keypress(function (e) {
+     console.log("keeeeeeeeeeeeeeeeeeeeey presseeeeeeeed");
+  if (e.which == 13) {
+    $scope.updateReviewsBySearch();
+    return false;    //<---- Add this line
+  }
+});
 
   
   $("#post_form").submit(function(event) {
@@ -254,7 +274,11 @@ function reviewsCtrl ($rootScope , $scope , $http , $state , $filter , $cookies)
         success: function(data, success) {
             console.log("success getting the provinces");
             $scope.provinces = JSON.parse(data);
-            $scope.post_review_selected_province = $scope.provinces[0];
+            var province = $filter('filter')( $scope.provinces, function (d) {
+                return d.id == $scope.reviews_city.province_id;
+            })[0];
+             $scope.post_review_selected_province = province;
+           // $scope.post_review_selected_province = $scope.provinces[0];
         }
     });      
   };
@@ -311,7 +335,15 @@ function reviewsCtrl ($rootScope , $scope , $http , $state , $filter , $cookies)
         }else{
             console.log('single object is hereeee ');
             console.log(single_object);
-            $scope.reviews_city = {"name" : single_object.name,"province_name" : single_object.province_name , "province_id" : single_object.province_id};
+            $scope.reviews_city = {"name" : single_object.name,
+                "province_name" : single_object.province_name , 
+                "province_id" : single_object.province_id,
+                "id" : single_object.id,
+                "country_id" : single_object.country_id};
+            $scope.getProvinces();
+            $scope.getCities();
+            $scope.post_review_selected_city = city;
+            
             $cookies.put("has_reviews_city" , "true");
             $cookies.putObject("landing_reviews_city" , $scope.reviews_city);
             $scope.getReviews();

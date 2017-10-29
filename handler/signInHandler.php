@@ -13,12 +13,12 @@
 
             $email    = $_GET["email"];
             $password = $_GET["password"];
-            $sql      = "select id , first_name , last_name , user_name , province_id , country_id , active"
+            $sql      = "select id , first_name , last_name , user_name , province_id , country_id , active , city_id"
                         . " from user where email = ? and password = ?";
             $stmt     = $conn->prepare($sql);
             $stmt->bind_param("ss", $email , $password);
             $stmt->execute(); 
-            $stmt->bind_result($col1,$col2,$col3,$col4,$col5,$col6 , $col7);
+            $stmt->bind_result($col1,$col2,$col3,$col4,$col5,$col6 , $col7 , $col8);
             $sigin_result             = new \stdClass();
             if($row = $stmt->fetch()){
                 if($col7 == "0"){
@@ -31,8 +31,12 @@
                     setcookie("province_id" , $col5, 0, '/');
                     setcookie("country_id"  , $col6, 0, '/');
                     setcookie("email"       , $email, 0, '/');
-
-                    echo $col4;
+                    setcookie("city_id"     , $col8, 0, '/');
+                    $user                = new \stdClass();
+                    $user->user_name     =  $col4;
+                    $user->city_id       =  $col8;      
+                    echo json_encode($user);
+                  //  echo $col4;
                 }
             }else{
                 echo "failed";

@@ -101,11 +101,11 @@
 
 <div class="row" style="background:white;height: 250px;">
     <div class="col-md-4 text-center well well-sm col-sm-12 col-md-push-1" style="min-height: 200px;margin-top: 20px;">
-      Here is your first AD
+       Post Your Ad Here
     </div>
     
     <div class="col-md-4 text-center well well-sm col-md-push-2 col-sm-12" style="min-height: 200px;margin-top: 20px;">
-      Here is your second AD
+       Post Your Ad Here
     </div>
 
 </div>

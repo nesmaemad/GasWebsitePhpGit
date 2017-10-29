@@ -25,7 +25,7 @@
    
            
         }
-        header("Location: http://localhost/GasWebsitePhpGit/index.php");
+        header("Location: http://superiorchoicemarketing.com/Gas/index.php#!/mainPage");
         exit;
     }else{
         $get_function_name = $_GET['function_name'];
@@ -54,10 +54,18 @@
             $sql = "insert into user (email,first_name,last_name,address,phone,postal_zip,province_id,"
              . "country_id,password,user_name,hash,city_id) values ( ? ,? ,? ,? ,? ,? ,? ,? ,? ,?,? , ?)";
             $stmt = $conn->prepare($sql);
+            if(! $stmt){
+                echo $conn->error;
+            }
             $stmt->bind_param("ssssssssssss", $_GET['email'], $_GET['first_name'] , $_GET['last_name'],
                     $_GET['address'] , $_GET['phone'] , $_GET['postal'] , $_GET['province'],
                     $_GET['country'] , $_GET['password'] , $_GET['user_name'],$hash , $_GET['city_id']);
-            $stmt->execute(); 
+            if(! $stmt){
+                echo $stmt->error;
+            }
+            if( ! $stmt->execute()){
+                echo $stmt->error;
+            }
             $msg = '
 
             Thanks for signing up!
@@ -69,7 +77,10 @@
             '; // Our message above including the link
 
             // send email
-          //  mail($_GET['email'],"Confirmation",$msg);
+//            $headers   = 'MIME-Version: 1.0' . "\r\n";
+//            $headers  .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+//            mail($_GET['email'],"Confirmation",$msg , $headers);
+            mail($_GET['email'],"Confirmation",$msg );
             $stmt-> close();
             echo "success"; 
         }

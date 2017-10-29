@@ -17,14 +17,14 @@ commercial.controller('commercialCtrl',commercialCtrl);
 commercialCtrl.$inject = ['$rootScope' , '$scope' , '$http' , '$state' , '$filter' , '$cookies'];
 
 function commercialCtrl ($rootScope , $scope , $http , $state , $filter , $cookies) {
+  $cookies.put("last_state" , "commercial"); 
   $scope.commercial_category_id       = $cookies.get("commercial_category_id");
   $scope.commercial_category_name     = $cookies.get("commercial_category_name");
   console.log("commerciaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaal");
   console.log($scope.commercial_category_id );
   console.log($scope.commercial_category_name );
-  $scope.country_id                   = "1";  
-  $scope.post_review_selected_volume  = "1";  
-  $scope.post_review_selected_country = "1";
+
+  $scope.post_review_selected_volume  = "1"; 
   if($cookies.get("has_reviews_volume") == "true"){
      $scope.reviews_volume            = $cookies.get("landing_reviews_volume"); 
   }else{
@@ -54,6 +54,9 @@ function commercialCtrl ($rootScope , $scope , $http , $state , $filter , $cooki
                                     "province_name": "Alberta"
                                   };
   }
+  $scope.country_id                   = $scope.reviews_city.country_id;  
+ 
+  $scope.post_review_selected_country = $scope.reviews_city.country_id;
 
 
   $scope.init = function(){
@@ -80,7 +83,15 @@ function commercialCtrl ($rootScope , $scope , $http , $state , $filter , $cooki
         success: function(data, success) {
             console.log("success getting the provinces");
             $scope.cities = JSON.parse(data);
-            $scope.post_review_selected_city = $scope.cities[0];
+            var city = $filter('filter')( $scope.cities, function (d) {
+                return d.id == $scope.reviews_city.id;
+            })[0];
+            if(city === undefined){
+                $scope.post_review_selected_city = $scope.cities[0];
+            }else{
+                $scope.post_review_selected_city = city;
+            }   
+          //  $scope.post_review_selected_city = $scope.cities[0];
         }
     });      
   };
@@ -276,7 +287,11 @@ function commercialCtrl ($rootScope , $scope , $http , $state , $filter , $cooki
         success: function(data, success) {
             console.log("success getting the provinces");
             $scope.provinces = JSON.parse(data);
-            $scope.post_review_selected_province = $scope.provinces[0];
+            var province = $filter('filter')( $scope.provinces, function (d) {
+                return d.id == $scope.reviews_city.province_id;
+            })[0];
+             $scope.post_review_selected_province = province;
+           // $scope.post_review_selected_province = $scope.provinces[0];
         }
     });      
   };
@@ -333,7 +348,14 @@ function commercialCtrl ($rootScope , $scope , $http , $state , $filter , $cooki
         }else{
             console.log('single object is hereeee ');
             console.log(single_object);
-            $scope.reviews_city = {"name" : single_object.name,"province_name" : single_object.province_name , "province_id" : single_object.province_id};
+            $scope.reviews_city = {"name" : single_object.name,
+                "province_name" : single_object.province_name , 
+                "province_id" : single_object.province_id,
+                "id" : single_object.id,
+                "country_id" : single_object.country_id};
+            $scope.getProvinces();
+            $scope.getCities();
+            
             $cookies.put("has_reviews_city" , "true");
             $cookies.putObject("landing_reviews_city" , $scope.reviews_city);
             $scope.getReviews();
