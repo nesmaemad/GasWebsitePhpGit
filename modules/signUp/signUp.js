@@ -62,26 +62,31 @@ function signUpCtrl ($scope , $http , $state , $cookies) {
             console.log("nameeeeeeeeeeeeee");
             console.log(data);
             if ($.trim(data) === "success") {
-                swal(
-                    'Success',
-                    'Please check your email for confirmation',
-                    'success'
-                );
-        
+
                 $scope.reviews_city = {"name" : $scope.selected_city.name,
                     "province_name" : $scope.selected_province.name , 
                     "province_id" : $scope.selected_province.id,
                     "id" : $scope.selected_city.id,
                     "country_id" : $scope.country};
-                $cookies.put("has_reviews_city" , "true");
-                $cookies.putObject("landing_reviews_city" , $scope.reviews_city);
-                var last_state = $cookies.get("last_state");
-                if(last_state){
-                    $state.go(last_state);
-                }else{
-                    $state.go("landing");
-                }
-                               
+                      if(! $cookies.get("has_reviews_city")){
+                        $cookies.put("has_reviews_city" , "true");
+                        $cookies.putObject("landing_reviews_city" , $scope.reviews_city);
+                      }
+
+                swal({
+                  title:  'Success',
+                  text :  'Please check your email for confirmation',
+                  type : 'success'
+                },function(){
+                    var last_state = $cookies.get("last_state");
+                    if(last_state){
+                        $state.go(last_state);
+                    }else{
+                        $state.go("landing");
+                    }
+                    
+                });
+           
             }else if ($.trim(data) === "exist"){
                 swal(
                    'Oops...',

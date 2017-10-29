@@ -50,7 +50,7 @@ session_start();       /* starting the session */
 
    </head>
 
-   <body ng-app="myApp" style="background-color: #6d5e5d">
+   <body ng-app="myApp" style="background-color: #fff8dc">
 
 <!--        <div class="container-fluid my-container">-->
 <!--            <div ng-include="'modules/navbar/navbar.php'" ng-app="myApp.navbar" ng-controller="navbarCtrl"></div>-->

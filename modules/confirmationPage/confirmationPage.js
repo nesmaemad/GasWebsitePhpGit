@@ -1,38 +1,27 @@
 'use strict';
 
-var signIn = angular.module('myApp.signIn', ['ui.router' ,  'ngCookies']);
+var confirmationPage = angular.module('myApp.confirmationPage', ['ui.router' ,  'ngCookies']);
 
-signIn.config(['$stateProvider', function($stateProvider) {
+confirmationPage.config(['$stateProvider', function($stateProvider) {
 
-    $stateProvider.state('signIn', {
-    url: '/signIn'    ,
-    templateUrl: 'modules/signIn/signIn.php',
-    controller: 'signInCtrl',
+    $stateProvider.state('confirmationPage', {
+    url: '/confirmationPage'    ,
+    templateUrl: 'modules/confirmationPage/confirmationPage.php',
+    controller: 'confirmationPageCtrl',
     controllerAs: 'vm'
   });
 
 }]);
 
 
-signIn.controller('signInCtrl',signInCtrl);
-signInCtrl.$inject = ['$scope' , '$http' , '$state' , '$cookies' , '$filter'];
+confirmationPage.controller('confirmationPageCtrl',confirmationPageCtrl);
+confirmationPageCtrl.$inject = ['$scope' , '$http' , '$state' , '$cookies' , '$filter'];
 
-function signInCtrl ($scope , $http , $state , $cookies , $filter) {
+function confirmationPageCtrl ($scope , $http , $state , $cookies , $filter) {
     
  $scope.loadCitiesTownsJson = function(callback) {   
 
-    var xobj = new XMLHttpRequest();
-        xobj.overrideMimeType("application/json");
-        xobj.open('GET', 'resources/canada_america.json', true); // Replace 'my_data' with the path to your file
-        xobj.onreadystatechange = function () {
-              if (xobj.readyState == 4 && xobj.status == "200") {
-                // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
-                callback(xobj.responseText);
-              }
-        };
-    xobj.send(null);  
-  };
-    
+
     
   $("#contact_form").submit(function(event) {
     var params = {

@@ -25,7 +25,7 @@
    
            
         }
-        header("Location: http://superiorchoicemarketing.com/Gas/index.php#!/mainPage");
+        header("Location: http://superiorchoicemarketing.com/Gas/index.php#!/landing");
         exit;
     }else{
         $get_function_name = $_GET['function_name'];
@@ -80,7 +80,7 @@
 //            $headers   = 'MIME-Version: 1.0' . "\r\n";
 //            $headers  .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 //            mail($_GET['email'],"Confirmation",$msg , $headers);
-            mail($_GET['email'],"Confirmation",$msg );
+           // mail($_GET['email'],"Confirmation",$msg );
             $stmt-> close();
             echo "success"; 
         }
