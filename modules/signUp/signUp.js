@@ -33,80 +33,89 @@ function signUpCtrl ($scope , $http , $state , $cookies) {
   };
   
   $("#contact_form").submit(function(event) {
-    var params = {
-        "email"         : $scope.email,
-        "first_name"    : $scope.first_name,
-        "last_name"     : $scope.last_name,
-        "address"       : $scope.address,
-        "phone"         : $scope.number,
-        "postal"        : $scope.code,              
-        "province"      : $scope.selected_province.id,
-        "country"       : $scope.country,
-        "password"      : $scope.password,
-        "user_name"     : $scope.user_name,
-        "city_id"       : $scope.selected_city.id,
-        "function_name" : "signUp"
-        
-    };  
-    console.log("params inside signup");
-    console.log(params);
-    event.preventDefault();
-    $.ajax({
-        type        : "GET",
-        url         : "handler/signUpHandler.php", // Location of the service
-        data        : params, //Data sent to server
-        contentType : "application/json", // content type sent to server
-        crossDomain : true,
-        async       : false,
-        success: function(data, success) {
-            console.log("nameeeeeeeeeeeeee");
-            console.log(data);
-            if ($.trim(data) === "success") {
+      console.log($scope.password);
+      console.log($scope.confirm_password);
+    if($scope.password == $scope.confirm_password){
+        var params = {
+            "email"         : $scope.email,
+            "first_name"    : $scope.first_name,
+            "last_name"     : $scope.last_name,
+            "address"       : $scope.address,
+            "phone"         : $scope.number,
+            "postal"        : $scope.code,              
+            "province"      : $scope.selected_province.id,
+            "country"       : $scope.country,
+            "password"      : $scope.password,
+            "user_name"     : $scope.user_name,
+            "city_id"       : $scope.selected_city.id,
+            "function_name" : "signUp"
 
-                $scope.reviews_city = {"name" : $scope.selected_city.name,
-                    "province_name" : $scope.selected_province.name , 
-                    "province_id" : $scope.selected_province.id,
-                    "id" : $scope.selected_city.id,
-                    "country_id" : $scope.country};
-                      if(! $cookies.get("has_reviews_city")){
-                        $cookies.put("has_reviews_city" , "true");
-                        $cookies.putObject("landing_reviews_city" , $scope.reviews_city);
-                      }
+        };  
+        console.log("params inside signup");
+        console.log(params);
+        event.preventDefault();
+        $.ajax({
+            type        : "GET",
+            url         : "handler/signUpHandler.php", // Location of the service
+            data        : params, //Data sent to server
+            contentType : "application/json", // content type sent to server
+            crossDomain : true,
+            async       : false,
+            success: function(data, success) {
+                console.log("nameeeeeeeeeeeeee");
+                console.log(data);
+                if ($.trim(data) === "success") {
 
-                swal({
-                  title:  'Success',
-                  text :  'Please check your email for confirmation',
-                  type : 'success'
-                },function(){
-                    var last_state = $cookies.get("last_state");
-                    if(last_state){
-                        $state.go(last_state);
-                    }else{
-                        $state.go("landing");
-                    }
-                    
-                });
-           
-            }else if ($.trim(data) === "exist"){
-                swal(
-                   'Oops...',
-                   'Email exists before!',
-                   'error'
-               );              
-            }else if ($.trim(data) == "user_exist"){
-                swal(
-                   'Oops...',
-                   'User name exists before!',
-                   'error'
-               );   
+                    $scope.reviews_city = {"name" : $scope.selected_city.name,
+                        "province_name" : $scope.selected_province.name , 
+                        "province_id" : $scope.selected_province.id,
+                        "id" : $scope.selected_city.id,
+                        "country_id" : $scope.country};
+                          if(! $cookies.get("has_reviews_city")){
+                            $cookies.put("has_reviews_city" , "true");
+                            $cookies.putObject("landing_reviews_city" , $scope.reviews_city);
+                          }
+
+                    swal({
+                      title:  'Success',
+                      text :  'Please check your email for confirmation',
+                      type : 'success'
+                    },function(){
+                        var last_state = $cookies.get("last_state");
+                        if(last_state){
+                            $state.go(last_state);
+                        }else{
+                            $state.go("landing");
+                        }
+
+                    });
+
+                }else if ($.trim(data) === "exist"){
+                    swal(
+                       'Oops...',
+                       'Email exists before!',
+                       'error'
+                   );              
+                }else if ($.trim(data) == "user_exist"){
+                    swal(
+                       'Oops...',
+                       'User name exists before!',
+                       'error'
+                   );   
+                }
+
+            },
+            error : function (jqXHR, textStatus, errorThrown) {
+                console.log("error in sign up");
             }
-            
-        },
-        error : function (jqXHR, textStatus, errorThrown) {
-            console.log("error in sign up");
-        }
-    });   
-     
+        });   
+    }else{
+            swal(
+               'Oops...',
+               'Password does not match confirmed one',
+               'error'
+           );  
+    }
    });
   
 
