@@ -360,6 +360,7 @@ function bbqCtrl ($rootScope , $scope , $http , $state , $filter , $cookies) {
             
             $scope.getProvinces();
             $scope.getCities();
+            $scope.getCompanies();
             
             $cookies.put("has_reviews_city" , "true");
             $cookies.putObject("landing_reviews_city" , $scope.reviews_city);

@@ -291,7 +291,7 @@ $(function(){
     var first_name = '<?php echo $first_name;?>';
     console.log("first name is inside opening the review box "+'<?php echo $first_name;?>');
     console.log(first_name);
-    if(first_name !== '' &&  $("#check_signed_in").val() == "true"){
+    if($("#check_signed_in").val() == "true"){
         reviewBox.slideDown(400, function()
           {
             $('#new-review').trigger('autosize.resize');

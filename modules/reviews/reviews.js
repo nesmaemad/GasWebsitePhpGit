@@ -351,6 +351,8 @@ function reviewsCtrl ($rootScope , $scope , $http , $state , $filter , $cookies)
                 "country_id" : single_object.country_id};
             $scope.getProvinces();
             $scope.getCities();
+            console.log("getting companiiiies");
+            $scope.getCompanies();
         //    $scope.post_review_selected_city = city;
             
             $cookies.put("has_reviews_city" , "true");
