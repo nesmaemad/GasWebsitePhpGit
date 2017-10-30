@@ -26,8 +26,8 @@
            
         }
         setcookie("email" , $email, 0, '/');
-         header("Location: http://localhost/GasWebsitePhpGit/index.php#!/confirmationPage");
-        //header("Location: http://superiorchoicemarketing.com/Gas/index.php#!/confirmationPage");
+       //  header("Location: http://localhost/GasWebsitePhpGit/index.php#!/confirmationPage");
+        header("Location: http://superiorchoicemarketing.com/Gas/index.php#!/confirmationPage");
         exit;
     }else{
         $get_function_name = $_GET['function_name'];
@@ -50,41 +50,51 @@
         $check_stmt = $conn->prepare($check_sql);
         $check_stmt->bind_param("s", $_GET['email']);
         $check_stmt->execute(); 
+        $check_stmt->store_result(); 
         if($check_stmt->fetch()){
             echo "exist";
         }else{
-            $sql = "insert into user (email,first_name,last_name,address,phone,postal_zip,province_id,"
-             . "country_id,password,user_name,hash,city_id) values ( ? ,? ,? ,? ,? ,? ,? ,? ,? ,?,? , ?)";
-            $stmt = $conn->prepare($sql);
-            if(! $stmt){
-                echo $conn->error;
+            $check_user_sql = "select id from user where user_name = ?";
+            $check_user_stmt = $conn->prepare($check_user_sql);
+            $check_user_stmt->bind_param("s", $_GET['user_name']);
+            $check_user_stmt->execute(); 
+            $check_user_stmt->store_result();
+            if($check_user_stmt->fetch()){
+                echo "user_exist";
+            }else{
+                $sql = "insert into user (email,first_name,last_name,address,phone,postal_zip,province_id,"
+                 . "country_id,password,user_name,hash,city_id) values ( ? ,? ,? ,? ,? ,? ,? ,? ,? ,?,? , ?)";
+                $stmt = $conn->prepare($sql);
+                if(! $stmt){
+                    echo $conn->error;
+                }
+                $stmt->bind_param("ssssssssssss", $_GET['email'], $_GET['first_name'] , $_GET['last_name'],
+                        $_GET['address'] , $_GET['phone'] , $_GET['postal'] , $_GET['province'],
+                        $_GET['country'] , $_GET['password'] , $_GET['user_name'],$hash , $_GET['city_id']);
+                if(! $stmt){
+                    echo $stmt->error;
+                }
+                if( ! $stmt->execute()){
+                    echo $stmt->error;
+                }
+                $msg = '
+
+                Thanks for signing up!
+                Your account has been created, you can login after you have activated your account by pressing the url below.
+
+                Please click this link to activate your account:
+                http://superiorchoicemarketing.com/Gas/handler/signUpHandler.php?email='.$_GET['email'].'&hash='.$hash.'
+
+                '; // Our message above including the link
+
+                // send email
+    //            $headers   = 'MIME-Version: 1.0' . "\r\n";
+    //            $headers  .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+    //            mail($_GET['email'],"Confirmation",$msg , $headers);
+               // mail($_GET['email'],"Confirmation",$msg );
+                $stmt-> close();
+                echo "success"; 
             }
-            $stmt->bind_param("ssssssssssss", $_GET['email'], $_GET['first_name'] , $_GET['last_name'],
-                    $_GET['address'] , $_GET['phone'] , $_GET['postal'] , $_GET['province'],
-                    $_GET['country'] , $_GET['password'] , $_GET['user_name'],$hash , $_GET['city_id']);
-            if(! $stmt){
-                echo $stmt->error;
-            }
-            if( ! $stmt->execute()){
-                echo $stmt->error;
-            }
-            $msg = '
-
-            Thanks for signing up!
-            Your account has been created, you can login after you have activated your account by pressing the url below.
-
-            Please click this link to activate your account:
-            http://superiorchoicemarketing.com/Gas/handler/signUpHandler.php?email='.$_GET['email'].'&hash='.$hash.'
-
-            '; // Our message above including the link
-
-            // send email
-//            $headers   = 'MIME-Version: 1.0' . "\r\n";
-//            $headers  .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-//            mail($_GET['email'],"Confirmation",$msg , $headers);
-           // mail($_GET['email'],"Confirmation",$msg );
-            $stmt-> close();
-            echo "success"; 
         }
         
 

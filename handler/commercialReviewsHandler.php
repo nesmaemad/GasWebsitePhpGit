@@ -54,9 +54,9 @@
         $stmt->execute(); 
         $stmt-> close();
         
-                $users_sql = "select email , first_name from user where province_id = ?";
+                $users_sql = "select email , first_name from user where province_id = ? and city_id = ?";
         $users_stmt     = $conn->prepare($users_sql);
-        $users_stmt->bind_param("s", $_GET['province_id'] );
+        $users_stmt->bind_param("ss", $_GET['province_id'] , $_GET['city_id'] );
         $users_stmt->execute(); 
         $users_stmt->store_result(); 
         $users_stmt->bind_result($col1,$col2 );

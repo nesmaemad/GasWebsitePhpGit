@@ -17,6 +17,13 @@ reviews.controller('reviewsCtrl',reviewsCtrl);
 reviewsCtrl.$inject = ['$rootScope' , '$scope' , '$http' , '$state' , '$filter' , '$cookies'];
 
 function reviewsCtrl ($rootScope , $scope , $http , $state , $filter , $cookies) {
+  
+  var is_signed_in = $cookies.get("is_signed_in");
+  if(is_signed_in){
+      $("#check_signed_in").val(is_signed_in);
+  }else{
+      $("#check_signed_in").val("false");
+  }
 
   $cookies.put("last_state" , "reviews");
   if($cookies.get("has_reviews_volume") == "true"){
@@ -58,6 +65,7 @@ function reviewsCtrl ($rootScope , $scope , $http , $state , $filter , $cookies)
   
  $scope.changeCity = function(){
       $scope.getCities();
+      $scope.getCompanies();
   };
   
  $scope.getCities = function(){
@@ -138,13 +146,14 @@ function reviewsCtrl ($rootScope , $scope , $http , $state , $filter , $cookies)
      
   };
   
-  $('#search_input').keypress(function (e) {
-     console.log("keeeeeeeeeeeeeeeeeeeeey presseeeeeeeed");
-  if (e.which == 13) {
-    $scope.updateReviewsBySearch();
-    return false;    //<---- Add this line
-  }
+  $("#search_input").keydown(function(event) {
+    if (event.which == 13) {
+        event.preventDefault();
+        $scope.updateReviewsBySearch();
+    }
 });
+
+
 
   
   $("#post_form").submit(function(event) {
@@ -342,7 +351,7 @@ function reviewsCtrl ($rootScope , $scope , $http , $state , $filter , $cookies)
                 "country_id" : single_object.country_id};
             $scope.getProvinces();
             $scope.getCities();
-            $scope.post_review_selected_city = city;
+        //    $scope.post_review_selected_city = city;
             
             $cookies.put("has_reviews_city" , "true");
             $cookies.putObject("landing_reviews_city" , $scope.reviews_city);

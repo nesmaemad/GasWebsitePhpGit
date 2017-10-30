@@ -90,9 +90,15 @@ function signUpCtrl ($scope , $http , $state , $cookies) {
             }else if ($.trim(data) === "exist"){
                 swal(
                    'Oops...',
-                   'User exists before!',
+                   'Email exists before!',
                    'error'
                );              
+            }else if ($.trim(data) == "user_exist"){
+                swal(
+                   'Oops...',
+                   'User name exists before!',
+                   'error'
+               );   
             }
             
         },

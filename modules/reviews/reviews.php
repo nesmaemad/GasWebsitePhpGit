@@ -33,6 +33,7 @@
             </div>
       </div>
       <?php $first_name =(isset($_COOKIE['first_name']))?$_COOKIE['first_name']:''; ?>
+      <input type="hidden" id="check_signed_in">
       <div class="row">
 
         <section class="content">
@@ -140,6 +141,19 @@
                 <div class="table-container">
                   <div class="table table-filter table-responsive" style="overflow-x: visible!important;">
                     <div class="reviews-body">
+                        <div data-status="pagado" class="row">
+                            <div class="col-lg-6 reviews-cell">                               
+                                <h3> Company</h3>
+                            </div>                                
+
+                            <div class="col-lg-4 reviews-cell">                              
+                                 <h3> Review </h3>
+                            </div>
+
+                            <div class="col-lg-2 reviews-cell">                              
+                                  <h3> Price </h3>                              
+                            </div>
+                        </div>
                       <div data-status="pagado" class="row rowlink reviews-row" ng-repeat="review in reviews">
                         <a class="rowlink" data-toggle="dropdown" ng-click="getCompanyReviews(review.company_id)">   
                          <div class="col-lg-6 reviews-cell">
@@ -281,7 +295,7 @@ $(function(){
     var first_name = '<?php echo $first_name;?>';
     console.log("first name is inside opening the review box "+'<?php echo $first_name;?>');
     console.log(first_name);
-    if(first_name !== ''){
+    if(first_name !== '' && $("#check_signed_in").val() == "true"){
         reviewBox.slideDown(400, function()
           {
             $('#new-review').trigger('autosize.resize');
@@ -383,4 +397,5 @@ $( document ).ready(function() {
             $('#characterLeft').removeClass('red');            
         }
     }); 
+
 </script>

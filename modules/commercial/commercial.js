@@ -17,6 +17,14 @@ commercial.controller('commercialCtrl',commercialCtrl);
 commercialCtrl.$inject = ['$rootScope' , '$scope' , '$http' , '$state' , '$filter' , '$cookies'];
 
 function commercialCtrl ($rootScope , $scope , $http , $state , $filter , $cookies) {
+  var is_signed_in = $cookies.get("is_signed_in");
+  if(is_signed_in){
+      $("#check_signed_in").val(is_signed_in);
+  }else{
+      $("#check_signed_in").val("false");
+  }
+  
+    
   $cookies.put("last_state" , "commercial"); 
   $scope.commercial_category_id       = $cookies.get("commercial_category_id");
   $scope.commercial_category_name     = $cookies.get("commercial_category_name");
@@ -70,6 +78,7 @@ function commercialCtrl ($rootScope , $scope , $http , $state , $filter , $cooki
   
    $scope.changeCity = function(){
       $scope.getCities();
+      $scope.getCompanies();
   };
   
    $scope.getCities = function(){
@@ -153,6 +162,12 @@ function commercialCtrl ($rootScope , $scope , $http , $state , $filter , $cooki
      
   };
 
+  $("#search_input").keydown(function(event) {
+    if (event.which == 13) {
+        event.preventDefault();
+        $scope.updateReviewsBySearch();
+    }
+});
   
   $("#post_form").submit(function(event) {
     var reviewBox              = $('#post-review-box');

@@ -18,6 +18,14 @@ bbqCtrl.$inject = ['$rootScope' , '$scope' , '$http' , '$state' , '$filter' , '$
 
 function bbqCtrl ($rootScope , $scope , $http , $state , $filter , $cookies) {
 
+  var is_signed_in = $cookies.get("is_signed_in");
+  if(is_signed_in){
+      $("#check_signed_in").val(is_signed_in);
+  }else{
+      $("#check_signed_in").val("false");
+  }
+
+
   $cookies.put("last_state" , "bbq");
   if($cookies.get("has_reviews_volume") == "true"){
       console.log("rootscope has review volume");
@@ -108,6 +116,13 @@ function bbqCtrl ($rootScope , $scope , $http , $state , $filter , $cookies) {
     });   
      
   };
+  
+    $("#search_input").keydown(function(event) {
+        if (event.which == 13) {
+            event.preventDefault();
+            $scope.updateReviewsBySearch();
+        }
+    });
 
   
   $("#post_form").submit(function(event) {
@@ -181,6 +196,7 @@ function bbqCtrl ($rootScope , $scope , $http , $state , $filter , $cookies) {
   
   $scope.changeCity = function(){
       $scope.getCities();
+      $scope.getCompanies();
   }
   
   var prev_company_id = "";
