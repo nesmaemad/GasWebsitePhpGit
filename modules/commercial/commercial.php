@@ -186,6 +186,19 @@
                 <div class="table-container">
                   <div class="table table-filter table-responsive" style="overflow-x: visible!important;">
                     <div class="reviews-body">
+                        <div data-status="pagado" class="row">
+                            <div class="col-lg-6 reviews-cell">                               
+                                <h3> Company</h3>
+                            </div>                                
+
+                            <div class="col-lg-4 reviews-cell">                              
+                                 <h3> Review </h3>
+                            </div>
+
+                            <div class="col-lg-2 reviews-cell">                              
+                                  <h3> Price </h3>                              
+                            </div>
+                        </div>
                       <div data-status="pagado" class="row rowlink reviews-row" ng-repeat="review in reviews">
                         <a class="rowlink" data-toggle="dropdown" ng-click="getCompanyReviews(review.company_id)">
                          <div class="col-lg-6 reviews-cell">
