@@ -20,20 +20,24 @@
         height: 40px;
     }
  
-    #custom-search-input .search-review {
+/*    #custom-search-input .search-review {
         border: 0;
         background: none;
-        /** belows styles are working good */
+        * belows styles are working good 
         padding: 2px 5px;
         margin-top: 2px;
         position: relative;
         left: -28px;
-        /* IE7-8 doesn't have border-radius, so don't indent the padding */
+         IE7-8 doesn't have border-radius, so don't indent the padding 
         margin-bottom: 0;
         -webkit-border-radius: 3px;
         -moz-border-radius: 3px;
         border-radius: 3px;
         color:#D9230F;
+    }*/
+
+    #custom-search-input .search-review {
+        height: 40px;
     }
  
     .search-query:focus + button {

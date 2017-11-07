@@ -23,7 +23,7 @@
       <div class="row">
            <div id="custom-search-input">
                 <div class="input-group col-md-12">
-                    <input type="text" class="  search-query form-control" id="search_input" placeholder="Search propane prices by city or zip" />
+                    <input type="text" class="  search-query form-control" id="search_input" placeholder="Search propane prices by city or town" />
                     <span class="input-group-btn">
                         <button class="btn btn-danger search-review" type="button" ng-click="updateReviewsBySearch()">
                             <span class=" glyphicon glyphicon-search"></span>
@@ -234,7 +234,7 @@
                                     <div class="col-sm-4" >
                                             <img src="images/Icon-user.png" style="width: 60px;height: 60px" class="img-rounded">
                                             <div class="review-block-name"><a href="#">{{company_review.user_name}}</a></div>
-                                            <div class="review-block-date">{{company_review.time * 1000  | date:'dd-MM-yyyy HH:mm:ss Z'}}</div>
+                                            <div class="review-block-date">{{company_review.time * 1000  | date:'dd-MM-yyyy'}}</div>
                                     </div>
                                     <div class="col-sm-7 col-sm-push-1">
                                             <div class="review-block-rate">

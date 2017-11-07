@@ -9,7 +9,7 @@
                     <div class="col-md-6">
               
                         <input type="text" class="form-control search-query" id="search_input" 
-                               placeholder="Search propane prices by city or zip" 
+                               placeholder="Search propane prices by city or town" 
                                style="position: absolute!important;height: 40px;width: 103.5%!important"
                                ng-model="zip_city"/>
                      

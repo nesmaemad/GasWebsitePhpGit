@@ -1,4 +1,4 @@
-            <div ng-include="'modules/landingNavbar/landingNavbar.php'" ng-app="myApp.landingNavbar" ng-controller="landingNavbarCtrl"></div>
+<div ng-include="'modules/navbar/navbar.php'" ng-app="myApp.navbar" ng-controller="navbarCtrl"></div>
 
 <div class="container-fluid" style="background-color: #FFF8DC;">
 
