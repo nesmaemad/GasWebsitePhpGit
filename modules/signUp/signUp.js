@@ -91,17 +91,19 @@ function signUpCtrl ($scope , $http , $state , $cookies) {
                     });
 
                 }else if ($.trim(data) === "exist"){
-                    swal(
-                       'Oops...',
-                       'Email exists before!',
-                       'error'
-                   );              
+                    $("#email_exists").show();
+//                    swal(
+//                       'Oops...',
+//                       'Email exists before!',
+//                       'error'
+//                   );              
                 }else if ($.trim(data) == "user_exist"){
-                    swal(
-                       'Oops...',
-                       'User name exists before!',
-                       'error'
-                   );   
+                    $("#username_exists").show();
+//                    swal(
+//                       'Oops...',
+//                       'User name exists before!',
+//                       'error'
+//                   );   
                 }
 
             },

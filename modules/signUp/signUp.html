@@ -37,7 +37,10 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+  <span>
   <input name="user_name" placeholder="Username" class="form-control"  type="text" ng-model="user_name" required="true">
+  <span style="color:red;display: none;" id="username_exists">User Name Already Exists</span>
+  </span>
     </div>
   </div>
 </div>
@@ -155,8 +158,12 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-  <input name="email" placeholder="E-Mail Address" class="form-control"  type="email" ng-model="email" required="true">
-    </div>
+        <span>
+          <input name="email" placeholder="E-Mail Address" class="form-control"  type="email" ng-model="email" required="true">
+          <span style="color:red;display: none;" id="email_exists">Email Already Exists</span>
+
+        </span> 
+  </div>
   </div>
 </div>
 
