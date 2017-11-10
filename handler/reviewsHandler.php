@@ -63,10 +63,12 @@
             $msg = '
 
             Hello '.$col2.'
-            A new Review has been added on propane companies in you region in the Resedential section
+            There\'s a new price posted in '.$_GET['city_name'].'. please click the button to view the latest price
 
-            Please check out the latest reviews.
-            Thanks. '; // Our message above including the link
+            
+            Thank you,
+            
+            Local Propane Price Team'; // Our message above including the link
 
             // send email
             mail($col1,"New Gas Review",$msg);

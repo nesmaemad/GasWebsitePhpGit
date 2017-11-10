@@ -177,6 +177,7 @@ function reviewsCtrl ($rootScope , $scope , $http , $state , $filter , $cookies)
             "volume_id"       : $scope.post_review_selected_volume,
             "company_id"      : $scope.selected_post_review_company.id,
             "city_id"         : $scope.post_review_selected_city.id,
+            "city_name"       : $scope.post_review_selected_city.name,
             "user_id"         : user_id.val(),
             "price"           : $scope.post_review_price,              
             "review"          : $scope.post_review_comment,
@@ -226,6 +227,7 @@ function reviewsCtrl ($rootScope , $scope , $http , $state , $filter , $cookies)
   $scope.changeProvincy = function(){
       $scope.getProvinces();
       $scope.getCompanies();
+      $scope.getCities();
       
   };
   

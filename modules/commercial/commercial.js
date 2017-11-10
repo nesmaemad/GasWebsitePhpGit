@@ -191,6 +191,7 @@ function commercialCtrl ($rootScope , $scope , $http , $state , $filter , $cooki
             "volume_id"              : $scope.post_review_selected_volume,
             "city_id"                : $scope.post_review_selected_city.id,
             "company_id"             : $scope.selected_post_review_company.id,
+            "city_name"              : $scope.post_review_selected_city.name,
             "user_id"                : user_id.val(),
             "price"                  : $scope.post_review_price,              
             "review"                 : $scope.post_review_comment,
@@ -240,6 +241,7 @@ function commercialCtrl ($rootScope , $scope , $http , $state , $filter , $cooki
   $scope.changeProvincy = function(){
       $scope.getProvinces();
       $scope.getCompanies();
+      $scope.getCities();
       
   };
   

@@ -160,6 +160,7 @@ function bbqCtrl ($rootScope , $scope , $http , $state , $filter , $cookies) {
             "review"                : $scope.post_review_comment,
             "rating"                : ratingsField.val(),
             "city_id"               : $scope.post_review_selected_city.id,
+            "city_name"             : $scope.post_review_selected_city.name,
             "function_name"         : "postReview"
 
         }; 
@@ -204,6 +205,7 @@ function bbqCtrl ($rootScope , $scope , $http , $state , $filter , $cookies) {
   $scope.changeProvincy = function(){
       $scope.getProvinces();
       $scope.getCompanies();
+      $scope.getCities();
       
   };
   
