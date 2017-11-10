@@ -140,44 +140,57 @@ function bbqCtrl ($rootScope , $scope , $http , $state , $filter , $cookies) {
         company               = $scope.custome_company;
         check_custome_company = "1";
     }
+    
+    if(ratingsField.val() == ""){
+        swal({
+            title: 'Rating is Required',
+            text: 'Please select rating before posting',
+            type: 'error'
+        });
+    }else{
+    
+        var params = {
+            "country_id"            : $scope.post_review_selected_country,
+            "province_id"           : $scope.post_review_selected_province.id,
+            "tank_id"               : $scope.post_review_selected_volume,
+            "check_custome_company" : check_custome_company,
+            "company"               : company,
+            "user_id"               : user_id.val(),
+            "price"                 : $scope.post_review_price,              
+            "review"                : $scope.post_review_comment,
+            "rating"                : ratingsField.val(),
+            "city_id"               : $scope.post_review_selected_city.id,
+            "function_name"         : "postReview"
 
-    
-    var params = {
-        "country_id"            : $scope.post_review_selected_country,
-        "province_id"           : $scope.post_review_selected_province.id,
-        "tank_id"               : $scope.post_review_selected_volume,
-        "check_custome_company" : check_custome_company,
-        "company"               : company,
-        "user_id"               : user_id.val(),
-        "price"                 : $scope.post_review_price,              
-        "review"                : $scope.post_review_comment,
-        "rating"                : ratingsField.val(),
-        "city_id"               : $scope.post_review_selected_city.id,
-        "function_name"         : "postReview"
-        
-    }; 
-    
-    console.log("params inside post review");
-    console.log(params);
-    event.preventDefault();
-    
-    $.ajax({
-        type        : "GET",
-        url         : "handler/bbqReviewsHandler.php", // Location of the service
-        data        : params, //Data sent to server
-        contentType : "application/json", // content type sent to server
-        crossDomain : true,
-        async       : false,
-        success: function(data, success) {
-            console.log("post review successfully");
-            console.log(data);
-            location.reload();
-        },
-        error : function (jqXHR, textStatus, errorThrown) {
-            console.log("error in sign up");
-        }
-    });   
-     
+        }; 
+
+        console.log("params inside post review");
+        console.log(params);
+        event.preventDefault();
+
+        $.ajax({
+            type        : "GET",
+            url         : "handler/bbqReviewsHandler.php", // Location of the service
+            data        : params, //Data sent to server
+            contentType : "application/json", // content type sent to server
+            crossDomain : true,
+            async       : false,
+            success: function(data, success) {
+                console.log("post review successfully");
+                console.log(data);
+                swal({
+                    title: 'Posted Successfully',
+                    text: 'Your Review is Posted',
+                    type: 'success'
+                },function(){
+                    location.reload();
+                });
+            },
+            error : function (jqXHR, textStatus, errorThrown) {
+                console.log("error in sign up");
+            }
+        });   
+    }
    });
   
   $scope.changeReviewsVolume = function(tank_id){

@@ -163,42 +163,56 @@ function reviewsCtrl ($rootScope , $scope , $http , $state , $filter , $cookies)
     var closeReviewBtn = $('#close-review-box');
     var ratingsField   = $('#ratings-hidden');
     var user_id        = $('#user_id');
-    
-    var params = {
-        "country_id"      : $scope.post_review_selected_country,
-        "province_id"     : $scope.post_review_selected_province.id,
-        "volume_id"       : $scope.post_review_selected_volume,
-        "company_id"      : $scope.selected_post_review_company.id,
-        "city_id"         : $scope.post_review_selected_city.id,
-        "user_id"         : user_id.val(),
-        "price"           : $scope.post_review_price,              
-        "review"          : $scope.post_review_comment,
-        "rating"          : ratingsField.val(),
-        "function_name"   : "postReview"
-        
-    }; 
-    
-    console.log("params inside post review");
-    console.log(params);
-    event.preventDefault();
-    
-    $.ajax({
-        type        : "GET",
-        url         : "handler/reviewsHandler.php", // Location of the service
-        data        : params, //Data sent to server
-        contentType : "application/json", // content type sent to server
-        crossDomain : true,
-        async       : false,
-        success: function(data, success) {
-            console.log("post review successfully");
-            console.log(data);
-            location.reload();
-        },
-        error : function (jqXHR, textStatus, errorThrown) {
-            console.log("error in sign up");
-        }
-    });   
-     
+    if(ratingsField.val() == ""){
+        swal({
+            title: 'Rating is Required',
+            text: 'Please select rating before posting',
+            type: 'error'
+        });
+    }else{
+
+        var params = {
+            "country_id"      : $scope.post_review_selected_country,
+            "province_id"     : $scope.post_review_selected_province.id,
+            "volume_id"       : $scope.post_review_selected_volume,
+            "company_id"      : $scope.selected_post_review_company.id,
+            "city_id"         : $scope.post_review_selected_city.id,
+            "user_id"         : user_id.val(),
+            "price"           : $scope.post_review_price,              
+            "review"          : $scope.post_review_comment,
+            "rating"          : ratingsField.val(),
+            "function_name"   : "postReview"
+
+        }; 
+
+        console.log("params inside post review");
+        console.log(params);
+        event.preventDefault();
+
+        $.ajax({
+            type        : "GET",
+            url         : "handler/reviewsHandler.php", // Location of the service
+            data        : params, //Data sent to server
+            contentType : "application/json", // content type sent to server
+            crossDomain : true,
+            async       : false,
+            success: function(data, success) {
+                console.log("post review successfully");
+                console.log(data);
+                swal({
+                    title: 'Posted Successfully',
+                    text: 'Your Review is Posted',
+                    type: 'success'
+                },function(){
+                    location.reload();
+                });
+
+            },
+            error : function (jqXHR, textStatus, errorThrown) {
+                console.log("error in sign up");
+            }
+        });   
+    }
    });
   
   $scope.changeReviewsVolume = function(volume_id){
