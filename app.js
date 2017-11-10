@@ -21,7 +21,8 @@ angular.module('myApp', [
     'myApp.footer',
     'myApp.signIn',
     'myApp.landingNavbar',
-    'myApp.confirmationPage'
+    'myApp.confirmationPage',
+    'myApp.userSettings'
 
 ]).
 config(['$stateProvider' , '$urlRouterProvider',function($stateProvider , $urlRouterProvider ) {

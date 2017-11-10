@@ -63,15 +63,16 @@
             $msg = '
 
             Hello '.$col2.'
-            There\'s a new price posted in '.$_GET['city_name'].'. please click the button to view the latest price
-
+            There\'s a new price posted in '.$_GET['city_name'].'. please click the url to view the latest price
+            http://superiorchoicemarketing.com/Gas/index.php#!/mainPage
             
             Thank you,
             
             Local Propane Price Team'; // Our message above including the link
 
             // send email
-            mail($col1,"New Gas Review",$msg);
+          //  $headers = "Content-type: text/html\r\n"; 
+            mail($col1,"New Gas Review",$msg );
         }
        
         

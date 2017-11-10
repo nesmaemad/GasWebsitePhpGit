@@ -92,11 +92,12 @@
             $msg = '
 
             Hello '.$col2.'
-            A new Review has been added on propane companies in you region in the BBQ section
-
-            Please check out the latest reviews.
-            Thanks. '; // Our message above including the link
-
+            There\'s a new price posted in '.$_GET['city_name'].'. please click the url to view the latest price
+            http://superiorchoicemarketing.com/Gas/index.php#!/bbq
+            
+            Thank you,
+            
+            Local Propane Price Team'; // Our message above including the link
             // send email
             mail($col1,"New Gas Review",$msg);
         }

@@ -35,7 +35,7 @@
             
             <li ng-if="is_signed_in == 'true'">
 <!--              <a class="btn btn-default btn-outline btn-circle collapsed"  data-toggle="collapse" href="#nav-collapse2" aria-expanded="false" aria-controls="nav-collapse2">Sign in</a>-->
-              <p class="btn btn-default btn-outline btn-circle" >{{user_name}}</p>
+              <a class="btn btn-default btn-outline btn-circle" ui-sref="userSettings" >{{user_name}}</a>
 
             </li>
             <li ng-if="is_signed_in == 'true'">
