@@ -103,6 +103,7 @@ session_start();       /* starting the session */
 <script src = "modules/userSettings/userSettings.js"></script>
 <script src = "modules/resetPassword/resetPassword.js"></script>
 <script src = "modules/forgetPassword/forgetPassword.js"></script>
+<script src = "modules/autoPropane/autoPropane.js"></script>
 
 <script src = "app.js"></script> 
 <script>

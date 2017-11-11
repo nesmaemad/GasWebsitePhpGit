@@ -34,6 +34,7 @@
                 </ul>
             </li> 
             <li><a ui-sref="bbq">BBQ</a></li>
+            <li><a ui-sref="autoPropane">Auto Propane</a></li>
             <li><a ui-sref="advertiseWithUs">Advertise With Us</a></li>
             <li><a ui-sref="contactUs">Contact</a></li>
             <li ng-if="is_signed_in != 'true'">

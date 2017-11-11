@@ -24,7 +24,8 @@ angular.module('myApp', [
     'myApp.confirmationPage',
     'myApp.userSettings',
     'myApp.resetPassword',
-    'myApp.forgetPassword'
+    'myApp.forgetPassword',
+    'myApp.autoPropane'
 
 ]).
 config(['$stateProvider' , '$urlRouterProvider',function($stateProvider , $urlRouterProvider ) {
