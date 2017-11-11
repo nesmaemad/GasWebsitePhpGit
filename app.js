@@ -22,7 +22,9 @@ angular.module('myApp', [
     'myApp.signIn',
     'myApp.landingNavbar',
     'myApp.confirmationPage',
-    'myApp.userSettings'
+    'myApp.userSettings',
+    'myApp.resetPassword',
+    'myApp.forgetPassword'
 
 ]).
 config(['$stateProvider' , '$urlRouterProvider',function($stateProvider , $urlRouterProvider ) {

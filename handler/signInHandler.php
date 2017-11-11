@@ -1,13 +1,64 @@
 <?php
 
     include_once "db.php";           /* including the database */
-    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-        $get_function_name = $_GET['function_name'];
-        if(isset($get_function_name) && $get_function_name == "signIn")
-        {       
-            signIn($conn);
-        }else if(isset($get_function_name) && $get_function_name == "signInConfirmation"){
-            signInConfirmation($conn);
+    if(isset($_GET['email']) && !empty($_GET['email']) AND isset($_GET['type']) && !empty($_GET['type'])){
+
+    // Verify data
+        $email = $_GET['email']; // Set email variable
+
+        setcookie("email" , $email, 0, '/');
+         header("Location: http://localhost/GasWebsitePhpGit/index.php#!/resetPassword");
+       // header("Location: http://superiorchoicemarketing.com/Gas/index.php#!/resetPassword");
+        exit;
+    }else{
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            $get_function_name = $_GET['function_name'];
+            if(isset($get_function_name) && $get_function_name == "signIn")
+            {       
+                signIn($conn);
+            }else if(isset($get_function_name) && $get_function_name == "signInConfirmation"){
+                signInConfirmation($conn);
+            }else if(isset($get_function_name) && $get_function_name == "forgetPassword"){
+                forgetPassword($conn);
+            }else if(isset($get_function_name) && $get_function_name == "resetPassword"){
+                resetPassword($conn);
+            }
+        }
+    }
+    
+    function resetPassword($conn){
+        $email    = $_GET["email"];
+        $password = $_GET["password"];
+        $sql      = "update user set password = ? where email = ?";
+        $stmt     = $conn->prepare($sql);
+        $stmt->bind_param("ss",$password , $email);
+        $stmt->execute(); 
+        echo 'success';
+    }
+    
+    function forgetPassword($conn){
+        $email    = $_GET["email"];
+
+        $sql      = "select user_name from user where email = ?";
+        $stmt     = $conn->prepare($sql);
+        $stmt->bind_param("s", $email);
+        $stmt->execute(); 
+        $stmt->bind_result($col1);
+        if($row = $stmt->fetch()){
+            $msg = '
+             Hello '.$col1.'
+             To reset your password click the link below and you will be redirected to a secure site from which you can set a new password.
+
+             http://superiorchoicemarketing.com/Gas/handler/signInHandler.php?email='.$_GET['email'].'&type=reset
+
+             Thanks,
+             Local Propane Prices team
+             '; // Our message above including the link
+
+             mail($_GET['email'],"Reset Your Password",$msg );
+            echo 'success';
+        }else{
+            echo 'failed';
         }
     }
     
