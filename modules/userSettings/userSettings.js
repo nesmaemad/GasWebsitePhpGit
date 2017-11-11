@@ -66,7 +66,7 @@ function userSettingsCtrl ($scope , $http , $state , $cookies , $filter) {
                 console.log("nameeeeeeeeeeeeee");
                 console.log(data);
                 if ($.trim(data) === "success") {
-
+                    $cookies.put("user_name" , $scope.user_name);
                     $scope.reviews_city = {"name" : $scope.selected_city.name,
                         "province_name" : $scope.selected_province.name , 
                         "province_id" : $scope.selected_province.id,
