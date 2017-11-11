@@ -39,7 +39,7 @@
     function forgetPassword($conn){
         $email    = $_GET["email"];
 
-        $sql      = "select user_name from user where email = ?";
+        $sql      = "select first_name from user where email = ?";
         $stmt     = $conn->prepare($sql);
         $stmt->bind_param("s", $email);
         $stmt->execute(); 

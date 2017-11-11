@@ -73,7 +73,29 @@
           //  $headers = "Content-type: text/html\r\n"; 
             mail($col1,"New Gas Review",$msg );
         }
-       
+               $writer_sql = "select email , first_name from user where id = ?";
+        $writer_stmt= $conn->prepare($writer_sql);
+        $writer_stmt->bind_param("s" , $_GET['user_id'] );
+        $writer_stmt->execute(); 
+        $writer_stmt->store_result(); 
+        $writer_stmt->bind_result($col11,$col22 );
+        if($writer_stmt->fetch()){
+            $msg = '
+
+            Hello '.$col22.'
+            Your review has been posted successfuly
+            
+            Thank you,
+            
+            Local Propane Price Team'; // Our message above including the link
+
+            // send email
+          //  $headers = "Content-type: text/html\r\n"; 
+            mail($col11,"Review Posted",$msg );
+        }
+       $writer_stmt->close();
+        
+   
         
         $users_stmt-> close();
         echo "success";
