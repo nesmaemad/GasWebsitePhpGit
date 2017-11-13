@@ -25,7 +25,7 @@
                 <div class="input-group col-md-12">
                     <input type="text" class="  search-query form-control" id="search_input" placeholder="Search propane prices by city or town" />
                     <span class="input-group-btn">
-                        <button class="btn btn-danger search-review" type="button" ng-click="updateReviewsBySearch()">
+                        <button class="btn btn-danger search-review" type="button" ng-click="updateReviewsBySearch()"> Search
                             <span class=" glyphicon glyphicon-search"></span>
                         </button>
                     </span>

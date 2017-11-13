@@ -23,6 +23,7 @@
                                     <option value="commercial3" >Forklifts(Commercial)</option>
                                     <option value="commercial4" >Heating and Cooking(Commercial)</option>
                                     <option value="bbq">BBQ</option>
+                                    <option value="autoPropane">Auto Propane</option>
               
                         </select> 
                     </div>
@@ -35,6 +36,15 @@
                                     <option value="3">2,000 - 4,999 Liters</option>
                                     <option value="4">5,000 - 9,999 Liters</option>
                                     <option value="5">10,000+ Liters</option>
+
+                        </select> 
+                    </div>
+                     <div class="col-md-2" ng-show="landing_selected_category == 'autoPropane'">
+
+                        <select class="form-control" ng-model="landing_selected_volume"
+                                style="position: absolute!important;height: 40px;"
+                                 id="landing_selected_volume">
+                                    <option value="1" >No Volumes</option>
 
                         </select> 
                     </div>

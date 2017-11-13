@@ -28,6 +28,7 @@ function userSettingsCtrl ($scope , $http , $state , $cookies , $filter) {
   
   $scope.changeProvincy = function(){
       $scope.getProvinces();
+      $scope.getCities();
   };
   
   $("#contact_form").submit(function(event) {
@@ -64,7 +65,7 @@ function userSettingsCtrl ($scope , $http , $state , $cookies , $filter) {
             async       : false,
             success: function(data, success) {
                 console.log("nameeeeeeeeeeeeee");
-                console.log(data);
+                console.log($scope.user_name);
                 if ($.trim(data) === "success") {
                     $cookies.put("user_name" , $scope.user_name);
                     $scope.reviews_city = {"name" : $scope.selected_city.name,

@@ -59,6 +59,12 @@ function signInCtrl ($scope , $http , $state , $cookies , $filter) {
                     'Wrong Email or Password!',
                     'error'
                 );
+            }else if($.trim(data) === "closed"){
+                swal(
+                    'Oops...',
+                    'This account is closed!',
+                    'error'
+                );
             }else if($.trim(data) === "confirm"){
                 swal(
                     'Oops...',

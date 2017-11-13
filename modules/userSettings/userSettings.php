@@ -167,6 +167,20 @@
   </div>
 </div>
 
+<div class="form-group">
+  <label class="col-md-4 control-label">Delete Account</label>  
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-remove"></i></span>
+        <span>
+            <button class="form-control"  type="button" class="btn btn-danger">
+                Delete
+            </button>
+        </span> 
+  </div>
+  </div>
+</div>
+
 <!-- Select Basic -->
 
 <!-- Success message -->

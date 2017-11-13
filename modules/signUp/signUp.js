@@ -30,6 +30,7 @@ function signUpCtrl ($scope , $http , $state , $cookies) {
   
   $scope.changeProvincy = function(){
       $scope.getProvinces();
+      $scope.getCities();
   };
   
   $("#contact_form").submit(function(event) {

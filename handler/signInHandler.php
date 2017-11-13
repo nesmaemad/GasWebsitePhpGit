@@ -98,16 +98,18 @@
 
             $email    = $_GET["email"];
             $password = $_GET["password"];
-            $sql      = "select id , first_name , last_name , user_name , province_id , country_id , active , city_id"
+            $sql      = "select id , first_name , last_name , user_name , province_id , country_id , active , city_id , closed"
                         . " from user where email = ? and password = ?";
             $stmt     = $conn->prepare($sql);
             $stmt->bind_param("ss", $email , $password);
             $stmt->execute(); 
-            $stmt->bind_result($col1,$col2,$col3,$col4,$col5,$col6 , $col7 , $col8);
+            $stmt->bind_result($col1,$col2,$col3,$col4,$col5,$col6 , $col7 , $col8 , $col9);
             $sigin_result             = new \stdClass();
             if($row = $stmt->fetch()){
                 if($col7 == "0"){
                     echo "confirm";
+                }else if($col9 == "1"){
+                    echo "closed";
                 }else{
                     setcookie("id", $col1   , 0, '/');
                     setcookie("first_name"  , $col2, 0, '/');

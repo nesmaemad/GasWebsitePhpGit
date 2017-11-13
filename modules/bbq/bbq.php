@@ -10,7 +10,7 @@
                 <div class="input-group col-md-12">
                     <input type="text" class="  search-query form-control" id="search_input" placeholder="Search propane prices by city or town" />
                     <span class="input-group-btn">
-                        <button class="btn btn-danger search-review" type="button" ng-click="updateReviewsBySearch()">
+                        <button class="btn btn-danger search-review" type="button" ng-click="updateReviewsBySearch()"> Search
                             <span class=" glyphicon glyphicon-search"></span>
                         </button>
                     </span>
@@ -129,11 +129,11 @@
                     <button type="button"  ng-click ="changeReviewsVolume('3')" ng-class="reviews_volume == '3' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">11 Lb</button>
                     <button type="button"  ng-click ="changeReviewsVolume('4')" ng-class="reviews_volume == '4' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">20 Lb</button>
                     <button type="button"  ng-click ="changeReviewsVolume('5')" ng-class="reviews_volume == '5' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">30 Lb</button>
-                    <button type="button"  ng-click ="changeReviewsVolume('5')" ng-class="reviews_volume == '6' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">33 Lb</button>
-                    <button type="button"  ng-click ="changeReviewsVolume('5')" ng-class="reviews_volume == '7' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">40 Lb</button>
-                    <button type="button"  ng-click ="changeReviewsVolume('5')" ng-class="reviews_volume == '8' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">50 Lb</button>
-                    <button type="button"  ng-click ="changeReviewsVolume('5')" ng-class="reviews_volume == '9' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">60 Lb</button>
-                    <button type="button"  ng-click ="changeReviewsVolume('5')" ng-class="reviews_volume == '10' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">100 Lb</button>
+                    <button type="button"  ng-click ="changeReviewsVolume('6')" ng-class="reviews_volume == '6' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">33 Lb</button>
+                    <button type="button"  ng-click ="changeReviewsVolume('7')" ng-class="reviews_volume == '7' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">40 Lb</button>
+                    <button type="button"  ng-click ="changeReviewsVolume('8')" ng-class="reviews_volume == '8' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">50 Lb</button>
+                    <button type="button"  ng-click ="changeReviewsVolume('9')" ng-class="reviews_volume == '9' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">60 Lb</button>
+                    <button type="button"  ng-click ="changeReviewsVolume('10')" ng-class="reviews_volume == '10' ? 'btn btn-danger btn-filter active' : 'btn btn-danger btn-filter'">100 Lb</button>
                   </div>
                 </div>
                 <div class="table-container">

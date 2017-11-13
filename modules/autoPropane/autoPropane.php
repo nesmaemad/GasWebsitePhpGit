@@ -10,7 +10,7 @@
                 <div class="input-group col-md-12">
                     <input type="text" class="  search-query form-control" id="search_input" placeholder="Search propane prices by city or town" />
                     <span class="input-group-btn">
-                        <button class="btn btn-danger search-review" type="button" ng-click="updateReviewsBySearch()">
+                        <button class="btn btn-danger search-review" type="button" ng-click="updateReviewsBySearch()"> Search
                             <span class=" glyphicon glyphicon-search"></span>
                         </button>
                     </span>
@@ -22,7 +22,7 @@
       <div class="row">
 
         <section class="content">
-           <h1>{{reviews_city.name}} Residential Propane  Prices</h1>
+           <h1>{{reviews_city.name}} Auto Propane Propane  Prices</h1>
             <div class="row" style="margin-top:40px;">
                 <div class="col-md-8 col-md-push-2">
                     <div class="well well-sm" style="background: rgba(0,151,169 , 0.5)">
