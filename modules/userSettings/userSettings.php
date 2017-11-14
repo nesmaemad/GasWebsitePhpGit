@@ -173,8 +173,8 @@
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-remove"></i></span>
         <span>
-            <button class="form-control"  type="button" class="btn btn-danger">
-                Delete
+            <button class="form-control btn btn-danger"  type="button" ng-click="deleteAccount()">
+                Delete Account
             </button>
         </span> 
   </div>

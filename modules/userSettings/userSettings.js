@@ -31,6 +31,43 @@ function userSettingsCtrl ($scope , $http , $state , $cookies , $filter) {
       $scope.getCities();
   };
   
+   $scope.signOut = function(){
+        var cookies = $cookies.getAll();
+        angular.forEach(cookies, function (v, k) {
+            $cookies.remove(k);
+        });
+        $state.go("landing");
+       // location.reload();
+
+    };
+    
+  $scope.deleteAccount = function(){
+        swal({
+          title:  'Are you sure?',
+          text :  'You won\'t be able to revert this!',
+          type : 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Yes, delete it!',
+          cancelButtonText: 'No, cancel!'
+        },function(confirm){
+            console.log("hreeeeeteee "+confirm);
+            if (!confirm) return;
+            $.ajax({
+                type        : "GET",
+                url         : "handler/signUpHandler.php", // Location of the service
+                data        : {"user_id" : $scope.user_id , "function_name" : "closeAccount"}, //Data sent to server
+                contentType : "application/json", // content type sent to server
+                crossDomain : true,
+                async       : false,
+                success: function(data, success) {
+                    console.log("data inside "+data);
+                    $scope.signOut();
+                }
+            });
+            
+        }); 
+  };
+  
   $("#contact_form").submit(function(event) {
       console.log($scope.password);
       console.log($scope.confirm_password);
@@ -80,7 +117,7 @@ function userSettingsCtrl ($scope , $http , $state , $cookies , $filter) {
 
                     swal({
                       title:  'Success',
-                      text :  'Data is Updated Successfully',
+                      text :  'Data is updated successfully',
                       type : 'success'
                     },function(){
                         var last_state = $cookies.get("last_state");

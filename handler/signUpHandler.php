@@ -42,7 +42,17 @@
             getUserData($conn);
         }else if(isset($get_function_name) && $get_function_name == "updateUserData"){
             updateUserData($conn);
+        }else if(isset($get_function_name) && $get_function_name == "closeAccount"){
+            closeAccount($conn);
         }
+    }
+    
+    function closeAccount($conn){
+        $sql = "update user set closed = '1' where id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $_GET['user_id']);
+        $stmt->execute(); 
+        echo 'success';
     }
 
     function updateUserData($conn){
