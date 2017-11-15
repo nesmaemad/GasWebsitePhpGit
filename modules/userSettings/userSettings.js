@@ -55,7 +55,10 @@ function userSettingsCtrl ($scope , $http , $state , $cookies , $filter) {
             $.ajax({
                 type        : "GET",
                 url         : "handler/signUpHandler.php", // Location of the service
-                data        : {"user_id" : $scope.user_id , "function_name" : "closeAccount"}, //Data sent to server
+                data        : {"user_id"       : $scope.user_id , 
+                               "first_name"    : $scope.first_name,
+                               "email"         : $scope.email,
+                               "function_name" : "closeAccount"}, //Data sent to server
                 contentType : "application/json", // content type sent to server
                 crossDomain : true,
                 async       : false,

@@ -52,6 +52,17 @@
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $_GET['user_id']);
         $stmt->execute(); 
+        
+        $msg = '
+         Hello '.$_GET['first_name'].'
+         
+         Your account is deactivated successfully. You can reactivate it by signing in back in a month.
+         
+         Hope you get back soon,
+         Local Propane Prices team
+         '; // Our message above including the link
+
+         mail($_GET['email'],"Verify your email address",$msg );
         echo 'success';
     }
 

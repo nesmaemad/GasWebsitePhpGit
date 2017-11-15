@@ -121,7 +121,7 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-  <input name="user_password" placeholder="Password" class="form-control"  type="password" ng-model="password" required="true">
+  <input name="user_password" placeholder="Password" class="form-control"  pattern=".{8,}" title="8 characters minimum"   type="password" ng-model="password" required="true">
     </div>
   </div>
 </div>
@@ -133,7 +133,7 @@
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-  <input name="confirm_password" placeholder="Confirm Password" class="form-control"  type="password" ng-model="confirm_password" required="true" >
+  <input name="confirm_password" placeholder="Confirm Password" class="form-control"  pattern=".{8,}" title="8 characters minimum"  type="password" ng-model="confirm_password" required="true" >
     </div>
   </div>
 </div>
