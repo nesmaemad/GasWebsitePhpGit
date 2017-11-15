@@ -197,6 +197,7 @@ function commercialCtrl ($rootScope , $scope , $http , $state , $filter , $cooki
             "review"                 : $scope.post_review_comment,
             "rating"                 : ratingsField.val(),
             "commercial_category_id" : commercial_category_id,
+            "rental"                 : $scope.post_review_rental,
             "function_name"          : "postReview"
 
         }; 

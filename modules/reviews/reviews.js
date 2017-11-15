@@ -182,6 +182,7 @@ function reviewsCtrl ($rootScope , $scope , $http , $state , $filter , $cookies)
             "price"           : $scope.post_review_price,              
             "review"          : $scope.post_review_comment,
             "rating"          : ratingsField.val(),
+            "rental"          : $scope.post_review_rental,
             "function_name"   : "postReview"
 
         }; 

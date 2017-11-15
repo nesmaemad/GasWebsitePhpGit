@@ -98,6 +98,9 @@
                                         </select> 
                                     </span>
                                     
+                                    <label class="col-md-4 control-label" >Rental/year</label>
+                                    <input type="number" step="any" class="form-control animated" id="rental" name="rental" ng-model="post_review_rental" required="true">
+                                    
                                     <label class="col-md-4 control-label" ng-if="post_review_selected_country == '2'">Price per Gallon</label>
                                     <label class="col-md-4 control-label" ng-if="post_review_selected_country == '1'">Price per Litre</label>
                                     <input type="number" step="any" class="form-control animated" id="price" name="price" ng-model="post_review_price" required="true">
@@ -142,12 +145,16 @@
                   <div class="table table-filter table-responsive" style="overflow-x: visible!important;">
                     <div class="reviews-body">
                         <div data-status="pagado" class="row">
-                            <div class="col-lg-6 reviews-cell">                               
+                            <div class="col-lg-4 reviews-cell">                               
                                 <h3> Company</h3>
                             </div>                                
 
                             <div class="col-lg-4 reviews-cell">                              
                                  <h3> Review </h3>
+                            </div>
+                            
+                            <div class="col-lg-2 reviews-cell">                              
+                                  <h3> Rental </h3>                              
                             </div>
 
                             <div class="col-lg-2 reviews-cell">                              
@@ -156,7 +163,7 @@
                         </div>
                       <div data-status="pagado" class="row rowlink reviews-row" ng-repeat="review in reviews">
                         <a class="rowlink" data-toggle="dropdown" ng-click="getCompanyReviews(review.company_id)">   
-                         <div class="col-lg-6 reviews-cell">
+                         <div class="col-lg-4 reviews-cell">
                         
                                 
                                     <h3> {{review.company_name}} </h3>
@@ -178,6 +185,10 @@
                               </span>
                               <br/>
                               <span style="color: black"> {{review.review}}</span>
+                        </div>
+                            
+                        <div class="col-lg-2 reviews-cell">                            
+                          <label  style=" font-size: 25px; color: rgb(0,151,169)">$ {{review.rental}}</label>
                         </div>
 
                         <div class="col-lg-2 reviews-cell">                            
@@ -201,7 +212,8 @@
                                                         class="glyphicon glyphicon-star-empty" style=" font-size: 20px;">
                                                     </span>
                                             </div>
-                                            <div class="review-block-title">$ {{company_review.price}}</div>
+                                            <div class="review-block-title"> Rental : $ {{company_review.rental}}</div>
+                                            <div class="review-block-title"> Price : $ {{company_review.price}}</div>
                                             <div class="review-block-description">{{company_review.review}}</div>
                                     </div>
 
