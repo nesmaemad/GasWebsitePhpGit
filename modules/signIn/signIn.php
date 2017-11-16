@@ -34,7 +34,7 @@
 </div>
 
 <div class="form-group">
-    <label class="col-md-4 col-md-push-2 control-label" ><a ui-sref="forgetPassword">forgot your password?</a></label> 
+    <label class="col-md-4 col-md-push-2 control-label" ><a ui-sref="forgetPassword">Forgot your password?</a></label> 
 
 </div>
 

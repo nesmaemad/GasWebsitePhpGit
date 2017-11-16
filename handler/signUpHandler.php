@@ -7,10 +7,8 @@
     if(isset($_GET['email']) && !empty($_GET['email']) AND isset($_GET['hash']) && !empty($_GET['hash'])){
 
     // Verify data
-        $email = $_GET['email']; // Set email variable
-        $hash = $_GET['hash']; // Set hash variable
-
-
+        $email    = $_GET['email']; // Set email variable
+        $hash     = $_GET['hash']; // Set hash variable
         $sql      = "SELECT email, hash, active FROM user WHERE email= ? AND hash= ? AND active=0";
         $stmt     = $conn->prepare($sql);
         $stmt->bind_param("ss", $email , $hash);
@@ -48,39 +46,71 @@
     }
     
     function closeAccount($conn){
-        $sql = "update user set closed = '1' where id = ?";
+        $date       = new DateTime();
+        $time_stamp = $date->getTimestamp();
+        $sql = "update user set closed = '1' , last_activated = ? where id = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("s", $_GET['user_id']);
+        $stmt->bind_param("ss", $time_stamp , $_GET['user_id']);
         $stmt->execute(); 
         
         $msg = '
          Hello '.$_GET['first_name'].'
          
-         Your account is deactivated successfully. You can reactivate it by signing in back in a month.
+         Your account is deactivated successfully. You can reactivate it by signing in anytime within a month to keep the same username. 
          
-         Hope you get back soon,
+         We Hope to have you back soon!  
+          
+         Thank you,
          Local Propane Prices team
          '; // Our message above including the link
 
-         mail($_GET['email'],"Verify your email address",$msg );
+         mail($_GET['email'],"Account Deactivated",$msg );
+         $stmt->close();
         echo 'success';
     }
 
     function updateUserData($conn){
-        $check_sql = "select id from user where email = ?";
+        $date         = new DateTime();
+        $time_stamp   = $date->getTimestamp();
+        $check_sql = "select id , last_activated , closed from user where email = ?";
         $check_stmt = $conn->prepare($check_sql);
         $check_stmt->bind_param("s", $_GET['email']);
         $check_stmt->execute(); 
         $check_stmt->store_result(); 
-        if($check_stmt->fetch() && $_GET['email'] != $_GET['init_email']){
+        $check_stmt->bind_result($col1,$col2,$col5);
+        
+        $check_stmt_var = "0";
+        $check_stmt_diff_var = 2;
+        $check_stmt_closed_var = "0";
+         if($check_stmt->fetch() ){
+            $diff1   = ($time_stamp - $col2) / 2592000;
+            $check_stmt_diff_var = $diff1;
+            $check_stmt_var = "1";
+            $check_stmt_closed_var = $col5;
+        }
+        
+        if(($_GET['email'] != $_GET['init_email'] && $check_stmt_var == "1" && $check_stmt_diff_var <= 1 && $check_stmt_closed_var == "1") ||
+           ($_GET['email'] != $_GET['init_email'] && $check_stmt_var == "1" && $check_stmt_closed_var == "0")){
             echo "exist";
         }else{
-            $check_user_sql = "select id from user where user_name = ?";
+            $check_user_sql = "select id , last_activated , closed from user where user_name = ?";
             $check_user_stmt = $conn->prepare($check_user_sql);
             $check_user_stmt->bind_param("s", $_GET['user_name']);
             $check_user_stmt->execute(); 
             $check_user_stmt->store_result();
-            if($check_user_stmt->fetch() && $_GET['user_name'] != $_GET['init_user_name']){
+            $check_user_stmt->bind_result($col3,$col4,$col6);
+            
+            $check_user_stmt_var = "0";
+            $check_user_stmt_diff_var = 2;
+            $check_user_stmt_closed_var = "0";
+            if($check_user_stmt->fetch() ){
+                $diff2   = ($time_stamp - $col4) / 2592000;
+                $check_user_stmt_var = "1";
+                $check_user_stmt_diff_var = $diff2;
+                $check_user_stmt_closed_var = $col6;
+            } 
+            if(($_GET['user_name'] != $_GET['init_user_name'] && $check_user_stmt_var = "1" && $check_user_stmt_diff_var <= 1 && $check_user_stmt_closed_var == "1")||
+               ($_GET['user_name'] != $_GET['init_user_name'] && $check_user_stmt_var = "1" && $check_user_stmt_closed_var == "0")){
                 echo "user_exist";
             }else{
                 $sql = "update user set email = ?,first_name = ?,last_name = ?,address = ?,phone = ?,"
@@ -108,21 +138,49 @@
 
   
     function signUp($conn){
+        $date         = new DateTime();
+        $time_stamp   = $date->getTimestamp();
         $hash = md5( rand(0,1000) );
-        $check_sql = "select id from user where email = ?";
+        $check_sql = "select id , last_activated , closed from user where email = ?";
         $check_stmt = $conn->prepare($check_sql);
         $check_stmt->bind_param("s", $_GET['email']);
         $check_stmt->execute(); 
         $check_stmt->store_result(); 
-        if($check_stmt->fetch()){
+        $check_stmt->bind_result($col1,$col2,$col5);
+        
+        $check_stmt_var = "0";
+        $check_stmt_diff_var = 2;
+        $check_stmt_closed_var = "0";
+         if($check_stmt->fetch() ){
+            $diff1   = ($time_stamp - $col2) / 2592000;
+            $check_stmt_diff_var = $diff1;
+            $check_stmt_var = "1";
+            $check_stmt_closed_var = $col5;
+        }
+
+        if(($check_stmt_var == "1" && $check_stmt_diff_var <= 1 && $check_stmt_closed_var == "1")||
+           ($check_stmt_var == "1" && $check_stmt_closed_var == "0")){
             echo "exist";
         }else{
-            $check_user_sql = "select id from user where user_name = ?";
+            $check_user_sql = "select id , last_activated , closed from user where user_name = ?";
             $check_user_stmt = $conn->prepare($check_user_sql);
             $check_user_stmt->bind_param("s", $_GET['user_name']);
             $check_user_stmt->execute(); 
             $check_user_stmt->store_result();
-            if($check_user_stmt->fetch()){
+            $check_user_stmt->bind_result($col3,$col4,$col6);
+            
+            $check_user_stmt_var = "0";
+            $check_user_stmt_diff_var = 2;
+            $check_user_stmt_closed_var = "0";
+            if($check_user_stmt->fetch() ){
+                $diff2   = ($time_stamp - $col4) / 2592000;
+                $check_user_stmt_var = "1";
+                $check_user_stmt_diff_var = $diff2;
+                $check_user_stmt_closed_var = $col6;
+            } 
+
+            if(($check_user_stmt_var = "1" && $check_user_stmt_diff_var <= 1 && $check_user_stmt_closed_var == "1")||
+               ($check_user_stmt_var = "1" && $check_user_stmt_closed_var == "0")){
                 echo "user_exist";
             }else{
                 $sql = "insert into user (email,first_name,last_name,address,phone,postal_zip,province_id,"

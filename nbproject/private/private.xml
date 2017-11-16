@@ -5,12 +5,15 @@
             <url>modules/reviews/reviews.php</url>
             <bookmark id="1">
                 <name/>
-                <line>161</line>
+                <line>168</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/xampp/htdocs/GasWebsitePhpGit/handler/signInHandler.php</file>
+            <file>file:/C:/xampp/htdocs/GasWebsitePhpGit/handler/signUpHandler.php</file>
+        </group>
     </open-files>
 </project-private>
