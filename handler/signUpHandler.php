@@ -109,8 +109,8 @@
                 $check_user_stmt_diff_var = $diff2;
                 $check_user_stmt_closed_var = $col6;
             } 
-            if(($_GET['user_name'] != $_GET['init_user_name'] && $check_user_stmt_var = "1" && $check_user_stmt_diff_var <= 1 && $check_user_stmt_closed_var == "1")||
-               ($_GET['user_name'] != $_GET['init_user_name'] && $check_user_stmt_var = "1" && $check_user_stmt_closed_var == "0")){
+            if(($_GET['user_name'] != $_GET['init_user_name'] && $check_user_stmt_var == "1" && $check_user_stmt_diff_var <= 1 && $check_user_stmt_closed_var == "1")||
+               ($_GET['user_name'] != $_GET['init_user_name'] && $check_user_stmt_var == "1" && $check_user_stmt_closed_var == "0")){
                 echo "user_exist";
             }else{
                 $sql = "update user set email = ?,first_name = ?,last_name = ?,address = ?,phone = ?,"
@@ -178,9 +178,9 @@
                 $check_user_stmt_diff_var = $diff2;
                 $check_user_stmt_closed_var = $col6;
             } 
-
-            if(($check_user_stmt_var = "1" && $check_user_stmt_diff_var <= 1 && $check_user_stmt_closed_var == "1")||
-               ($check_user_stmt_var = "1" && $check_user_stmt_closed_var == "0")){
+            
+            if(($check_user_stmt_var == "1" && $check_user_stmt_diff_var <= 1 && $check_user_stmt_closed_var == "1")||
+               ($check_user_stmt_var == "1" && $check_user_stmt_closed_var == "0")){
                 echo "user_exist";
             }else{
                 $sql = "insert into user (email,first_name,last_name,address,phone,postal_zip,province_id,"

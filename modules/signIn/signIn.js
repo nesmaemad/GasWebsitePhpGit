@@ -104,8 +104,14 @@ function signInCtrl ($scope , $http , $state , $cookies , $filter) {
               
                    });
                 
+                    var swal_title = "";
+                   if(user["activated"] == "false"){
+                       swal_title = 'Signed In Successfully';
+                   }else{
+                       swal_title = 'Your Account is Active now';
+                   }
                     swal({
-                        title: 'Signed In Successfully',
+                        title: swal_title,
                         text: 'Welcome '+user["user_name"],
                         type: 'success'
                     },function(){
@@ -118,6 +124,7 @@ function signInCtrl ($scope , $http , $state , $cookies , $filter) {
                         }
                    
                     });
+                    
                 
                
             }

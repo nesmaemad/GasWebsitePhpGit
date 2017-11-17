@@ -140,6 +140,12 @@
                         $update_closed_stmt->bind_param("s", $col1 );
                         $update_closed_stmt->execute(); 
                         $update_closed_stmt->store_result(); 
+                        
+                        if($col9 == "1" && $diff <= 1 ){
+                            $user->activated = "true";
+                        }else{
+                            $user->activated = "false";
+                        }
                        echo json_encode($user);
                     }else{
                        echo "closed"; 
